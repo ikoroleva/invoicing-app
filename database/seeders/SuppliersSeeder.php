@@ -18,22 +18,19 @@ class SuppliersSeeder extends Seeder
     {
         $suppliers = [
             [
-            'first_name' => 'User name',
-            'last_name' => 'User surname' [not null],
-            'reg_number' => 12345678, //ičo
-            'reg_type' => 'Městský soud v Plzni C 358938', // must be on invoice -> obchodní rejstřík, živnostenský rejstřík apod.
-            'adress_id' => 1,
-            'email' => 'user@mail.cz',
-            'phone' => 608123456             
+                'first_name' => 'User1 name',
+                'last_name' => 'User1 surname',
+                'reg_number' => 12345678,
+                'reg_type' => 'Městský soud v Plzni A 358938',
+                'adress_id' => 1,
+                'email' => 'user@mail.cz',
+                'phone' => 608123456
             ]
 
-            ];
+        ];
 
         foreach ($suppliers as $supplier) {
             Supplier::create($supplier);
         }
     }
 }
-
- 
- 
