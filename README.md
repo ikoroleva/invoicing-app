@@ -39,3 +39,7 @@
 
 12. Doublecheck each Seeder and make sure that Model name in each Seeder is corresponding with actual Model name and method name in Seeder
 13. Run for each Seeader: `php artisan db:seed --class=SeederName`
+
+#### API Controllers
+
+14. Uncomment corresponding methods in **App/Http/Controllers/Api/Controllername** files to retreive data from our DB
