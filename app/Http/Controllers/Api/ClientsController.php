@@ -48,6 +48,7 @@ class ClientsController extends Controller
         //     $response[] = [
         //         'name' => $client->name,
         //         'reg_number' => $client->reg_number,
+        //          'reg_number_eu' => $client->reg_number_eu,
         //         'reg_type_court' => $client->reg_type_court,
         //         'reg_type_file' => $client->reg_type_file,
         //         'address_id' => $client->address_id,

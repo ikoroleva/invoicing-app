@@ -22,10 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// /api/fakeares
+// /api/fakeares:  returns json format of real ARES response structure from https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=27074358
 Route::get('/fakeares', [FakeAresController::class, 'fakeAres']);
 
-// APIs for DB
+// APIs for our DB
 
 //All CLIENTS in our DB
 Route::get('/clients', [ClientsController::class, 'index']);
