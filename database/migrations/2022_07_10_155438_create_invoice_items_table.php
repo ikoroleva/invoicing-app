@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('invoice_description');
             $table->integer('unit_cost');
             $table->integer('unit_quantity');
+            $table->timestamps();
         });
     }
 
