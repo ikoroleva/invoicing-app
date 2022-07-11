@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('client_supplier', function (Blueprint $table) {
            $table->unsignedBigInteger('supplier_id');
            $table->unsignedBigInteger('client_id');
+           $table->timestamps();
         });
     }
 
