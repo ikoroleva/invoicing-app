@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReactAppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,6 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'home']);
+//Route::get('/', [HomeController::class, 'home']);
 
-
+Route::get('/{path?}', [ReactAppController::class, 'renderApp'])->where('path', '.*');

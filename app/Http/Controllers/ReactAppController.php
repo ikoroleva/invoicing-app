@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class ReactAppController extends Controller
 {
-    public function home ()
-{
+    public function renderApp()
+    {
         return view('Home/home');
-    
-}
+    }
 }
