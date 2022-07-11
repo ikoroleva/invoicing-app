@@ -16,6 +16,7 @@
 ```
 <VirtualHost *:80>
     ServerName www.invoicing-app.test
+    ServerAlias invoicing-app.test
     DocumentRoot "C:\web\final-project\invoicing-app\public"
     Header set Access-Control-Allow-Origin "*"
     Header set Cache-Control "no-cache, must-revalidate"
