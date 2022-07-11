@@ -10,7 +10,7 @@ class Supplier extends Model
     use HasFactory;
     public function adresses()
         {
-            return $this->hasMany(Adress::class);
+            return $this->hasMany(Address::class);
         }
     public function bankAccounts()
         {
