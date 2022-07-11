@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Account;
+use App\Models\BankAccount;
 // Check Model name and method name in seeder!!!
 
 class BankAccountsSeeder extends Seeder
@@ -28,7 +28,7 @@ class BankAccountsSeeder extends Seeder
             ]
         ];
         foreach ($accounts as $account) {
-            Account::create($account);
+            BankAccount::create($account);
         }
     }
 }

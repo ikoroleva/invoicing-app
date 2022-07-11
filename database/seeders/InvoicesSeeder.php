@@ -25,7 +25,7 @@ class InvoicesSeeder extends Seeder
                 'status' => 'new',
                 'total_amount' => 10500,
                 'currency' => 'CZK',
-                'formOfPayment' => 'cash',
+                'form_of_payment' => 'cash',
                 'issued_on' => '2022-06-22 17:25:58',
                 'due_date' => '2022-06-30 00:00:00'
 
@@ -51,7 +51,7 @@ class InvoicesSeeder extends Seeder
                 'status' => 'paid',
                 'total_amount' => 31500,
                 'currency' => 'CZK',
-                'formOfPayment' => 'cash',
+                'form_of_payment' => 'cash',
                 'issued_on' => '2022-05-21 17:25:58',
                 'due_date' => '2022-05-30 00:00:00'
 
@@ -64,7 +64,7 @@ class InvoicesSeeder extends Seeder
                 'status' => 'new',
                 'total_amount' => 45500,
                 'currency' => 'CZK',
-                'formOfPayment' => 'wire transfer',
+                'form_of_payment' => 'wire transfer',
                 'issued_on' => '2022-05-30 17:25:58',
                 'due_date' => '2022-06-15 00:00:00'
 
@@ -77,7 +77,7 @@ class InvoicesSeeder extends Seeder
                 'status' => 'new',
                 'total_amount' => 50000,
                 'currency' => 'CZK',
-                'formOfPayment' => 'wire transfer',
+                'form_of_payment' => 'wire transfer',
                 'issued_on' => '2022-07-30 17:25:58',
                 'due_date' => '2022-08-15 00:00:00'
 

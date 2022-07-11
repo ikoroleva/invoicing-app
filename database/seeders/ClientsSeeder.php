@@ -25,7 +25,7 @@ class ClientsSeeder extends Seeder
                 'reg_type_file' => 'C 358938',
                 'address_id' => 2,
                 'email' => 'asseco@mail.cz',
-                'phone' => 608123456
+                'phone' => '608123456'
             ],
             [
                 'name' => 'Prosecco Italy, sro',
@@ -35,7 +35,7 @@ class ClientsSeeder extends Seeder
                 'reg_type_file' => 'B 345938',
                 'address_id' => 3,
                 'email' => 'prosecco@mail.it',
-                'phone' => 345098675
+                'phone' => '345098675'
             ],
             [
                 'name' => 'Wine France, LTD',
@@ -45,7 +45,7 @@ class ClientsSeeder extends Seeder
                 'reg_type_file' => 'C 345938',
                 'address_id' => 4,
                 'email' => 'wine@mail.fr',
-                'phone' => 675098675
+                'phone' => '675098675'
             ],
             [
                 'name' => 'Tequila Mexico',
@@ -55,7 +55,7 @@ class ClientsSeeder extends Seeder
                 'reg_type_file' => 'D 456938',
                 'address_id' => 5,
                 'email' => 'tequilla@mail.mx',
-                'phone' => 23456781
+                'phone' => '23456781'
             ],
             [
                 'name' => 'Whiskey, ltd',
@@ -65,7 +65,7 @@ class ClientsSeeder extends Seeder
                 'reg_type_file' => 'E 345654',
                 'address_id' => 6,
                 'email' => 'whiskey@mail.scot',
-                'phone' => 23450988766
+                'phone' => '23450988766'
             ]
         ];
 

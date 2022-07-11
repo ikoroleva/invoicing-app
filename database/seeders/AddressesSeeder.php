@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Address;
+use App\Models\Adress;
 // Check Model name and method name in seeder!!!
 
 class AddressesSeeder extends Seeder
@@ -68,7 +68,7 @@ class AddressesSeeder extends Seeder
             // add further addresses!!!
         ];
         foreach ($addresses as $address) {
-            Address::create($address);
+            Adress::create($address);
         }
     }
 }
