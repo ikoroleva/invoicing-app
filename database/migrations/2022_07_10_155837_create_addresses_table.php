@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('house_orient');
             $table->string('city');
             $table->string('postal_code');
+            $table->timestamps();
         });
     }
 
