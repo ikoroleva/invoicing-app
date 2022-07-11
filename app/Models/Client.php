@@ -8,22 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
-      public function adresses()
-        {
-            return $this->hasMany(Address::class);
-        }
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
 
     public function invoices()
-        {
-            return $this->hasMany(Invoice::class);
-        }
+    {
+        return $this->hasMany(Invoice::class);
+    }
     public function bankAccounts()
-        {
-            return $this->hasMany(BankAccount::class);
-        }
+    {
+        return $this->hasMany(BankAccount::class);
+    }
 
     public function suppliers()
-        {
-            return $this->belongsToMany(Supplier::class);
-        }
+    {
+        return $this->belongsToMany(Supplier::class);
+    }
 }

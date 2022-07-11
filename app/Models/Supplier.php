@@ -8,20 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Supplier extends Model
 {
     use HasFactory;
-    public function adresses()
-        {
-            return $this->hasMany(Address::class);
-        }
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
     public function bankAccounts()
-        {
-            return $this->hasMany(BankAccount::class);
-        }
+    {
+        return $this->hasMany(BankAccount::class);
+    }
     public function invoices()
-        {
-            return $this->hasMany(Invoice::class);
-        }
+    {
+        return $this->hasMany(Invoice::class);
+    }
     public function clients()
-        {
-            return $this->belongsToMany(Client::class);
-        }
+    {
+        return $this->belongsToMany(Client::class);
+    }
 }
