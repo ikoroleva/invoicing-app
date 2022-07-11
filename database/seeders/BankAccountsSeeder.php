@@ -20,7 +20,7 @@ class BankAccountsSeeder extends Seeder
             [
                 'supplier_id' => 1,
                 'bank_name' => 'Air Bank a.s.',
-                'bank_account_prefix' => '',
+                'bank_account_prefix' => 000,
                 'bank_account_number' => 271880010, //account number
                 'bank_account_code' => 3030, // bank code
                 'swift' => 'AIRACZPP',
