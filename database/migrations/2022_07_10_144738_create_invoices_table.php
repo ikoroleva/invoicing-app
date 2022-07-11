@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('form_of_payment');
             $table->date('issued_on');
             $table->date('due_date');
+            $table->timestamps();
         });
     }
 
