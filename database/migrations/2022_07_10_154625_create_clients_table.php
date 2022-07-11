@@ -17,13 +17,13 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('reg_number');
-            $table->string('reg_number_EU');
+            $table->string('reg_number_EU')->nullable();
             $table->string('reg_type_court');
             $table->string('reg_type_file');
-            $table->unsignedBigInteger('adress_id');
+            $table->unsignedBigInteger('address_id');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('alias');
+            $table->string('alias')->nullable();
             $table->timestamps();
         });
     }

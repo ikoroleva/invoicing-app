@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('bank_account_prefix')->nullable();
             $table->integer('bank_account_number');
             $table->integer('bank_account_code');
-            $table->integer('swift');
-            $table->integer('iban');
+            $table->string('swift');
+            $table->string('iban');
             $table->timestamps();
         });
     }
