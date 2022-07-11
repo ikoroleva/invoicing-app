@@ -38,7 +38,7 @@ class InvoicesSeeder extends Seeder
                 'status' => 'new',
                 'total_amount' => 21500,
                 'currency' => 'CZK',
-                'formOfPayment' => 'wire transfer',
+                'form_of_payment' => 'wire transfer',
                 'issued_on' => '2022-07-21 17:25:58',
                 'due_date' => '2022-07-30 00:00:00'
 
