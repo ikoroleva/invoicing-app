@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->integer('supplier_id')->nullable();
             $table->integer('client_id')->nullable();
-            $table->string('street_name');
-            $table->integer('house_number');
-            $table->string('house_orient');
-            $table->string('city');
-            $table->string('postal_code');
+            $table->string('street_name')->nullable();
+            $table->integer('house_number')->nullable();
+            $table->string('house_orient')->nullable();
+            $table->string('city')->nullable();
+            $table->string('postal_code')->nullable();
             $table->timestamps();
         });
     }
