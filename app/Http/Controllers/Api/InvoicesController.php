@@ -74,21 +74,24 @@ class InvoicesController extends Controller
             ->orderBy('id')
             ->get();
         foreach ($invoices as $invoice) {
-
-            $response[] = [
-                'id' => $invoice->id,
-                'supplier' => $invoice->supplier,
-                'client' => $invoice->client,
-                'number' => $invoice->number,
-                'additional_notes' => $invoice->additional_notes,
-                'status' => $invoice->status,
-                'invoice_items' => $invoice->invoiceItems,
-                'total_amount' => $invoice->total_amount,
-                'currency' => $invoice->currency,
-                'form_of_payment' => $invoice->form_of_payment,
-                'issued_on' => $invoice->issued_on,
-                'due_date' => $invoice->due_date
-            ];
+            if ($invoice->client->reg_number == $ico) {
+                $response[] = [
+                    'id' => $invoice->id,
+                    'supplier' => $invoice->supplier,
+                    'client' => $invoice->client->reg_number,
+                    'number' => $invoice->number,
+                    'additional_notes' => $invoice->additional_notes,
+                    'status' => $invoice->status,
+                    'invoice_items' => $invoice->invoiceItems,
+                    'total_amount' => $invoice->total_amount,
+                    'currency' => $invoice->currency,
+                    'form_of_payment' => $invoice->form_of_payment,
+                    'issued_on' => $invoice->issued_on,
+                    'due_date' => $invoice->due_date
+                ];
+            } else {
+                return 'not found :(';
+            }
         }
 
         return $response;
