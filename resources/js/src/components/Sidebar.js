@@ -1,11 +1,24 @@
+import home from "/images/home.svg";
+
 const Sidebar = () => {
 
     return (
-        <div className="sidebar">
-            <strong>
-                This is sidebar
-            </strong>
-        </div>
+        <aside>
+            <h2>
+                logo
+            </h2>
+
+            <div className="navs">
+                <img src={home} alt="home icon" />
+                <span>imgIcon</span>
+                <span>imgIcon</span>
+            </div>
+
+
+            <h3>
+                user
+            </h3>
+        </aside>
     );
 }
 

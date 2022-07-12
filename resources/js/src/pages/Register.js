@@ -41,7 +41,7 @@ export default function Register(props) {
     }
 
     return (
-        <form action="/register" method="post" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
 
             <h1>
                 Register
