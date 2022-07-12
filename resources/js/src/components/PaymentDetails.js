@@ -1,8 +1,7 @@
-import axios from 'axios';
 import { useEffect, useState } from "react";
 import React from 'react';
 
-function CompanyDetails() {
+function PaymentDetails() {
 
     const [details, setDetails] = useState(null);
 
@@ -61,4 +60,4 @@ return (
     )
 }
 
-export default CompanyDetails;
+export default PaymentDetails;
