@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
+    protected $fillable = ['supplier_id'];
     use HasFactory;
     public function supplier()
-        {
-            return $this->belongsTo(Supplier::class);
-        }
+    {
+        return $this->belongsTo(Supplier::class);
+    }
     public function client()
-        {
-            return $this->belongsTo(Client::class);
-        }
+    {
+        return $this->belongsTo(Client::class);
+    }
 }

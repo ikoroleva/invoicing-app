@@ -2,6 +2,8 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Address;
+use App\Models\BankAccount;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -39,11 +41,21 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
         ]);
 
-        Supplier::create([
+        $supplier = Supplier::create([
             'user_id' => $user->id,
             'name' => $user->name,
             'email' => $user->email
         ]);
+
+        Address::create([
+            'supplier_id' => $supplier->id
+        ]);
+
+        BankAccount::create([
+            'supplier_id' => $supplier->id
+        ]);
+
+
         return $user;
     }
 }

@@ -1,4 +1,7 @@
 import home from "/images/home.svg";
+import document from "/images/document.svg";
+import people from '/images/people.svg';
+
 
 const Sidebar = () => {
 
@@ -10,8 +13,8 @@ const Sidebar = () => {
 
             <div className="navs">
                 <img src={home} alt="home icon" />
-                <span>imgIcon</span>
-                <span>imgIcon</span>
+                <img src={document} alt="document icon" />
+                <img src={people} alt="users icon" />
             </div>
 
 
