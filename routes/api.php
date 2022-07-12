@@ -45,7 +45,7 @@ Route::get('/suppliers/current', [SuppliersController::class, 'currentSupplier']
 // SUPPLIER by ICO
 Route::get('/suppliers/{ico}', [SuppliersController::class, 'indexIco']);
 //Edit supplier
-Route::put('/suppliers', [SuppliersController::class, 'update']);
+Route::put('/suppliers/{id}', [SuppliersController::class, 'update']);
 // should we add {ico} ?
 
 
@@ -56,3 +56,7 @@ Route::get('/invoices', [InvoicesController::class, 'index']);
 Route::get('/invoices/suppliers/{ico}', [InvoicesController::class, 'supplierIco']);
 //INVOICES by CLIENT-ICO
 Route::get('/invoices/clients/{ico}', [InvoicesController::class, 'clientIco']);
+//Create new invoice
+Route::post('/invoices', [InvoicesController::class, 'create']);
+//Update existing invoice
+Route::put('/invoices/{invoice_number}', [InvoicesController::class, 'update']);
