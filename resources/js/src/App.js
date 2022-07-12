@@ -4,6 +4,7 @@ import { loadUser } from "./actions/auth";
 import UserContext from "./context/UserContext";
 import Layout from "./Layout";
 
+
 export default function App() {
 
     const [user, setUser] = useState(null)

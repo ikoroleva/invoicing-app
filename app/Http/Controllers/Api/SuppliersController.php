@@ -37,7 +37,7 @@ class SuppliersController extends Controller
     public function currentSupplier()
     {
         
-        $currentSupplier = Supplier::with('addresses')->where('user_id',Auth::id())->first();  
+        $currentSupplier = Supplier::with('bankAccounts','addresses')->where('user_id',Auth::id())->first();  
         
         return $currentSupplier;
     }
