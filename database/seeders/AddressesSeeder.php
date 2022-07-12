@@ -18,7 +18,8 @@ class AddressesSeeder extends Seeder
     {
         $addresses = [
             [
-
+                'supplier_id' => 1,
+                'client_id' => null,
                 'street_name' => 'Volutova',
                 'house_number' => 2225,
                 'house_orient' => '16',
@@ -26,7 +27,8 @@ class AddressesSeeder extends Seeder
                 'postal_code' => 15000
             ],
             [
-
+                'supplier_id' => null,
+                'client_id' => 1,
                 'street_name' => 'Budějovická',
                 'house_number' => 778,
                 'house_orient' => '3a',
@@ -34,7 +36,8 @@ class AddressesSeeder extends Seeder
                 'postal_code' => 14000
             ],
             [
-
+                'supplier_id' => null,
+                'client_id' => 2,
                 'street_name' => 'Italy street',
                 'house_number' => 543,
                 'house_orient' => '7b',
@@ -42,7 +45,8 @@ class AddressesSeeder extends Seeder
                 'postal_code' => 209987
             ],
             [
-
+                'supplier_id' => null,
+                'client_id' => 3,
                 'street_name' => 'France street',
                 'house_number' => 54,
                 'house_orient' => '45',
@@ -50,7 +54,8 @@ class AddressesSeeder extends Seeder
                 'postal_code' => 363636
             ],
             [
-
+                'supplier_id' => null,
+                'client_id' => 4,
                 'street_name' => 'Mexiko street',
                 'house_number' => 345,
                 'house_orient' => '65',
@@ -58,7 +63,8 @@ class AddressesSeeder extends Seeder
                 'postal_code' => 4534656
             ],
             [
-
+                'supplier_id' => null,
+                'client_id' => 5,
                 'street_name' => 'Mexiko street',
                 'house_number' => 345,
                 'house_orient' => '65',
