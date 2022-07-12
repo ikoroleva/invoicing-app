@@ -18,7 +18,7 @@ class AddressesSeeder extends Seeder
     {
         $addresses = [
             [
-                'supplier_id' => 1,
+                'supplier_id' => 9999,
                 'client_id' => null,
                 'street_name' => 'Volutova',
                 'house_number' => 2225,

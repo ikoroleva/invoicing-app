@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('bank_accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('supplier_id');
-            $table->string('bank_name');
+            $table->string('bank_name')->nullable();
             $table->integer('bank_account_prefix')->nullable();
-            $table->integer('bank_account_number');
-            $table->integer('bank_account_code');
-            $table->string('swift');
-            $table->string('iban');
+            $table->integer('bank_account_number')->nullable();
+            $table->integer('bank_account_code')->nullable();
+            $table->string('swift')->nullable();
+            $table->string('iban')->nullable();
             $table->timestamps();
         });
     }
