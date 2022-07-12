@@ -24,4 +24,8 @@ class Supplier extends Model
     {
         return $this->belongsToMany(Client::class);
     }
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }
