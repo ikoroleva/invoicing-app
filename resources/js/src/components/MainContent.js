@@ -21,9 +21,9 @@ const MainContent = () => {
                         user ? <Fragment>
                             <Route exact path="/about" element={<About />} />
                             <Route exact path="/userdetails" element={<UserDetails/>} />
-                        </Fragment> : <Fragment>
                             <Route exact path="/dashboard" element={<MainDashboard/>} />
-                        </Fragment> :
+                        </Fragment>  
+                        :
                         <Fragment>
                             <Route exact path="/login" element={<Login />} />
 
