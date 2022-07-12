@@ -18,7 +18,7 @@ class BankAccountsSeeder extends Seeder
     {
         $accounts = [
             [
-                'supplier_id' => 1,
+                'supplier_id' => 9999,
                 'bank_name' => 'Air Bank a.s.',
                 'bank_account_prefix' => 000,
                 'bank_account_number' => 271880010, //account number

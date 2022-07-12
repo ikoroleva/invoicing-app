@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\Address;
+use Auth;
 
 class SuppliersController extends Controller
 {
@@ -33,14 +34,21 @@ class SuppliersController extends Controller
         return $response;
     }
 
+    public function currentSupplier()
+    {
+        $currentSupplier = Supplier::where('user_id',Auth::id())->first();
+        return $currentSupplier;
+    }
+
     public function indexIco($ico)
     {
+
         $response = [];
-        $suppliers = Supplier::with('bankAccounts', 'addresses')
+        $supplier = Supplier::with('bankAccounts', 'addresses')
             ->orderBy('id')
             ->where('reg_number', $ico)
-            ->get();
-        foreach ($suppliers as $supplier) {
+            ->first();
+        // foreach ($suppliers as $supplier) {
             $response[] = [
                 'name' => $supplier->name,
                 'reg_number' =>  $supplier->reg_number,
@@ -53,7 +61,7 @@ class SuppliersController extends Controller
                 'phone' => $supplier->phone,
                 'alias' => $supplier->alias
             ];
-        }
+        // }
         return $response;
     }
 }
