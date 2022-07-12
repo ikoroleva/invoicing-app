@@ -7,9 +7,9 @@ const Sidebar = () => {
 
     return (
         <aside>
-            <h2>
+            {/* <h2>
                 logo
-            </h2>
+            </h2> */}
 
             <div className="navs">
                 <img src={home} alt="home icon" />
@@ -18,9 +18,9 @@ const Sidebar = () => {
             </div>
 
 
-            <h3>
+            {/* <h3>
                 user
-            </h3>
+            </h3> */}
         </aside>
     );
 }
