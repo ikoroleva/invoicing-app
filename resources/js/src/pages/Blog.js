@@ -2,7 +2,7 @@ const Blog = () => {
 
     return (
         <div>
-            <p>Useful blog</p>
+            <p>Useful blog page</p>
         </div>
     );
 }

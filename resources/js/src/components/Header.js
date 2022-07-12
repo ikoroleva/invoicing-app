@@ -1,5 +1,6 @@
-import BrowserLinks from './BrowserLinks';
-import wallet from '/images/wallet.svg';
+import HeaderLinks from './HeaderLinks';
+import UserElement from './UserElement';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
@@ -7,8 +8,11 @@ const Header = () => {
         <header>
 
             <div className='header-logo'>
-                <img src={wallet} alt="wallet icon" />
+                <Link to="home">
+                    Logo</Link>
             </div>
+            <HeaderLinks />
+            <UserElement />
 
         </header>
     );
