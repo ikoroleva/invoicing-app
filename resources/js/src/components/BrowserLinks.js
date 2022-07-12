@@ -12,6 +12,7 @@ const BrowserLinks = () => {
             {
                 user ? <Fragment>
                     <Link to="/about">About</Link>
+                    <Link to="/userdetails">User</Link>
                 </Fragment> : <Fragment>
                     <Link to="/login">Login</Link>
                     <Link to="/register">Register</Link>

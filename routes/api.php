@@ -35,6 +35,8 @@ Route::get('/clients/{ico}', [ClientsController::class, 'indexIco']);
 //ALL SUPPLIERS
 Route::get('/suppliers', [SuppliersController::class, 'index']);
 // SUPPLIER by ICO
+Route::get('/suppliers/current', [SuppliersController::class, 'currentSupplier']);
+// SUPPLIER by ICO
 Route::get('/suppliers/{ico}', [SuppliersController::class, 'indexIco']);
 
 

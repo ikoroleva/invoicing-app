@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import BrowserLinks from './BrowserLinks';
 import About from '../pages/About';
+import UserDetails from '../pages/UserDetails';
 
 const MainContent = () => {
 
@@ -18,6 +19,7 @@ const MainContent = () => {
                     {
                         user ? <Fragment>
                             <Route exact path="/about" element={<About />} />
+                            <Route exact path="/userdetails" element={<UserDetails/>} />
                         </Fragment> : <Fragment>
                             <Route exact path="/login" element={<Login />} />
 
