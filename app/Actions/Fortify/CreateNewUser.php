@@ -2,6 +2,9 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Address;
+use App\Models\BankAccount;
+use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -32,10 +35,27 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        $user =  User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        $supplier = Supplier::create([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email
+        ]);
+
+        Address::create([
+            'supplier_id' => $supplier->id
+        ]);
+
+        BankAccount::create([
+            'supplier_id' => $supplier->id
+        ]);
+
+
+        return $user;
     }
 }

@@ -42,8 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function client()
+    public function supplier()
     {
-        return $this->hasOne(Client::class);
+        return $this->hasOne(Supplier::class);
     }
 }

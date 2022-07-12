@@ -6,6 +6,7 @@ import Register from '../pages/Register';
 import BrowserLinks from './BrowserLinks';
 import About from '../pages/About';
 import UserDetails from '../pages/UserDetails';
+import MainDashboard from '../pages/MainDashboard';
 
 const MainContent = () => {
 
@@ -21,6 +22,9 @@ const MainContent = () => {
                             <Route exact path="/about" element={<About />} />
                             <Route exact path="/userdetails" element={<UserDetails/>} />
                         </Fragment> : <Fragment>
+                            <Route exact path="/dashboard" element={<MainDashboard/>} />
+                        </Fragment> :
+                        <Fragment>
                             <Route exact path="/login" element={<Login />} />
 
                             <Route exact path="/register" element={<Register />} />
