@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import BrowserLinks from './BrowserLinks';
 import About from '../pages/About';
+import MainDashboard from '../pages/MainDashboard';
 
 const MainContent = () => {
 
@@ -18,7 +19,9 @@ const MainContent = () => {
                     {
                         user ? <Fragment>
                             <Route exact path="/about" element={<About />} />
-                        </Fragment> : <Fragment>
+                            <Route exact path="/dashboard" element={<MainDashboard/>} />
+                        </Fragment> : 
+                        <Fragment>
                             <Route exact path="/login" element={<Login />} />
 
                             <Route exact path="/register" element={<Register />} />
