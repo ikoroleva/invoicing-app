@@ -19,6 +19,7 @@ class SuppliersSeeder extends Seeder
         $suppliers = [
             [
                 'name' => 'User1 name',
+                'user_id' => 1,
                 'reg_number' => 12345678,
                 'reg_type_court' => 'Městský soud v Plzni',
                 'reg_type_file' => 'A 358938',
