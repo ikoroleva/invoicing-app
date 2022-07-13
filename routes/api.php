@@ -57,6 +57,6 @@ Route::get('/invoices/suppliers/{ico}', [InvoicesController::class, 'supplierIco
 //INVOICES by CLIENT-ICO
 Route::get('/invoices/clients/{ico}', [InvoicesController::class, 'clientIco']);
 //Create new invoice
-Route::post('/invoices', [InvoicesController::class, 'create']);
+Route::post('/create-invoice', [InvoicesController::class, 'create']);
 //Update existing invoice
 Route::put('/invoices/{invoice_number}', [InvoicesController::class, 'update']);
