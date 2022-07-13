@@ -1,18 +1,20 @@
 // import { use } from "browser-sync";
 import { useEffect, useState } from "react";
+import TotalRevenue from "../components/TotalRevenue";
 
 
 export default function MainDashboard(){
-    const [supplier, setSupplier] = useState([]);
+    const [supplier, setSupplier] = useState({});
     
 
-    const url = '/api/suppliers' //make the {ico} -> user.ico
+    const url = '/api/suppliers/current' ;
+    //currently logged in use
     const fetchData = async() => {
     const resp = await fetch(url);
     const data = await resp.json();
-    console.log(data)
-    setSupplier(data)
-    console.log(supplier)
+    console.log(data);
+    setSupplier(data);
+    
     };
 
     // const url = '/api/invoices/suppliers/12345678' //make the {ico} -> user.ico
@@ -27,9 +29,13 @@ export default function MainDashboard(){
         fetchData();
     }, []);
 
-
+console.log(supplier);
 
     return(
-        <h1>Hi</h1>
+        <>
+        <h1>Main Dashboard of: {supplier.name}</h1>
+        <h3>View Invoices:</h3>
+        <TotalRevenue />
+        </>
     )
 }

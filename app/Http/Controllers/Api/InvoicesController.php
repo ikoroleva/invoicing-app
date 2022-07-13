@@ -96,4 +96,16 @@ class InvoicesController extends Controller
 
         return $response;
     }
+
+
+    // all paid invoices for current user will be in API together with other information about invoices
+    public function currentSupplierPaidInvoices()
+    {
+        $currentSupplierPaidInvoices = Invoice::where('supplier_id',\Auth::id())->where('status','paid')->pluck('total_amount')->toArray();;
+
+        return $currentSupplierPaidInvoices;
+    }
+    
+    
+
 }
