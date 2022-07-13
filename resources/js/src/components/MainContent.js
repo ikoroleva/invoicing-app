@@ -7,33 +7,34 @@ import BrowserLinks from './BrowserLinks';
 import About from '../pages/About';
 import UserDetails from '../pages/UserDetails';
 import MainDashboard from '../pages/MainDashboard';
+import Home from "../pages/Home";
 
 const MainContent = () => {
 
-    const { user } = useContext(UserContext)
+    // const { user } = useContext(UserContext)
 
     return (
         <main>
-            <Router>
-                <BrowserLinks />
-                <Routes>
-                    {
-                        user ? <Fragment>
-                            <Route exact path="/about" element={<About />} />
-                            <Route exact path="/userdetails" element={<UserDetails/>} />
-                            <Route exact path="/dashboard" element={<MainDashboard/>} />
-                        </Fragment>  
-                        :
-                        <Fragment>
-                            <Route exact path="/login" element={<Login />} />
+            {/* <Router> */}
+            {/* <BrowserLinks /> */}
+            {/* <Routes> */}
+            {
+                // user ? <Fragment>
+                //     <Route exact path="/about" element={<About />} />
+                //     <Route exact path="/dashboard" element={<MainDashboard />} />
+                // </Fragment> :
+                //     <Fragment>
+                //         {/* <Route exact path="/home" element={<Home />} /> */}
 
-                            <Route exact path="/register" element={<Register />} />
-                        </Fragment>
-                    }
+                //         <Route exact path="/login" element={<Login />} />
 
-                </Routes>
+                //         <Route exact path="/register" element={<Register />} />
+                //     </Fragment>
+            }
 
-            </Router>
+            {/* </Routes> */}
+
+            {/* </Router> */}
             <p>This is the main content</p>
         </main>
     );

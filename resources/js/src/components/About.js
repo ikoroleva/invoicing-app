@@ -22,9 +22,9 @@ const About = () => {
     return (
         <article>
 
-            <h1>
+            <h3>
                 Hi, {user.name || 'N/A'}
-            </h1>
+            </h3>
 
             <p>
                 Your email address is {user.email}
