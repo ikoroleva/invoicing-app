@@ -1,12 +1,21 @@
+@import "https://fonts.googleapis.com/css?family=Roboto:400,300,700|Pacifico|Julius+Sans+One";
+
+$header-height: 100px;
+$metadata-color: lighten(black, 50%);
+$border-color: darken(white, 10%);
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background-color: #fff;
+    padding: 0;
     height: 100hv;
-    position: relative;
+    font-family: "Roboto";
+    background-color: #fff;
+
+    // position: relative;
 }
 
 #root {
@@ -16,19 +25,66 @@ body {
 
 .layout {
     width: 100%;
-    padding: 0 30px;
     height: 100hv;
-    //overflow-y: auto;
+    padding-top: $header-height;
 }
 
 
 header {
     width: 100%;
-    min-height: 96px;
-    border-bottom: 1px solid #121212;
-    padding: 20px;
+    height: $header-height;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    transition: top 0.1s ease-in-out;
+    background: rgba(255, 255, 255, .95);
+    border-bottom: 1px solid $border-color;
+    font-family: sans-serif;
+
+    .header-logo {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        width: 100px;
+
+        a {
+            margin: auto;
+        }
+    }
+
+    .header-links {
+
+        display: flex;
+
+        a {
+            color: #121212;
+            text-decoration: none;
+            margin: 1rem;
+
+        }
+
+
+
+
+    }
+
+    .header-user-container {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            margin: .5rem;
+        }
+
+        p,
+        h3 {
+            margin: .0rem;
+        }
+    }
+
 }
 
 
@@ -37,8 +93,7 @@ header {
     position: relative;
     display: flex;
     align-items: center;
-    padding: 80px 0;
-    min-height: 80vh;
+    height: 78vh;
 }
 
 main {
@@ -48,10 +103,12 @@ main {
 
 aside {
     width: 100px;
-    height: 100vh;
+    height: 78vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: rgba(221, 221, 221, 0.842);
 
     img {
         inline-size: 2rem;
@@ -87,6 +144,12 @@ aside>* {
 
 footer {
     width: 100%;
-    min-height: 96px;
-    border-top: 1px solid #121212;
+    min-height: $header-height;
+    border-top: 1px solid $border-color;
+    font-size: .8rem;
+    text-align: right;
+
+    p {
+        margin-right: 1rem;
+    }
 }

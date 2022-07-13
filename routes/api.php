@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\FakeAresController;
+use App\Http\Controllers\Api\AresController;
 use App\Http\Controllers\Api\ClientsController;
 use App\Http\Controllers\Api\InvoicesController;
 use App\Http\Controllers\Api\SuppliersController;
@@ -25,6 +26,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // /api/fakeares:  returns json format of real ARES response structure from https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=27074358
 Route::get('/fakeares', [FakeAresController::class, 'fakeAres']);
 
+//API for Ares-get info by ICO
+Route::get('/ares/{ico}', [AresController::class, 'getAres']);
+
+
+
 // APIs for our DB
 
 //All CLIENTS in our DB
@@ -38,6 +44,10 @@ Route::get('/suppliers', [SuppliersController::class, 'index']);
 Route::get('/suppliers/current', [SuppliersController::class, 'currentSupplier']);
 // SUPPLIER by ICO
 Route::get('/suppliers/{ico}', [SuppliersController::class, 'indexIco']);
+//Edit supplier
+Route::put('/suppliers/{id}', [SuppliersController::class, 'update']);
+// should we add {ico} ?
+
 
 
 //ALL invoices
@@ -46,5 +56,12 @@ Route::get('/invoices', [InvoicesController::class, 'index']);
 Route::get('/invoices/suppliers/{ico}', [InvoicesController::class, 'supplierIco']);
 //INVOICES by CLIENT-ICO
 Route::get('/invoices/clients/{ico}', [InvoicesController::class, 'clientIco']);
+<<<<<<< HEAD
 //All paid invoices for current user
 Route::get('/invoices/paid', [InvoicesController::class, 'currentSupplierPaidInvoices']);
+=======
+//Create new invoice
+Route::post('/invoices', [InvoicesController::class, 'create']);
+//Update existing invoice
+Route::put('/invoices/{invoice_number}', [InvoicesController::class, 'update']);
+>>>>>>> main
