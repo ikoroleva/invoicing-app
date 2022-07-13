@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import MainDashboard from "./pages/MainDashboard";
+import UserDetails from './pages/UserDetails';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
@@ -42,6 +43,7 @@ const Layout = () => {
                                         <Route exact path="/contact" element={<Contact />} />
                                         {/* <Route exact path="/about" element={<About />} /> */}
                                         <Route exact path="/dashboard" element={<MainDashboard />} />
+                                        <Route exact path="/userdetails" element={<UserDetails />} />
                                     </Fragment>
                                     : <Fragment>
                                         <Route exact path="/home" element={<Home />} />

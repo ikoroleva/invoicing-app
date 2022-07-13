@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import BrowserLinks from './BrowserLinks';
 import About from '../pages/About';
+import UserDetails from '../pages/UserDetails';
 import MainDashboard from '../pages/MainDashboard';
 import Home from "../pages/Home";
 
