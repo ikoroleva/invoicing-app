@@ -47,7 +47,7 @@ Route::get('/suppliers/current', [SuppliersController::class, 'currentSupplier']
 // SUPPLIER by ICO
 Route::get('/suppliers/{ico}', [SuppliersController::class, 'indexIco']);
 //Edit supplier
-Route::put('/suppliers/{id}', [SuppliersController::class, 'update']);
+Route::post('/suppliers/current', [SuppliersController::class, 'updateCurrent']);
 // should we add {ico} ?
 
 

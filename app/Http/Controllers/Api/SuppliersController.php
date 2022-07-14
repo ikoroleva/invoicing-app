@@ -67,9 +67,18 @@ class SuppliersController extends Controller
         return $response;
     }
 
+    public function updateCurrent(Request $request)
+    {
+        $userId = Auth::id();
+
+        $updateResponse = $this->update($request, $userId);
+
+        return 'CURRENT '.$updateResponse;
+    }
+
     public function update(Request $request, $id)
     {
-        $supplier = Supplier::with('bankAccounts', 'addresses')->where('user_id', Auth::id())->first();
+        $supplier = Supplier::with('bankAccounts', 'addresses')->where('user_id', $id)->first();
 
         $supplier->name = $request->input('name');
         $supplier->reg_number = $request->input('reg_number');
