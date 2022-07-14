@@ -16,6 +16,7 @@ import MainDashboard from "./pages/MainDashboard";
 import UserDetails from './pages/UserDetails';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Client from './pages/Client';
 
 
 
@@ -44,6 +45,7 @@ const Layout = () => {
                                         {/* <Route exact path="/about" element={<About />} /> */}
                                         <Route exact path="/dashboard" element={<MainDashboard />} />
                                         <Route exact path="/userdetails" element={<UserDetails />} />
+                                        <Route exact path="/clients/:number" element={<Client />} />
                                     </Fragment>
                                     : <Fragment>
                                         <Route exact path="/home" element={<Home />} />

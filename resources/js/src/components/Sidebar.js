@@ -15,7 +15,7 @@ const Sidebar = () => {
                 <div className="navs">
                     <Link to="/dashboard"><img src={home} alt="home icon" /></Link>
                     <img src={document} alt="document icon" />
-                    <img src={people} alt="users icon" />
+                    {/* <Link to={`./clients/${number}`}><img src={people} alt="users icon" /></Link> */}
                 </div>
             }
 
