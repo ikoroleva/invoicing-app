@@ -1,6 +1,3 @@
-import home from "/images/home.svg";
-import document from "/images/document.svg";
-import people from "/images/people.svg";
 import ClientList from "./ClientList";
 import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
@@ -15,48 +12,35 @@ const Sidebar = () => {
 
     let menuItems = [
         {
-            name: "Eduhance",
+            name: "",
             iconName: "menu",
             url: "/home",
         },
         {
             name: "Home",
-            iconName: "home",
-            url: "/dashboard",
-            type: "solid"
+            iconName: "mdiHome",
+            url: "/dashboard"
         },
         {
-            name: "Invoice",
-            iconName: "document",
-            url: "/create-invoice",
-            type: "solid"
+            name: "New invoice",
+            iconName: "mdiFileDocument",
+            url: "/create-invoice"
         },
         {
             name: "Clients",
-            iconName: "people",
-            url: "/home",
-            type: "solid"
+            iconName: "mdiAccountMultiple",
+            url: "/home"
         }
 
     ];
 
     const [hovered, setHovered] = useState(null);
     const [active, setActive] = useState(1);
-    const [animate, setAnimate] = useState(false);
     const [expanded, setExpanded] = useState(false);
 
-    let delay = 1;
-    useEffect(() => {
-        setAnimate(true);
-        let timer = setTimeout(() => setAnimate(false), delay * 1000);
-
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [active, delay]);
 
     return (
-        <aside>
+        <>
             {user && (
                 <div className={`sidebar ${expanded && "expanded"}`}>
 
@@ -67,8 +51,14 @@ const Sidebar = () => {
                             middle = true;
                         }
 
+                        let last = false;
+                        if (!(index === menuItems.length - 1)) {
+                            last = true;
+                        }
+
                         return (
-                            <div
+
+                            <Link to={item.url}
                                 className={`boxicon-container ${expanded && "expanded-boxicon-container"
                                     }`}
                                 onMouseEnter={() => {
@@ -88,29 +78,35 @@ const Sidebar = () => {
                                     if (index === 0) {
                                         setExpanded(!expanded);
                                     }
+                                    if (last) {
+
+                                    }
                                 }}
                                 key={index}
                             >
+                                {/* <Link to={item.url}> */}
                                 <BoxItem
                                     className={`${middle && "boxicon"} 
                                     ${!middle && "first-and-last-trash-fix"}
                                     ${active === index && "active"}
                                     `}
-                                    // size={changeSmall ? "sm" : "md"}
                                     name={item.iconName}
                                     // type={item.type}
                                     color={
-                                        hovered === index || active === index ? "white" : item.color
+                                        active === index ? "white" : item.color
                                     }
                                 // animation={active === index && animate ? "tada" : ""}
                                 // rotate={item.rotate}
                                 ></BoxItem>
+
                                 <p
                                     className={`description 
                                         ${expanded && "show-description"}
                                         ${active === index && "active-description"}`}
                                 >   {item.name}
-                                </p></div>
+                                </p>
+                            </Link>
+                            // </div>
                         );
 
                     })}
@@ -133,69 +129,10 @@ const Sidebar = () => {
                 </div>
             )
             }
-        </aside>
+        </>
     );
 };
 
 export default Sidebar;
 
-
-{/* <div className={`sidebar ${expanded && "expanded"}`}>
-      {menuItems.map((item, index) => {
-        let middle = false;
-        if (!(index === 0 || index === menuItems.length - 1)) {
-          middle = true;
-        }
-        return (
-          <div
-            className={`boxicon-container ${
-              expanded && "expanded-boxicon-container"
-            }`}
-            onMouseEnter={() => {
-              if (middle) {
-                setHovered(index);
-              }
-            }}
-            onMouseLeave={() => {
-              if (middle) {
-                setHovered(null);
-              }
-            }}
-            onClick={() => {
-              if (middle) {
-                setActive(index);
-              }
-              if (index === 0) {
-                setExpanded(!expanded);
-              }
-            }}
-            key={index}
-          >
-            <box-icon
-              class={`${middle && "boxicon"} 
-                      ${!middle && "first-and-last-trash-fix"}
-                      ${active === index && "active"}
-                      `}
-              size={changeSmall ? "sm" : "md"}
-              name={item.iconName}
-              type={item.type}
-              color={
-                hovered === index || active === index ? "white" : item.color
-              }
-              animation={active === index && animate ? "tada" : ""}
-              rotate={item.rotate}
-            ></box-icon>
-            <p
-              className={`description 
-            ${expanded && "show-description"}
-            ${active === index && "active-description"}`}
-            >
-              {item.name}
-            </p>
-          </div>
-        );
-      })}
-    </div>
-  );
-}; */}
 

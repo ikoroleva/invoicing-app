@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import ListGroup from 'react-bootstrap/ListGroup';
 
 
 const ClientList = () => {
@@ -23,12 +24,12 @@ const ClientList = () => {
         <div className="result-container">
 
             {clients &&
-                <div>
+                <ListGroup>
                     {clients.map((client, i) =>
-                        <Link to={`/clients/${client.reg_number}`} key={i}>{client.name}</Link>)
+                        <ListGroup.Item><Link to={`/clients/${client.reg_number}`} key={i}>{client.name}</Link></ListGroup.Item>)
                     }
 
-                </div>
+                </ListGroup>
             }
         </div >)
 }
