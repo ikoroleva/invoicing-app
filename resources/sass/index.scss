@@ -19,27 +19,23 @@ body {
 }
 
 #root {
+    width: 100%;
     height: 100%;
-    overflow: hidden;
 }
 
 .layout {
     width: 100%;
     height: 100hv;
-    padding-top: $header-height;
+    //padding-top: $header-height;
 }
 
 
 header {
     width: 100%;
-    height: $header-height;
+    height: 15%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    transition: top 0.1s ease-in-out;
     background: rgba(255, 255, 255, .95);
     border-bottom: 1px solid $border-color;
     font-family: sans-serif;
@@ -48,7 +44,7 @@ header {
         display: flex;
         align-items: center;
         justify-items: center;
-        width: 100px;
+        width: 4.2rem;
 
         a {
             margin: auto;
@@ -56,19 +52,13 @@ header {
     }
 
     .header-links {
-
         display: flex;
 
         a {
             color: #121212;
             text-decoration: none;
             margin: 1rem;
-
         }
-
-
-
-
     }
 
     .header-user-container {
@@ -84,61 +74,49 @@ header {
             margin: .0rem;
         }
     }
-
 }
 
-
-
 .main-container {
-    position: relative;
     display: flex;
     align-items: center;
-    height: 78vh;
 }
 
 main {
     padding: 20px;
+
+    .client_form_element {
+        margin: .5rem 0;
+    }
 }
 
-
-aside {
-    width: 100px;
-    height: 78vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+.sidebar {
+    width: 4.2rem;
+    min-height: 75%;
+    height: 100%;
     background-color: rgba(221, 221, 221, 0.842);
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.3s width;
+
+
 
     img {
         inline-size: 2rem;
         margin: 10px;
     }
-}
 
-aside>h2 {
-    margin-bottom: auto;
-}
 
-aside>div {
-    margin: auto 0;
-}
+    a {
+        text-decoration: none;
+        padding: .5rem;
+        display: block;
 
-aside>h3 {
-    margin-top: auto;
-}
-
-.navs {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    }
 
 }
 
-aside>* {
-    width: 100%;
-}
 
 
 
@@ -151,5 +129,124 @@ footer {
 
     p {
         margin-right: 1rem;
+    }
+}
+
+.boxicon-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+    position: relative;
+}
+
+.boxicon {
+    margin: 0.8rem;
+    animation-iteration-count: 1;
+    z-index: 2;
+}
+
+.first-and-last-trash-fix {
+    margin: 0.8rem;
+}
+
+.active {
+    background-color: red;
+}
+
+.active::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 95%;
+    background-color: #373737;
+    opacity: 1;
+    z-index: -1;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -0.25rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+}
+
+.boxicon::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 95%;
+    background-color: #373737;
+    opacity: 0;
+    z-index: -1;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -0.25rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+}
+
+.boxicon-container:hover>.boxicon::after {
+    opacity: 1;
+    transition: 0.1s;
+}
+
+aside>*:first-child {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+aside>*:last-child {
+    margin-top: auto;
+    margin-bottom: 2rem;
+}
+
+.final-icon {
+    background-color: red;
+}
+
+.description {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 5rem;
+    z-index: 10;
+    font-weight: bold;
+    margin: 0;
+    color: black;
+    transition: 0.2s opacity;
+}
+
+.active-description {
+    color: white;
+}
+
+.expanded {
+    width: 13rem;
+    align-items: flex-start;
+}
+
+.show-description {
+    opacity: 1;
+}
+
+.container {
+    display: flex;
+}
+
+.text {
+    color: white;
+    z-index: 100;
+    margin: 0 auto;
+    align-self: center;
+    font-size: 32px;
+}
+
+@media screen and (max-height: 550px) {
+    .boxicon {
+        margin-left: 1.2rem;
+    }
+
+    .first-and-last-trash-fix {
+        margin-left: 1.2rem;
     }
 }
