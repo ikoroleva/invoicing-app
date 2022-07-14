@@ -16,3 +16,5 @@ yarn-error.log
 /public/js
 /public/mix-manifest.json
 /public/mix.js.map
+/app/Http/Controllers/TestController.php
+/resources/views/development-test/index.blade.php

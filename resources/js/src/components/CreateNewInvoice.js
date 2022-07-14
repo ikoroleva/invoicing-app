@@ -1,13 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 
-import Modal from "react-bootstrap/Modal";
+import ModalCreateInvoice from "./ModalCreateInvoice";
+import InvoiceItem from "./InvoiceItem";
 
 const CreateNewInvoice = () => {
     const [values, setValues] = useState({
@@ -19,17 +18,23 @@ const CreateNewInvoice = () => {
         issued_on: "",
         due_date: "",
         form_of_payment: "",
-        invoice_description: "",
-        unit_cost: "",
-        unit_quantity: "",
+        // invoice_description: "",
+        // unit_cost: "",
+        // unit_quantity: "",
         additional_notes: "",
+        invoice_items: [
+            { invoice_description: "", unit_cost: "", unit_quantity: "" },
+        ],
     });
 
     //success message, if any
     const [flashMessage, setFlashMessage] = useState("");
 
     //state for modal
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
+
+    //state for new InvoiceItem line
+    const [listOfNewLines, setListOfNewLines] = useState([]);
 
     const handleChange = (event) => {
         setValues((previous_values) => {
@@ -43,101 +48,25 @@ const CreateNewInvoice = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(values);
-        const response = await axios.post("/api/create-invoice", values);
-        const response_data = response.data;
-        if (response_data) {
-            setFlashMessage(response_data);
-            setShow(true);
-        }
-    };
+        // const response = await axios.post("/api/create-invoice", values);
+        // const response = await axios.get("/development-test/invoice", values);
 
-    const closeModal = () => {};
+        // const response_data = response.data;
+        // if (response_data) {
+        //     setFlashMessage(response_data);
+        //     setShow(false);
+        // }
+    };
 
     return (
         <>
-            {/* <Modal
-                show={show}
-                onHide={() => setShow(false)}
-                dialogClassName="modal-90w"
-                aria-labelledby="example-custom-modal-styling-title"
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title id="example-custom-modal-styling-title">
-                        {flashMessage}
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>
-                        Here is custom width modal! Ipsum molestiae natus
-                        adipisci modi eligendi? Debitis amet quae unde commodi
-                        aspernatur enim, consectetur. Cumque deleniti temporibus
-                        ipsam atque a dolores quisquam quisquam adipisci
-                        possimus laboriosam. Quibusdam facilis doloribus
-                        debitis! Sit quasi quod accusamus eos quod. Ab quos
-                        consequuntur eaque quo rem! Mollitia reiciendis porro
-                        quo magni incidunt dolore amet atque facilis ipsum
-                        deleniti rem!
-                    </p>
-                    <Button type="submit" className="mb-2">
-                        Submit
-                    </Button>
-                </Modal.Body>
-            </Modal> */}
-
             <Form onSubmit={handleSubmit}>
-                <Modal
+                <ModalCreateInvoice
                     show={show}
-                    onHide={() => setShow(false)}
-                    dialogClassName="modal-90w"
-                    aria-labelledby="example-custom-modal-styling-title"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title id="example-custom-modal-styling-title">
-                            {flashMessage}
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div>
-                            <p>
-                                Here is custom width modal! Ipsum molestiae
-                                natus adipisci modi eligendi? Debitis amet quae
-                                unde commodi aspernatur enim, consectetur.
-                                Cumque deleniti temporibus ipsam atque a dolores
-                                quisquam quisquam adipisci possimus laboriosam.
-                                Quibusdam facilis doloribus debitis! Sit quasi
-                                quod accusamus eos quod. Ab quos consequuntur
-                                eaque quo rem! Mollitia reiciendis porro quo
-                                magni incidunt dolore amet atque facilis ipsum
-                                deleniti rem!
-                            </p>
-                            <ButtonGroup
-                                className="me-2"
-                                aria-label="First group"
-                            >
-                                <Button
-                                    variant="primary"
-                                    size="sm"
-                                    className="mb-2"
-                                    onClick={() => setShow(false)}
-                                >
-                                    Edit invoice
-                                </Button>
-                            </ButtonGroup>
-                            <ButtonGroup
-                                className="me-2"
-                                aria-label="Second group"
-                            >
-                                <Button
-                                    type="submit"
-                                    size="sm"
-                                    className="mb-2"
-                                >
-                                    Save invoice
-                                </Button>
-                            </ButtonGroup>
-                        </div>
-                    </Modal.Body>
-                </Modal>
+                    setShow={setShow}
+                    flashMessage={flashMessage}
+                    handleSubmit={handleSubmit}
+                />
                 <Row className="align-items-center">
                     <Col xs="auto">
                         <Form.Label htmlFor="inlineFormInput" visuallyHidden>
@@ -153,7 +82,7 @@ const CreateNewInvoice = () => {
                         />
                     </Col>
 
-                    <Form.Label column lg={2}>
+                    <Form.Label column lg={1}>
                         Issued on:
                     </Form.Label>
                     <Col xs="auto">
@@ -169,7 +98,7 @@ const CreateNewInvoice = () => {
                         />
                     </Col>
 
-                    <Form.Label column lg={2}>
+                    <Form.Label column lg={1}>
                         Due date:
                     </Form.Label>
                     <Col xs="auto">
@@ -196,66 +125,56 @@ const CreateNewInvoice = () => {
                             <option>Cash</option>
                         </Form.Select>
                     </Col>
-                    <Col xs="auto">
-                        <Form.Label htmlFor="inlineFormInput" visuallyHidden>
-                            Service description
-                        </Form.Label>
-                        <Form.Control
-                            className="mb-2"
-                            id="inlineFormInput"
-                            name="invoice_description"
-                            value={values.invoice_description}
-                            placeholder="Service description"
-                            onChange={handleChange}
-                        />
-                    </Col>
-                    <Col xs="auto">
-                        <Form.Label htmlFor="inlineFormInput" visuallyHidden>
-                            Unit cost
-                        </Form.Label>
-                        <Form.Control
-                            className="mb-2"
-                            id="inlineFormInput"
-                            name="unit_cost"
-                            value={values.unit_cost}
-                            placeholder="Unit cost"
-                            onChange={handleChange}
-                        />
-                    </Col>
-                    <Col xs="auto">
-                        <Form.Label htmlFor="inlineFormInput" visuallyHidden>
-                            Unit quantity
-                        </Form.Label>
-                        <Form.Control
-                            className="mb-2"
-                            id="inlineFormInput"
-                            name="unit_quantity"
-                            value={values.unit_quantity}
-                            placeholder="Unit quantity"
-                            onChange={handleChange}
-                        />
-                    </Col>
+                </Row>
+                <Row className="align-items-center">
+                    <InvoiceItem
+                        values={{ values }}
+                        handleChange={handleChange}
+                    />
 
+                    {listOfNewLines.map((Element, index) => (
+                        <Col xs={7}>
+                            <Element
+                                values={{ values }}
+                                handleChange={handleChange}
+                                key={index}
+                            />
+                        </Col>
+                    ))}
                     <Col xs="auto">
-                        Total amount: {values.unit_cost * values.unit_quantity}
-                        ,- CZK
-                    </Col>
-                    <Col xs={7}>
-                        <Form.Control
-                            name="additional_notes"
-                            value={values.additional_notes}
-                            placeholder="Your notes to be shown on invoice...."
-                            onChange={handleChange}
-                        />
-                    </Col>
-
-                    <br />
-                    <Col xs="auto">
-                        <Button type="submit" className="mb-2">
-                            Submit
+                        <Button
+                            variant="secondary"
+                            onClick={() =>
+                                setListOfNewLines([
+                                    ...listOfNewLines,
+                                    InvoiceItem,
+                                ])
+                            }
+                        >
+                            add new line
                         </Button>
                     </Col>
                 </Row>
+                <Col xs={7}>
+                    <Form.Control
+                        name="additional_notes"
+                        value={values.additional_notes}
+                        placeholder="Your notes to be shown on invoice...."
+                        onChange={handleChange}
+                    />
+                </Col>
+                <Col xs="auto">
+                    Total: {values.unit_cost * values.unit_quantity}
+                    ,- CZK
+                </Col>
+
+                <br />
+                <Col xs="auto">
+                    {/* <Button variant="primary" onClick={() => setShow(true)}>
+                            Generate invoice
+                        </Button> */}
+                    <Button type="submit">test values</Button>{" "}
+                </Col>
             </Form>
         </>
     );
