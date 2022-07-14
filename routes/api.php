@@ -37,6 +37,8 @@ Route::get('/ares/{ico}', [AresController::class, 'getAres']);
 Route::get('/clients', [ClientsController::class, 'index']);
 //CLIENT by ICO
 Route::get('/clients/{ico}', [ClientsController::class, 'indexIco']);
+Route::post('/clients/{ico}', [ClientsController::class, 'store']);
+
 
 //ALL SUPPLIERS
 Route::get('/suppliers', [SuppliersController::class, 'index']);
