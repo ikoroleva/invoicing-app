@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
-const ClientList = () => {
+const ClientList = ({ showClients }) => {
     const [clients, setClients] = useState([]);
 
     const url = `/api/clients/`;
@@ -16,17 +16,20 @@ const ClientList = () => {
     }
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        if (showClients) { fetchData(); }
+
+    }, [showClients]);
 
 
     return (
-        <div className="result-container">
+        <div className={`result-container 
+                        ${!showClients && "hidden"}`} >
+            {console.log(showClients)}
 
             {clients &&
                 <ListGroup>
                     {clients.map((client, i) =>
-                        <ListGroup.Item><Link to={`/clients/${client.reg_number}`} key={i}>{client.name}</Link></ListGroup.Item>)
+                        <ListGroup.Item key={i}><Link to={`/clients/${client.reg_number}`} key={i}>{client.name}</Link></ListGroup.Item>)
                     }
 
                 </ListGroup>

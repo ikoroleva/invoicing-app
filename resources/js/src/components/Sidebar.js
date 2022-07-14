@@ -37,6 +37,7 @@ const Sidebar = () => {
     const [hovered, setHovered] = useState(null);
     const [active, setActive] = useState(1);
     const [expanded, setExpanded] = useState(false);
+    const [showClients, setShowClients] = useState(false);
 
 
     return (
@@ -52,7 +53,7 @@ const Sidebar = () => {
                         }
 
                         let last = false;
-                        if (!(index === menuItems.length - 1)) {
+                        if (index === menuItems.length - 1) {
                             last = true;
                         }
 
@@ -74,12 +75,14 @@ const Sidebar = () => {
                                 onClick={() => {
                                     if (middle) {
                                         setActive(index);
+                                        setShowClients(false);
                                     }
                                     if (index === 0) {
                                         setExpanded(!expanded);
+                                        setShowClients(!expanded && active == menuItems.length - 1);
                                     }
                                     if (last) {
-
+                                        setShowClients(expanded);
                                     }
                                 }}
                                 key={index}
@@ -93,7 +96,7 @@ const Sidebar = () => {
                                     name={item.iconName}
                                     // type={item.type}
                                     color={
-                                        active === index ? "white" : item.color
+                                        hovered === index || active === index ? "white" : item.color
                                     }
                                 // animation={active === index && animate ? "tada" : ""}
                                 // rotate={item.rotate}
@@ -109,26 +112,13 @@ const Sidebar = () => {
                             // </div>
                         );
 
-                    })}
 
-                    {/* <div className="boxicon-container">
-                        <Link to="/dashboard">
-                            <img src={home} alt="home icon" />
-                        </Link>
-                    </div>
-                    <box-icon size="md" name="alt" type="solid" color="red" />
-                    <div className="boxicon-container">
-                        <Link to="/create-invoice">
-                            <img src={document} alt="document icon" />
-                        </Link>
-                    </div>
-                    <div className="boxicon-container">
-                        <img src={people} alt="users icon" />
-                    </div>
-                    <ClientList /> */}
+                    })}
+                    <ClientList showClients={showClients} />
                 </div>
             )
             }
+
         </>
     );
 };
