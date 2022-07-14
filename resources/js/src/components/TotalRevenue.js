@@ -3,14 +3,15 @@ import { useEffect,useState } from "react";
 
 export default function TotalRevenue(){
 
-    let sum = 1; 
-    const revenues = (array) => {
-    for (let i = 0; i < array.length; i++) {
-        sum += array[i];
-    }}
-
+    // function to sum all paid invoices fetched from API
+    let sum = 0; 
+    const revenues = () => {
+    for (let i = 0; i < invoices.length; i++) {
+        sum += invoices[i];
+    }return <>{sum}</>
+}
+    //state to store all paid invoices into
     const [invoices, setInvoices] = useState([])
-    
     const url = 'api/invoices/paid' ;
 
 
@@ -22,22 +23,15 @@ export default function TotalRevenue(){
     setInvoices(data);
     };
 
-
-        useEffect(() => {
-        fetchData(), revenues(invoices);
+    //watching fetch data and also revenues function 
+    useEffect(() => {
+        fetchData(), revenues();
     }, []);
-
-    // const revenues = (array) => {
-    // for (let i = 0; i < array.length; i++) {
-          
-    //     sum += array[i];
-    //     return sum;
-    // }}
 
     console.log(invoices);
     console.log(sum);
 
     return(
-        <h1>Total Revenue</h1>
+        <h1>Total Revenue: {revenues()} CZK</h1>
     )
 }

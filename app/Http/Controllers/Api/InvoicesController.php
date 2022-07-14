@@ -97,8 +97,6 @@ class InvoicesController extends Controller
         return $response;
     }
 
-<<<<<<< HEAD
-
     // all paid invoices for current user will be in API together with other information about invoices
     public function currentSupplierPaidInvoices()
     {
@@ -109,7 +107,6 @@ class InvoicesController extends Controller
     
     
 
-=======
     public function create(Request $request)
     {
         $invoice = new Invoice;
@@ -153,5 +150,4 @@ class InvoicesController extends Controller
         // session()->flash('success_message', 'Invoice updated!');
         return 'Invoice updated!';
     }
->>>>>>> main
 }
