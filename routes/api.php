@@ -63,6 +63,6 @@ Route::get('/invoices/paid', [InvoicesController::class, 'currentSupplierPaidInv
 //All issued invoices for current user
 Route::get('/invoices/issued', [InvoicesController::class, 'currentSupplierIssuedInvoices']);
 //Create new invoice
-Route::post('/invoices', [InvoicesController::class, 'create']);
+Route::post('/create-invoice', [InvoicesController::class, 'create']);
 //Update existing invoice
 Route::put('/invoices/{invoice_number}', [InvoicesController::class, 'update']);
