@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react";
 
 // this component will show total amlount of already paid invoices
-export default function TotalRevenueInvoices(){
+export default function TotalValueInvoices(){
 
     // function to sum all paid invoices fetched from API
     let sum = 0; 
@@ -32,6 +32,6 @@ export default function TotalRevenueInvoices(){
     console.log(sum);
 
     return(
-        <h1>Total Revenue: {revenues()} CZK</h1>
+        <h1>Total value of issueed invoices: {revenues()} CZK</h1>
     )
 }

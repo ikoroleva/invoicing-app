@@ -1,6 +1,6 @@
 // import { use } from "browser-sync";
 import { useEffect, useState } from "react";
-import TotalRevenue from "../components/TotalRevenue";
+import TotalRevenueInvoices from "../components/TotalRevenue";
 
 
 export default function MainDashboard(){
@@ -46,7 +46,8 @@ console.log(supplier);
         <>
         <h1>Main Dashboard of: {supplier.name}</h1>
         <h3>View Invoices:</h3>
-        <TotalRevenue />
+        <TotalRevenueInvoices /> 
+        {/* <TotalValueInvoices/> */}
         </>
     )
 }

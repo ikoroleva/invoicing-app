@@ -104,6 +104,14 @@ class InvoicesController extends Controller
 
         return $currentSupplierPaidInvoices;
     }
+
+    // all issued invoices for currently loged in supplier/user
+    public function currentSupplierIssuedInvoices()
+    {
+        $currentSupplierIssuedInvoices = Invoice::where('supplier_id',\Auth::id())->pluck('total_amount')->toArray();
+
+        return $currentSupplierIssuedInvoices;
+    }
     
     
 
