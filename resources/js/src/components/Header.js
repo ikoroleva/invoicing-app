@@ -1,13 +1,18 @@
-import BrowserLinks from './BrowserLinks';
+import HeaderLinks from './HeaderLinks';
+import UserElement from './UserElement';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
     return (
         <header>
 
-            <strong>
-                Our amazing invoicing app
-            </strong>
+            <div className='header-logo'>
+                <Link to="home">
+                    Logo</Link>
+            </div>
+            <HeaderLinks />
+            <UserElement />
 
         </header>
     );

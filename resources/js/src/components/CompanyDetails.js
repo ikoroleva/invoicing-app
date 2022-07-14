@@ -1,28 +1,27 @@
-import axios from 'axios';
+import axios from "axios";
 import { useEffect, useState } from "react";
-import React from 'react';
+import React from "react";
 
 function CompanyDetails() {
 
     const [details, setDetails] = useState(null);
 
-  const url = "/api/suppliers/current";
+    const url = "/api/suppliers/current";
 
-  const fetchData = async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-  
-     console.log(data);
-   
-    setDetails(data);
-  
-  };
+    const fetchData = async () => {
+        const response = await fetch(url);
+        const data = await response.json();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-  
-return (
+        console.log(data);
+
+        setDetails(data);
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    return (
         <div className="userdetails__box">
             <div className="userdetails__heading">Company Details</div>
 
@@ -58,7 +57,7 @@ return (
             }
 
         </div>
-    )
+    );
 }
 
 export default CompanyDetails;

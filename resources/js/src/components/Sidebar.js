@@ -1,28 +1,32 @@
 import home from "/images/home.svg";
 import document from "/images/document.svg";
-import people from '/images/people.svg';
-
+import people from "/images/people.svg";
+import { Link } from "react-router-dom";
+import UserContext from "../context/UserContext";
+import React, { Fragment, useContext } from "react";
 
 const Sidebar = () => {
-
+    const { user } = useContext(UserContext);
     return (
         <aside>
-            <h2>
-                logo
-            </h2>
+            {user && (
+                <div className="navs">
+                    <Link to="/dashboard">
+                        <img src={home} alt="home icon" />
+                    </Link>
+                    <Link to="/create-invoice">
+                        <img src={document} alt="document icon" />
+                    </Link>
 
-            <div className="navs">
-                <img src={home} alt="home icon" />
-                <img src={document} alt="document icon" />
-                <img src={people} alt="users icon" />
-            </div>
+                    <img src={people} alt="users icon" />
+                </div>
+            )}
 
-
-            <h3>
+            {/* <h3>
                 user
-            </h3>
+            </h3> */}
         </aside>
     );
-}
+};
 
 export default Sidebar;
