@@ -121,11 +121,7 @@ class InvoicesController extends Controller
     // all paid invoices for current user will be in API together with other information about invoices
     public function currentSupplierPaidInvoices()
     {
-<<<<<<< HEAD
-        $currentSupplierPaidInvoices = Invoice::where('supplier_id', \Auth::id())->where('status', 'paid')->pluck('total_amount')->toArray();;
-=======
         $currentSupplierPaidInvoices = Invoice::where('supplier_id',\Auth::id())->where('status','paid')->pluck('total_amount');
->>>>>>> main
 
         return $currentSupplierPaidInvoices;
     }
@@ -137,11 +133,6 @@ class InvoicesController extends Controller
 
         return $currentSupplierIssuedInvoices;
     }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> main
 
      // all issued invoices in curretn month for currently loged in supplier 
      public function thisMonthInvoices()
