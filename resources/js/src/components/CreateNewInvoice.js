@@ -22,9 +22,7 @@ const CreateNewInvoice = () => {
         // unit_cost: "",
         // unit_quantity: "",
         additional_notes: "",
-        invoice_items: [
-            { invoice_description: "", unit_cost: "", unit_quantity: "" },
-        ],
+        invoice_items: [],
     });
 
     //success message, if any
@@ -45,6 +43,24 @@ const CreateNewInvoice = () => {
         });
     };
 
+    const handleInvoiceChange = async (element) => {
+        const isMatch = await values.invoice_items.filter(
+            (elem) => elem.id === element.id
+        );
+        if (isMatch.length) {
+            const arry = await values.invoice_items.map((elem) =>
+                elem.id === element.id ? element : elem
+            );
+
+            return setValues({ ...values, invoice_items: arry });
+        } else {
+            return setValues({
+                ...values,
+                invoice_items: [...values.invoice_items, element],
+            });
+        }
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(values);
@@ -57,6 +73,8 @@ const CreateNewInvoice = () => {
         //     setShow(false);
         // }
     };
+
+    // values?.invoice_items?.reduce((a, b) => a.unit_cost + b.unit_cost);
 
     return (
         <>
@@ -129,15 +147,16 @@ const CreateNewInvoice = () => {
                 <Row className="align-items-center">
                     <InvoiceItem
                         values={{ values }}
-                        handleChange={handleChange}
+                        handleChange={handleInvoiceChange}
+                        id={0}
                     />
 
                     {listOfNewLines.map((Element, index) => (
-                        <Col xs={7}>
+                        <Col xs={7} key={index}>
                             <Element
                                 values={{ values }}
-                                handleChange={handleChange}
-                                key={index}
+                                handleChange={handleInvoiceChange}
+                                id={index + 1}
                             />
                         </Col>
                     ))}
