@@ -31,6 +31,6 @@ export default function ThisMonthInvoicesValue(){
 
 
     return(
-        <h1>This month issued voices amount: {sumOfInvoices()} CZK</h1>
+        <h4>This month issued invoices amount: {sumOfInvoices()} CZK</h4>
     )
 }

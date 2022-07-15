@@ -27,7 +27,7 @@ console.log(supplier);
 
     return(
         <>
-        <h1>Main Dashboard of: {supplier.name}</h1>
+        <h2>Main Dashboard of: {supplier.name}</h2>
         <h3>View Invoices:</h3>
         <TotalRevenueInvoices /> 
         <TotalValueInvoices/>

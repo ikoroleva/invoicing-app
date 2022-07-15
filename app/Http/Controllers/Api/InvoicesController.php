@@ -100,17 +100,28 @@ class InvoicesController extends Controller
     }
 
     //all invoices for currently logged in user
-    public function currentSupplierInvoices()
+    public function currentSupplierInvoices(Request $request)
     {
-        $currentSupplierInvoices = Invoice::where('supplier_id',\Auth::id())->orderBy('id')->get();
-
-        return $currentSupplierInvoices;
+        $offset = $request->get('offset') ?? 0;
+        $currentSupplierInvoicesCount = Invoice::where('supplier_id',\Auth::id())
+            ->count();
+        $currentSupplierInvoices = Invoice::where('supplier_id',\Auth::id())
+        ->with('client')
+        ->orderByDesc('id')
+        ->offset($offset)
+        ->limit(3)
+        ->get();
+        
+        return [
+            'data' => $currentSupplierInvoices,
+            'totalCount' => $currentSupplierInvoicesCount
+        ];
     }
 
     // all paid invoices for current user will be in API together with other information about invoices
     public function currentSupplierPaidInvoices()
     {
-        $currentSupplierPaidInvoices = Invoice::where('supplier_id',\Auth::id())->where('status','paid')->pluck('total_amount')->toArray();;
+        $currentSupplierPaidInvoices = Invoice::where('supplier_id',\Auth::id())->where('status','paid')->pluck('total_amount');
 
         return $currentSupplierPaidInvoices;
     }

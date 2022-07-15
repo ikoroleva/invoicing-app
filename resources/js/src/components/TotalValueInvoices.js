@@ -31,6 +31,6 @@ export default function TotalValueInvoices(){
   
 
     return(
-        <h1>Total value of issueed invoices: {sumOfIssuedInvoices()} CZK</h1>
+        <h4>Total value of issueed invoices: {sumOfIssuedInvoices()} CZK</h4>
     )
 }

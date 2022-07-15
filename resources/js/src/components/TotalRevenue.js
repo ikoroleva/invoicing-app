@@ -31,6 +31,6 @@ export default function TotalRevenueInvoices(){
   
 
     return(
-        <h1>Total Revenue: {revenues()} CZK</h1>
+        <h4>Total Revenue: {revenues()} CZK</h4>
     )
 }
