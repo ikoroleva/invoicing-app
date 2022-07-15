@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
+use Carbon\Carbon;
 
 class InvoicesController extends Controller
 {
@@ -98,24 +99,53 @@ class InvoicesController extends Controller
         return $response;
     }
 
+    //all invoices for currently logged in user
+    public function currentSupplierInvoices(Request $request)
+    {
+        $offset = $request->get('offset') ?? 0;
+        $currentSupplierInvoicesCount = Invoice::where('supplier_id',\Auth::id())
+            ->count();
+        $currentSupplierInvoices = Invoice::where('supplier_id',\Auth::id())
+        ->with('client')
+        ->orderByDesc('id')
+        ->offset($offset)
+        ->limit(3)
+        ->get();
+        
+        return [
+            'data' => $currentSupplierInvoices,
+            'totalCount' => $currentSupplierInvoicesCount
+        ];
+    }
+
     // all paid invoices for current user will be in API together with other information about invoices
     public function currentSupplierPaidInvoices()
     {
-        $currentSupplierPaidInvoices = Invoice::where('supplier_id',\Auth::id())->where('status','paid')->pluck('total_amount')->toArray();;
+        $currentSupplierPaidInvoices = Invoice::where('supplier_id',\Auth::id())->where('status','paid')->pluck('total_amount');
 
         return $currentSupplierPaidInvoices;
     }
 
-    // all issued invoices for currently loged in supplier/user
+    // all issued invoices for currently loged in supplier/user but only as array of total amounts values
     public function currentSupplierIssuedInvoices()
     {
         $currentSupplierIssuedInvoices = Invoice::where('supplier_id',\Auth::id())->pluck('total_amount')->toArray();
 
         return $currentSupplierIssuedInvoices;
     }
-    
-    
 
+     // all issued invoices in curretn month for currently loged in supplier 
+     public function thisMonthInvoices()
+    {
+        $thisMonthInvoices = Invoice::where('supplier_id',\Auth::id())
+            ->select('total_amount')
+            ->whereMonth('issued_on', Carbon::now()->month)
+            ->pluck('total_amount')
+            ->toArray();
+
+            return $thisMonthInvoices;
+    }
+    
     public function create(Request $request)
     {
         $invoice = new Invoice;
@@ -144,12 +174,6 @@ class InvoicesController extends Controller
 
         return 'Invoice created.';
     }
-
-
-
-
-
-
 
     public function update(Request $request, $invoice_number)
     {

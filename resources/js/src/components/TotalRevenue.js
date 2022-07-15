@@ -28,10 +28,9 @@ export default function TotalRevenueInvoices(){
         fetchData(), revenues();
     }, []);
 
-    console.log(invoices);
-    console.log(sum);
+  
 
     return(
-        <h1>Total Revenue: {revenues()} CZK</h1>
+        <h4>Total Revenue: {revenues()} CZK</h4>
     )
 }
