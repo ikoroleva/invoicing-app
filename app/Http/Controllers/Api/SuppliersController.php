@@ -78,7 +78,7 @@ class SuppliersController extends Controller
 
     public function update(Request $request, $id)
     {
-        $supplier = Supplier::with('bankAccounts', 'address')->where('user_id', $id)->first();
+        $supplier = Supplier::with('bankAccount', 'address')->where('user_id', $id)->first();
 
         $supplier->name = $request->input('name');
         $supplier->reg_number = $request->input('reg_number');
