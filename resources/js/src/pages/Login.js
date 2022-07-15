@@ -42,33 +42,37 @@ export default function Login() {
     }
 
     return (
-        <Form action="/login" method="post" onSubmit={handleSubmit}>
-            <h1>
-                Account login
-            </h1>
-            <Form.Group className="user-login">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" name="email" value={values.email} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group className="user-password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" autoComplete='off' name="password" value={values.password} onChange={handleChange} />
-            </Form.Group>
-            <br />
-            <Button variant="primary" type='submit'>Log in</Button>
+        <div className='form-container'>
+            <Form className='form-centered'
+            // action="/login" method="post" onSubmit={handleSubmit}
+            >
+                <h1>
+                    Account login
+                </h1>
+                <Form.Group className="user-login">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" name="email" value={values.email} onChange={handleChange} />
+                </Form.Group>
+                <Form.Group className="user-password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" autoComplete='off' name="password" value={values.password} onChange={handleChange} />
+                </Form.Group>
+                <br />
+                <Button variant="primary" type='submit' onClick={handleSubmit}>Log in</Button>
+                <br />
+                <p>or <Link to="/register">create an account</Link></p>
 
-            <p>Or <Link to="/register">Create an account</Link></p>
 
 
-
-            {/* <span>Email</span>
+                {/* <span>Email</span>
             <input type="email" autoComplete='off' name="email" value={values.email} onChange={handleChange} />
 
             <span>Password</span>
             <input type="password" autoComplete='off' name="password" value={values.password} onChange={handleChange} /> */}
 
-            {/* <button>Login</button> */}
+                {/* <button>Login</button> */}
 
-        </Form>
+            </Form>
+        </div>
     );
 }
