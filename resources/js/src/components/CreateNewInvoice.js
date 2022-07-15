@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -18,9 +18,6 @@ const CreateNewInvoice = () => {
         issued_on: "",
         due_date: "",
         form_of_payment: "",
-        // invoice_description: "",
-        // unit_cost: "",
-        // unit_quantity: "",
         additional_notes: "",
         invoice_items: [],
     });
@@ -33,6 +30,9 @@ const CreateNewInvoice = () => {
 
     //state for new InvoiceItem line
     const [listOfNewLines, setListOfNewLines] = useState([]);
+
+    //state for total
+    const [total, setTotal] = useState(0);
 
     const handleChange = (event) => {
         setValues((previous_values) => {
@@ -64,6 +64,7 @@ const CreateNewInvoice = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(values);
+
         // const response = await axios.post("/api/create-invoice", values);
         // const response = await axios.get("/development-test/invoice", values);
 
@@ -75,6 +76,17 @@ const CreateNewInvoice = () => {
     };
 
     // values?.invoice_items?.reduce((a, b) => a.unit_cost + b.unit_cost);
+
+    // const totalAmount = () => {
+    //     values.invoice_items.map((el, i) => {
+    //         setTotal(total + el.sub_total);
+    //         console.log(total);
+    //     });
+    // };
+
+    // useEffect(() => {
+    //     totalAmount();
+    // }, [values.invoice_items]);
 
     return (
         <>
@@ -148,6 +160,8 @@ const CreateNewInvoice = () => {
                     <InvoiceItem
                         values={{ values }}
                         handleChange={handleInvoiceChange}
+                        total={total}
+                        setTotal={setTotal}
                         id={0}
                     />
 
@@ -156,6 +170,8 @@ const CreateNewInvoice = () => {
                             <Element
                                 values={{ values }}
                                 handleChange={handleInvoiceChange}
+                                total={total}
+                                setTotal={setTotal}
                                 id={index + 1}
                             />
                         </Col>
@@ -183,15 +199,15 @@ const CreateNewInvoice = () => {
                     />
                 </Col>
                 <Col xs="auto">
-                    Total: {values.unit_cost * values.unit_quantity}
+                    Total: {total}
                     ,- CZK
                 </Col>
 
                 <br />
                 <Col xs="auto">
                     {/* <Button variant="primary" onClick={() => setShow(true)}>
-                            Generate invoice
-                        </Button> */}
+                        Generate invoice
+                    </Button> */}
                     <Button type="submit">test values</Button>{" "}
                 </Col>
             </Form>

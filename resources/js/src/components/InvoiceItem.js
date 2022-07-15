@@ -7,13 +7,15 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 
-const InvoiceItem = ({ values, handleChange, id }) => {
-    // { invoice_description: "", unit_cost: "", unit_quantity: "" },
+const InvoiceItem = ({ handleChange, id }) => {
+    // total Sub-total state
+    const [subtotal, setSubtotal] = useState(0);
 
     const [invoiceData, setInvoiceData] = useState({
         invoice_description: "",
-        unit_cost: "",
-        unit_quantity: "",
+        unit_cost: 0,
+        unit_quantity: 0,
+        sub_total: 0,
         id,
     });
 
@@ -22,10 +24,15 @@ const InvoiceItem = ({ values, handleChange, id }) => {
             invoice_description: null,
             unit_cost: null,
             unit_quantity: null,
+            sub_total: subtotal,
             id,
         };
         setInvoiceData(value);
     }, []);
+
+    useEffect(() => {
+        setSubtotal(invoiceData.unit_cost * invoiceData.unit_quantity);
+    }, [invoiceData]);
 
     const handleChangeInput = (e) => {
         const newValue = {
@@ -45,6 +52,7 @@ const InvoiceItem = ({ values, handleChange, id }) => {
                     Service description
                 </Form.Label>
                 <Form.Control
+                    type="text"
                     className="mb-2"
                     id="inlineFormInput"
                     name="invoice_description"
@@ -58,6 +66,7 @@ const InvoiceItem = ({ values, handleChange, id }) => {
                     Unit cost
                 </Form.Label>
                 <Form.Control
+                    type="number"
                     className="mb-2"
                     id="inlineFormInput"
                     name="unit_cost"
@@ -71,6 +80,7 @@ const InvoiceItem = ({ values, handleChange, id }) => {
                     Unit quantity
                 </Form.Label>
                 <Form.Control
+                    type="number"
                     className="mb-2"
                     id="inlineFormInput"
                     name="unit_quantity"
@@ -78,6 +88,10 @@ const InvoiceItem = ({ values, handleChange, id }) => {
                     placeholder="Unit quantity"
                     onChange={(e) => handleChangeInput(e)}
                 />
+            </Col>
+            <Col xs="auto">
+                Sub-total: {subtotal}
+                ,- CZK
             </Col>
         </>
     );

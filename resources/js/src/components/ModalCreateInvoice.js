@@ -13,7 +13,7 @@ const ModalCreateInvoice = ({ show, setShow, flashMessage, handleSubmit }) => {
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
-                dialogClassName="modal-90w"
+                dialogClassName="modal-100w"
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <Modal.Header closeButton>
