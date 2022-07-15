@@ -10,9 +10,9 @@ class Supplier extends Model
     protected $fillable = ['user_id', 'name', 'email'];
 
     use HasFactory;
-    public function addresses()
+    public function address()
     {
-        return $this->hasMany(Address::class);
+        return $this->hasOne(Address::class);
     }
     public function bankAccounts()
     {

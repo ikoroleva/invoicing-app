@@ -16,4 +16,8 @@ use App\Http\Controllers\ReactAppController;
 
 //Route::get('/', [HomeController::class, 'home']);
 
+Route::get('/development-test', [App\Http\Controllers\TestController::class, 'index']);
+Route::get('/development-test/receive', [App\Http\Controllers\TestController::class, 'showInput']);
+Route::get('/development-test/invoice', [App\Http\Controllers\TestController::class, 'showInvoice']);
+
 Route::get('/{path?}', [ReactAppController::class, 'renderApp'])->where('path', '.*');
