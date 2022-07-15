@@ -17,6 +17,7 @@ import UserDetails from "./pages/UserDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Client from './pages/Client';
+import Clients from "./pages/Clients";
 
 const Layout = () => {
     const { user } = useContext(UserContext);
@@ -63,6 +64,7 @@ const Layout = () => {
                                         path="/create-invoice"
                                         element={<CreateInvoice />}
                                     />
+                                    <Route exact path="/clients" element={<Clients />} />
                                     <Route exact path="/clients/:number" element={<Client />} />
                                 </Fragment>
                             ) : (

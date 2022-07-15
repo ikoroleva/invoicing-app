@@ -1,5 +1,7 @@
 import ClientDetails from '../components/ClientDetails';
 import { useParams } from "react-router-dom";
+import ClientSearch from '../components/ClientSearch';
+
 
 
 const Client = () => {
