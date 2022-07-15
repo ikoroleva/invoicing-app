@@ -289,3 +289,15 @@ footer {
         }
     }
 }
+
+.userdetails__container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    border-style: solid;
+    border-color: #bbb5b5;
+    border-width: 5px;
+    padding: 0;
+
+}

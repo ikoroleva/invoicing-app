@@ -14,7 +14,7 @@ class SuppliersController extends Controller
     {
 
         $response = [];
-        $suppliers = Supplier::with('bankAccounts', 'addresses')
+        $suppliers = Supplier::with('bankAccounts', 'address')
             ->orderBy('id')
             ->get();
         foreach ($suppliers as $supplier) {
@@ -25,7 +25,7 @@ class SuppliersController extends Controller
                 'reg_type' =>  $supplier->reg_type_court . ', složka ' . $supplier->reg_type_file,
                 'address_id' => $supplier->address_id,
                 'bank_name' => $supplier->bankAccounts,
-                'address' => $supplier->addresses,
+                'address' => $supplier->address,
                 'email' =>  $supplier->email,
                 'phone' => $supplier->phone,
                 'alias' => $supplier->alias
@@ -36,9 +36,9 @@ class SuppliersController extends Controller
 
     public function currentSupplier()
     {
-        
-            $currentSupplier = Supplier::with('bankAccounts','addresses')->where('user_id',Auth::id())->first();  
-        
+            $user_id = Auth::id();
+            $currentSupplier = Supplier::with('bankAccounts','address')->where('user_id', $user_id)->first();  
+            
         return $currentSupplier;
     }
 
@@ -46,7 +46,7 @@ class SuppliersController extends Controller
     {
 
         $response = [];
-        $supplier = Supplier::with('bankAccounts', 'addresses')
+        $supplier = Supplier::with('bankAccounts', 'address')
             ->orderBy('id')
             ->where('reg_number', $ico)
             ->first();
@@ -58,7 +58,7 @@ class SuppliersController extends Controller
             'reg_type' =>  $supplier->reg_type_court . ', složka ' . $supplier->reg_type_file,
             'address_id' => $supplier->address_id,
             'bank_name' => $supplier->bankAccounts,
-            'address' => $supplier->addresses,
+            'address' => $supplier->address,
             'email' =>  $supplier->email,
             'phone' => $supplier->phone,
             'alias' => $supplier->alias
@@ -73,23 +73,19 @@ class SuppliersController extends Controller
 
         $updateResponse = $this->update($request, $userId);
 
-        return 'CURRENT '.$updateResponse;
+        return $updateResponse;
     }
 
     public function update(Request $request, $id)
     {
-        $supplier = Supplier::with('bankAccounts', 'addresses')->where('user_id', $id)->first();
+        $supplier = Supplier::with('bankAccounts', 'address')->where('user_id', $id)->first();
 
         $supplier->name = $request->input('name');
         $supplier->reg_number = $request->input('reg_number');
         $supplier->reg_number_EU = $request->input('reg_number_EU');
         $supplier->reg_type_court = $request->input('reg_type_court');
         $supplier->reg_type_file = $request->input('reg_type_file');
-        $supplier->addresses->street_name = $request->input('street_name');
-        $supplier->addresses->house_number = $request->input('house_number');
-        $supplier->addresses->house_orient = $request->input('house_orient');
-        $supplier->addresses->city = $request->input('city');
-        $supplier->addresses->postal_code = $request->input('postal_code');
+        
         $supplier->bankAccounts->bank_name = $request->input('bank_name');
         $supplier->bankAccounts->bank_account_prefix = $request->input('bank_account_prefix');
         $supplier->bankAccounts->bank_account_number = $request->input('bank_account_number');
@@ -101,8 +97,31 @@ class SuppliersController extends Controller
         $supplier->alias = $request->input('alias');
 
         $supplier->save();
+        
+        $address = Address::where('id', $supplier->address_id)->first();
 
+        if (!$address) {
+            
+            $address = new Address;
+
+        }
+        
+        $address->street_name = $request->input('street_name');
+        $address->house_number = $request->input('house_number');
+        $address->house_orient = $request->input('house_orient');
+        $address->city = $request->input('city');
+        $address->postal_code = $request->input('postal_code');
+        $address->supplier_id = $supplier->id;
+
+        $address->save();
+        
+        $supplier->address_id = $address->id;
+            
+        $supplier->save();
+            
+        $res = Supplier::with('bankAccounts', 'address')->where('user_id', $id)->first();
+        
         // session()->flash('success_message', 'Supplier updated!');
-        return 'Supplier updated!';
+        return $res;
     }
 }

@@ -1,13 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
+
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
     
 
 function CompanyDetails() {
 
     const [details, setDetails] = useState(null);
     const [editing, setEditing] = useState(false);
-    const [formData, setFormData] = useState({})
+    const [formData, setFormData] = useState(null)
 
     const url = "/api/suppliers/current";
 
@@ -19,12 +24,7 @@ function CompanyDetails() {
 
         setDetails(data);
 
-        const formData = { ...data}
-        formData.address_city = data.addresses[0].city
-        formData.address_street_name = data.addresses[0].street_name
-        formData.address_house_number = data.addresses[0].house_number
-        formData.address_house_orient = data.addresses[0].house_orient
-        formData.address_postal_code = data.addresses[0].postal_code
+        const formData = { ...data }
 
         setFormData(formData)
     };
@@ -45,7 +45,9 @@ function CompanyDetails() {
 
         const response = await axios.post(`/api/suppliers/current`, formData);
         const response_data = response.data;
-        console.log(response_data);
+        
+        setFormData({...formData, ...response_data})
+        setDetails({...details, ...response_data});
 
     }
 
@@ -63,84 +65,82 @@ function CompanyDetails() {
                         <div>
 
                             {editing ? (
-                                <form>
-                                    <label htmlFor="reg_number">ICO/REG N: </label>
-                                    <input
-                                        name="reg_number"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.reg_number}
-                                    />
-                                    <br />
-
-                                    <label htmlFor="reg_number_EU">DIC/VAT N: </label>
-                                    <input
-                                        name="reg_number_EU"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.reg_number_EU}
-                                    />
-                                    <br />
-
-                                    <label htmlFor="phone">Phone: </label>
-                                    <input
-                                        name="phone"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.phone}
-                                    />
-
-                                    <br />
-
-                                    <label htmlFor="email">Email: </label>
-                                    <input
-                                        name="email"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.email}
-                                    />
-                                    <br />
-
-                                    <strong>Address  </strong>
-                                    <br />
-                                    <label htmlFor="address_city">City: </label>
-                                    <input
-                                        name="address_city"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.address_city}
-                                    />
-                                    <br />
-                                    <label htmlFor="address_street_name">Street: </label>
-                                    <input
-                                        name="address_street_name"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.address_street_name}
-                                    />
-                                    <br />
-                                    <label htmlFor="address_house_number">House number: </label>
-                                    <input
-                                        name="address_house_number"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.address_house_number}
-                                    />
-                                    <br />
-                                    <label htmlFor="address_house_orient">House orient number: </label>
-                                    <input
-                                        name="address_house_orient"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.address_house_orient}
-                                    />
-                                    <br />
-                                    <label htmlFor="address_postal_code">Postal code: </label>
-                                    <input
-                                        name="address_postal_code"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.address_postal_code}
-                                    />
-                                    <br />
-                                    <button type="submit" onClick={(e) => handleSubmit(e)}>
-                                        Save
-                                    </button>
+                                   <Form className="client_form">
+                                   <Form.Group className="client_form_element client_reg_number_EU">
+                                       <Form.Label>DIC/VAT N:</Form.Label>
+                                       <Form.Control type="text"
+                                           name="reg_number_EU"
+                                           onChange={(e) => handleChange(e)}
+                                           value={formData.reg_number_EU} />
+                                   </Form.Group>
+                                   <Row className="client_contact_row">
+                                       <Form.Group as={Col} className="client_form_element client_email">
+                                           <Form.Label>Email:</Form.Label>
+                                           <Form.Control type="email"
+                                               name="email"
+                                               onChange={(e) => handleChange(e)}
+                                               value={formData.email} />
+                                       </Form.Group>
+                                       <Form.Group as={Col} className="client_form_element client_phone">
+                                           <Form.Label>Phone:</Form.Label>
+                                           <Form.Control type="text"
+                                               name="phone"
+                                               onChange={(e) => handleChange(e)}
+                                               value={formData.phone} />
+                                       </Form.Group>
+                                   </Row>
 
 
-                                </form>
-                            ) :
+                                   <strong>Address:  </strong>
+                                   <Row className="client_address_row">
+
+                                       <Form.Group as={Col} className="client_form_element client_address_postal_code">
+                                           <Form.Label>Postal code:</Form.Label>
+                                           <Form.Control type="text"
+                                               name="postal_code"
+                                               onChange={(e) => handleChange(e)}
+                                               value={formData.postal_code} />
+                                       </Form.Group>
+                                       <Form.Group as={Col} className="client_form_element client_address_city">
+                                           <Form.Label>City:</Form.Label>
+                                           <Form.Control type="text"
+                                               name="city"
+                                               onChange={(e) => handleChange(e)}
+                                               value={formData.city} />
+                                       </Form.Group>
+
+                                   </Row>
+                                   <Form.Group className="client_form_element client_address_street">
+                                       <Form.Label>Street:</Form.Label>
+                                       <Form.Control type="text"
+                                           name="street_name"
+                                           onChange={(e) => handleChange(e)}
+                                           value={formData.street_name} />
+                                   </Form.Group>
+                                   <Row className="client_address_house">
+
+                                       <Form.Group as={Col} className="client_form_element client_address_house_number">
+                                           <Form.Label>House number:</Form.Label>
+                                           <Form.Control type="text"
+                                               name="house_number"
+                                               onChange={(e) => handleChange(e)}
+                                               value={formData.house_number} />
+                                       </Form.Group>
+                                       <Form.Group as={Col} className="client_form_element client_address_house_orient">
+                                           <Form.Label>House orient number:</Form.Label>
+                                           <Form.Control type="text"
+                                               name="house_orient"
+                                               onChange={(e) => handleChange(e)}
+                                               value={formData.house_orient} />
+                                       </Form.Group>
+
+                                   </Row>
+                                   <Button type="submit" variant="primary" onClick={(e) => handleSubmit(e)}>
+                                       Save
+                                   </Button>
+
+
+                               </Form>) :
                                 (
                                     <div className="userdetails__container">
                                         <span className="userdetails__detail"><strong>ICO/REG N.: </strong>{details.reg_number}</span>
@@ -157,11 +157,11 @@ function CompanyDetails() {
 
                                             <div className='serdetails__address_container'>
 
-                                                <span className="userdetails__detail">{details.addresses[0].street_name}</span><br />
+                                                <span className="userdetails__detail">{details.address.street_name}</span><br />
 
-                                                <span className="userdetails__detail">{details.addresses[0].house_number}/{details.addresses[0].house_orient}</span><br />
+                                                <span className="userdetails__detail">{details.address.house_number}/{details.address.house_orient}</span><br />
 
-                                                <span className="userdetails__detail">{details.addresses[0].postal_code} {details.addresses[0].city}</span><br />
+                                                <span className="userdetails__detail">{details.address.postal_code} {details.address.city}</span><br />
 
                                             </div>
                                             <button type="button" onClick={() => setEditing(true)}>
