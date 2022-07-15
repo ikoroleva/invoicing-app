@@ -103,15 +103,15 @@ class InvoicesController extends Controller
     public function currentSupplierInvoices(Request $request)
     {
         $offset = $request->get('offset') ?? 0;
-        $currentSupplierInvoicesCount = Invoice::where('supplier_id',\Auth::id())
+        $currentSupplierInvoicesCount = Invoice::where('supplier_id', \Auth::id())
             ->count();
-        $currentSupplierInvoices = Invoice::where('supplier_id',\Auth::id())
-        ->with('client')
-        ->orderByDesc('id')
-        ->offset($offset)
-        ->limit(3)
-        ->get();
-        
+        $currentSupplierInvoices = Invoice::where('supplier_id', \Auth::id())
+            ->with('client')
+            ->orderByDesc('id')
+            ->offset($offset)
+            ->limit(3)
+            ->get();
+
         return [
             'data' => $currentSupplierInvoices,
             'totalCount' => $currentSupplierInvoicesCount
@@ -121,11 +121,7 @@ class InvoicesController extends Controller
     // all paid invoices for current user will be in API together with other information about invoices
     public function currentSupplierPaidInvoices()
     {
-<<<<<<< HEAD
-        $currentSupplierPaidInvoices = Invoice::where('supplier_id', \Auth::id())->where('status', 'paid')->pluck('total_amount')->toArray();;
-=======
-        $currentSupplierPaidInvoices = Invoice::where('supplier_id',\Auth::id())->where('status','paid')->pluck('total_amount');
->>>>>>> main
+        $currentSupplierPaidInvoices = Invoice::where('supplier_id', \Auth::id())->where('status', 'paid')->pluck('total_amount');
 
         return $currentSupplierPaidInvoices;
     }
@@ -137,24 +133,19 @@ class InvoicesController extends Controller
 
         return $currentSupplierIssuedInvoices;
     }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> main
-
-     // all issued invoices in curretn month for currently loged in supplier 
-     public function thisMonthInvoices()
+    // all issued invoices in curretn month for currently loged in supplier 
+    public function thisMonthInvoices()
     {
-        $thisMonthInvoices = Invoice::where('supplier_id',\Auth::id())
+        $thisMonthInvoices = Invoice::where('supplier_id', \Auth::id())
             ->select('total_amount')
             ->whereMonth('issued_on', Carbon::now()->month)
             ->pluck('total_amount')
             ->toArray();
 
-            return $thisMonthInvoices;
+        return $thisMonthInvoices;
     }
-    
+
     public function create(Request $request)
     {
 
@@ -165,7 +156,7 @@ class InvoicesController extends Controller
         $invoice->number = $request->input('number');
         $invoice->additional_notes = $request->input('additional_notes');
         $invoice->status = $request->input('status');
-        $invoice->total_amount = $request->input('unit_cost') * $request->input('unit_quantity');
+        $invoice->total_amount = $request->input('total');
         $invoice->currency = $request->input('currency');
         $invoice->form_of_payment = $request->input('form_of_payment');
         $invoice->issued_on = $request->input('issued_on');
@@ -173,14 +164,23 @@ class InvoicesController extends Controller
 
         $invoice->save();
 
-        $invoiceItems = new InvoiceItem;
+        // foreach ($request->invoice_items as $item) {
+        //     $invoiceItems = new InvoiceItem;
+        //     $invoiceItems->invoice_id = $invoice->id;
+        //     $invoiceItems->invoice_description = $item->invoice_description;
+        //     $invoiceItems->unit_cost = $item->unit_cost;
+        //     $invoiceItems->unit_quantity = $item->unit_quantity;
+        //     $invoiceItems->save();
+        // }
 
-        $invoiceItems->invoice_id = $invoice->id;
-        $invoiceItems->invoice_description = $request->input('invoice_description');
-        $invoiceItems->unit_cost = $request->input('unit_cost');
-        $invoiceItems->unit_quantity = $request->input('unit_quantity');
+        // $invoiceItems = new InvoiceItem;
 
-        $invoiceItems->save();
+        // $invoiceItems->invoice_id = $invoice->id;
+        // $invoiceItems->invoice_description = $request->invoice_items['invoice_description'];
+        // $invoiceItems->unit_cost = $request->input('unit_cost');
+        // $invoiceItems->unit_quantity = $request->input('unit_quantity');
+
+        // $invoiceItems->save();
 
         return 'Invoice created.';
     }

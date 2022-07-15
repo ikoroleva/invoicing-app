@@ -49,7 +49,7 @@ const ModalCreateInvoice = ({ show, setShow, flashMessage, handleSubmit }) => {
                                 type="submit"
                                 size="sm"
                                 className="mb-2"
-                                onClick={() => handleSubmit()}
+                                onClick={(event) => handleSubmit(event)}
                             >
                                 Save invoice
                             </Button>
