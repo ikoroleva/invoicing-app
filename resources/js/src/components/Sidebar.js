@@ -17,7 +17,7 @@ const Sidebar = () => {
             url: "/home",
         },
         {
-            name: "Home",
+            name: "Dashboard",
             iconName: "mdiHome",
             url: "/dashboard"
         },
@@ -29,7 +29,7 @@ const Sidebar = () => {
         {
             name: "Clients",
             iconName: "mdiAccountMultiple",
-            url: "/home"
+            url: ""
         }
 
     ];
@@ -38,7 +38,7 @@ const Sidebar = () => {
     const [active, setActive] = useState(1);
     const [expanded, setExpanded] = useState(false);
     const [showClients, setShowClients] = useState(false);
-
+    const [isClicked, setIsClicked] = useState(false);
 
     return (
         <>
@@ -82,7 +82,8 @@ const Sidebar = () => {
                                         setShowClients(!expanded && active == menuItems.length - 1);
                                     }
                                     if (last) {
-                                        setShowClients(expanded);
+                                        setIsClicked(!isClicked);
+                                        setShowClients(expanded && isClicked);
                                     }
                                 }}
                                 key={index}

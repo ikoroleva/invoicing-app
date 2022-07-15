@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import axios from 'axios';
 
 
@@ -56,7 +56,15 @@ const ClientDetails = ({ number }) => {
 
     useEffect(() => {
         fetchData();
-    }, [editing, number]);
+
+
+    }, [number]);
+
+
+    useEffect(() => {
+        setEditing(false);
+
+    }, [number]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -75,31 +83,34 @@ const ClientDetails = ({ number }) => {
     }
 
     return (
-        <div>
+        <Fragment>
             {!dataLoaded ?
                 <p>Loading...</p>
                 :
                 <div className="client-details">
                     {clientData &&
 
-                        <div>
+                        <Fragment>
 
                             {editing ? (
                                 <Form className="client_form">
-                                    <Form.Group as={Col} className="client_form_element client_name">
-                                        <Form.Label>Name:</Form.Label>
-                                        <Form.Control type="text"
-                                            name="name"
-                                            onChange={(e) => handleChange(e)}
-                                            value={formData.name} />
-                                    </Form.Group>
-                                    <Form.Group className="client_form_element client_reg_number_EU">
-                                        <Form.Label>DIC/VAT N:</Form.Label>
-                                        <Form.Control type="text"
-                                            name="reg_number_EU"
-                                            onChange={(e) => handleChange(e)}
-                                            value={formData.reg_number_EU} />
-                                    </Form.Group>
+                                    <Row className="client_contact_row">
+                                        <Form.Group as={Col} className="client_form_element client_name">
+                                            <Form.Label>Name:</Form.Label>
+                                            <Form.Control type="text"
+                                                name="name"
+                                                onChange={(e) => handleChange(e)}
+                                                value={formData.name} />
+                                        </Form.Group>
+                                        <Form.Group as={Col} className="client_form_element client_reg_number_EU">
+                                            <Form.Label>DIC/VAT N:</Form.Label>
+                                            <Form.Control type="text"
+                                                name="reg_number_EU"
+                                                onChange={(e) => handleChange(e)}
+                                                value={formData.reg_number_EU} />
+                                        </Form.Group>
+                                    </Row>
+
                                     <Row className="client_contact_row">
                                         <Form.Group as={Col} className="client_form_element client_email">
                                             <Form.Label>Email:</Form.Label>
@@ -135,17 +146,13 @@ const ClientDetails = ({ number }) => {
                                                 onChange={(e) => handleChange(e)}
                                                 value={formData.address_city} />
                                         </Form.Group>
-
-                                    </Row>
-                                    <Form.Group className="client_form_element client_address_street">
-                                        <Form.Label>Street:</Form.Label>
-                                        <Form.Control type="text"
-                                            name="address_street_name"
-                                            onChange={(e) => handleChange(e)}
-                                            value={formData.address_street_name} />
-                                    </Form.Group>
-                                    <Row className="client_address_house">
-
+                                        <Form.Group as={Col} className="client_form_element client_address_street">
+                                            <Form.Label>Street:</Form.Label>
+                                            <Form.Control type="text"
+                                                name="address_street_name"
+                                                onChange={(e) => handleChange(e)}
+                                                value={formData.address_street_name} />
+                                        </Form.Group>
                                         <Form.Group as={Col} className="client_form_element client_address_house_number">
                                             <Form.Label>House number:</Form.Label>
                                             <Form.Control type="text"
@@ -165,29 +172,39 @@ const ClientDetails = ({ number }) => {
                                     <Button type="submit" variant="primary" onClick={(e) => handleSubmit(e)}>
                                         Save
                                     </Button>
+                                    <Button type="button" variant="primary" onClick={() => setEditing(false)}>
+                                        Cancel
+                                    </Button>
 
 
                                 </Form>)
                                 : (
                                     <>
                                         <h3>{clientData.name}</h3>
-                                        <p><strong>ICO/REG N.</strong> {clientData.reg_number}</p>
-                                        <p><strong>DIC/VAT N.</strong> {clientData.reg_number_EU}</p>
-                                        <p><strong>Phone: </strong>{clientData.phone}</p>
-                                        <p><strong>Email: </strong>{clientData.email}</p>
-                                        <p><strong>Address: </strong>{clientData.address[0].postal_code}, {clientData.address[0].city} {clientData.address[0].street_name} {clientData.address[0].house_number}/{clientData.address[0].house_orient} </p>
-
-                                        <button type="button" onClick={() => setEditing(true)}>
-                                            Edit
-                                        </button>
+                                        <div className="client-details-items">
+                                            <div className="client-details-items item">
+                                                <p><strong>ICO/REG N.</strong> {clientData.reg_number}</p>
+                                                <p><strong>DIC/VAT N.</strong> {clientData.reg_number_EU}</p>
+                                                <p><strong>Address: </strong>{clientData.address[0].postal_code}, {clientData.address[0].city} {clientData.address[0].street_name} {clientData.address[0].house_number}/{clientData.address[0].house_orient} </p>
+                                            </div>
+                                            <div className="client-details-items item">
+                                                <p><strong>Phone: </strong>{clientData.phone}</p>
+                                                <p><strong>Email: </strong>{clientData.email}</p>
+                                            </div>
+                                            <div className="client-details-items item">
+                                                <Button className="button-container" type="button" onClick={() => setEditing(true)}>
+                                                    Edit
+                                                </Button>
+                                            </div>
+                                        </div>
                                     </>
                                 )}
-                        </div>
+                        </Fragment>
 
                     }
                 </div>
             }
-        </div>
+        </Fragment>
     );
 }
 
