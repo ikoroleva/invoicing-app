@@ -1,18 +1,19 @@
 import { useEffect,useState } from "react";
 
 // this component will show total amlount of already paid invoices
-export default function TotalRevenueInvoices(){
+export default function ThisMonthInvoicesValue(){
 
-    // function to sum all paid invoices fetched from API
+    // function to sum all paid issued invoices fetched from API
     let sum = 0; 
-    const revenues = () => {
+    const sumOfInvoices = () => {
     for (let i = 0; i < invoices.length; i++) {
         sum += invoices[i];
     }return <>{sum}</>
-}
+    }
+
     //state to store all paid invoices into
     const [invoices, setInvoices] = useState([])
-    const url = 'api/invoices/paid' ;
+    const url = 'api/invoices/thismonth';
 
 
     //currently logged in user
@@ -25,12 +26,11 @@ export default function TotalRevenueInvoices(){
 
     //watching fetch data and also revenues function 
     useEffect(() => {
-        fetchData(), revenues();
+        fetchData(), sumOfInvoices();
     }, []);
 
-  
 
     return(
-        <h1>Total Revenue: {revenues()} CZK</h1>
+        <h1>This month issued voices amount: {sumOfInvoices()} CZK</h1>
     )
 }

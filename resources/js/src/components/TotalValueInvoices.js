@@ -5,14 +5,14 @@ export default function TotalValueInvoices(){
 
     // function to sum all paid invoices fetched from API
     let sum = 0; 
-    const revenues = () => {
+    const sumOfIssuedInvoices = () => {
     for (let i = 0; i < invoices.length; i++) {
         sum += invoices[i];
     }return <>{sum}</>
 }
     //state to store all paid invoices into
     const [invoices, setInvoices] = useState([])
-    const url = 'api/invoices/paid' ;
+    const url = 'api/invoices/issued';
 
 
     //currently logged in user
@@ -25,13 +25,12 @@ export default function TotalValueInvoices(){
 
     //watching fetch data and also revenues function 
     useEffect(() => {
-        fetchData(), revenues();
+        fetchData(), sumOfIssuedInvoices();
     }, []);
 
-    console.log(invoices);
-    console.log(sum);
+  
 
     return(
-        <h1>Total value of issueed invoices: {revenues()} CZK</h1>
+        <h1>Total value of issueed invoices: {sumOfIssuedInvoices()} CZK</h1>
     )
 }

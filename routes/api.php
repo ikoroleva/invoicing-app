@@ -54,10 +54,14 @@ Route::put('/suppliers/{id}', [SuppliersController::class, 'update']);
 
 //ALL invoices
 Route::get('/invoices', [InvoicesController::class, 'index']);
+// this month invoices for current user. 
+Route::get('/invoices/thismonth', [InvoicesController::class, 'thisMonthInvoices']);
 //INVOICES by SUPPLIER-ICO
 Route::get('/invoices/suppliers/{ico}', [InvoicesController::class, 'supplierIco']);
 //INVOICES by CLIENT-ICO
 Route::get('/invoices/clients/{ico}', [InvoicesController::class, 'clientIco']);
+//All invoices issued for current user
+Route::get('/invoices/suppliers/allinvoices', [InvoicesController::class, 'currentSupplierInvoices']);
 //All paid invoices for current user
 Route::get('/invoices/paid', [InvoicesController::class, 'currentSupplierPaidInvoices']);
 //All issued invoices for current user
