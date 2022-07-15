@@ -21,6 +21,10 @@ function CompanyDetails() {
 
         const formData = { ...data}
         formData.address_city = data.addresses[0].city
+        formData.address_street_name = data.addresses[0].street_name
+        formData.address_house_number = data.addresses[0].house_number
+        formData.address_house_orient = data.addresses[0].house_orient
+        formData.address_postal_code = data.addresses[0].postal_code
 
         setFormData(formData)
     };
