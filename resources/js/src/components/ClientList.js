@@ -29,7 +29,7 @@ const ClientList = ({ showClients }) => {
             {clients &&
                 <ListGroup>
                     {clients.map((client, i) =>
-                        <ListGroup.Item key={i}><Link to={`/clients/${client.reg_number}`} key={i}>{client.name}</Link></ListGroup.Item>)
+                        <Link to={`/clients/${client.reg_number}`} key={i}>{client.name}</Link>)
                     }
 
                 </ListGroup>

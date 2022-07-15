@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import { loadUser } from '../actions/auth';
 import UserContext from '../context/UserContext';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Link } from "react-router-dom";
 
 export default function Login() {
 
@@ -39,19 +42,33 @@ export default function Login() {
     }
 
     return (
-        <form action="/login" method="post" onSubmit={handleSubmit}>
+        <Form action="/login" method="post" onSubmit={handleSubmit}>
             <h1>
-                Login
+                Account login
             </h1>
+            <Form.Group className="user-login">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" name="email" value={values.email} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className="user-password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" autoComplete='off' name="password" value={values.password} onChange={handleChange} />
+            </Form.Group>
+            <br />
+            <Button variant="primary" type='submit'>Log in</Button>
 
-            <span>Email</span>
+            <p>Or <Link to="/register">Create an account</Link></p>
+
+
+
+            {/* <span>Email</span>
             <input type="email" autoComplete='off' name="email" value={values.email} onChange={handleChange} />
 
             <span>Password</span>
-            <input type="password" autoComplete='off' name="password" value={values.password} onChange={handleChange} />
+            <input type="password" autoComplete='off' name="password" value={values.password} onChange={handleChange} /> */}
 
-            <button>Login</button>
+            {/* <button>Login</button> */}
 
-        </form>
+        </Form>
     );
 }

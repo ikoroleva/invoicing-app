@@ -87,19 +87,15 @@ const Sidebar = () => {
                                 }}
                                 key={index}
                             >
-                                {/* <Link to={item.url}> */}
                                 <BoxItem
                                     className={`${middle && "boxicon"} 
                                     ${!middle && "first-and-last-trash-fix"}
                                     ${active === index && "active"}
                                     `}
                                     name={item.iconName}
-                                    // type={item.type}
                                     color={
                                         hovered === index || active === index ? "white" : item.color
                                     }
-                                // animation={active === index && animate ? "tada" : ""}
-                                // rotate={item.rotate}
                                 ></BoxItem>
 
                                 <p
