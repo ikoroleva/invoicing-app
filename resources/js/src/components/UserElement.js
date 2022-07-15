@@ -1,6 +1,7 @@
 import UserContext from "../context/UserContext";
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
 import About from "./About";
 
@@ -15,8 +16,8 @@ const UserElement = () => {
                 </Fragment>
             ) : (
                 <Fragment>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
+                    <Button variant="primary"><Link to="/login">Login</Link></Button>
+                    {/* <Link to="/register">Register</Link> */}
                 </Fragment>
             )}
         </div>

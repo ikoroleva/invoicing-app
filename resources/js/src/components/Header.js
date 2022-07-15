@@ -11,8 +11,10 @@ const Header = () => {
                 <Link to="home">
                     Logo</Link>
             </div>
-            <HeaderLinks />
-            <UserElement />
+            <div className='header-links-container'>
+                <HeaderLinks />
+                <UserElement />
+            </div>
 
         </header>
     );
