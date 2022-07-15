@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\Address;
+use App\Models\BankAccount;
 use Auth;
 
 class SuppliersController extends Controller
@@ -14,7 +15,7 @@ class SuppliersController extends Controller
     {
 
         $response = [];
-        $suppliers = Supplier::with('bankAccounts', 'address')
+        $suppliers = Supplier::with('bankAccount', 'address')
             ->orderBy('id')
             ->get();
         foreach ($suppliers as $supplier) {
@@ -24,7 +25,7 @@ class SuppliersController extends Controller
                 'reg_number_EU' =>  $supplier->reg_number_EU,
                 'reg_type' =>  $supplier->reg_type_court . ', složka ' . $supplier->reg_type_file,
                 'address_id' => $supplier->address_id,
-                'bank_name' => $supplier->bankAccounts,
+                'bank_name' => $supplier->bankAccount->bank_name,
                 'address' => $supplier->address,
                 'email' =>  $supplier->email,
                 'phone' => $supplier->phone,
@@ -37,7 +38,7 @@ class SuppliersController extends Controller
     public function currentSupplier()
     {
             $user_id = Auth::id();
-            $currentSupplier = Supplier::with('bankAccounts','address')->where('user_id', $user_id)->first();  
+            $currentSupplier = Supplier::with('bankAccount','address')->where('user_id', $user_id)->first();  
             
         return $currentSupplier;
     }
@@ -46,7 +47,7 @@ class SuppliersController extends Controller
     {
 
         $response = [];
-        $supplier = Supplier::with('bankAccounts', 'address')
+        $supplier = Supplier::with('bankAccount', 'address')
             ->orderBy('id')
             ->where('reg_number', $ico)
             ->first();
@@ -57,7 +58,7 @@ class SuppliersController extends Controller
             'reg_number_EU' =>  $supplier->reg_number_EU,
             'reg_type' =>  $supplier->reg_type_court . ', složka ' . $supplier->reg_type_file,
             'address_id' => $supplier->address_id,
-            'bank_name' => $supplier->bankAccounts,
+            'bank_name' => $supplier->bankAccount->bank_name,
             'address' => $supplier->address,
             'email' =>  $supplier->email,
             'phone' => $supplier->phone,
@@ -86,17 +87,36 @@ class SuppliersController extends Controller
         $supplier->reg_type_court = $request->input('reg_type_court');
         $supplier->reg_type_file = $request->input('reg_type_file');
         
-        $supplier->bankAccounts->bank_name = $request->input('bank_name');
-        $supplier->bankAccounts->bank_account_prefix = $request->input('bank_account_prefix');
-        $supplier->bankAccounts->bank_account_number = $request->input('bank_account_number');
-        $supplier->bankAccounts->bank_account_code = $request->input('bank_account_code');
-        $supplier->bankAccounts->swift = $request->input('swift');
-        $supplier->bankAccounts->iban = $request->input('iban');
         $supplier->email = $request->input('email');
         $supplier->phone = $request->input('phone');
         $supplier->alias = $request->input('alias');
 
         $supplier->save();
+
+        // return Auth::id();
+
+        $bankAccount = $supplier->bankAccount;
+
+        // $bankAccount = BankAccount::where('supplier_id', $supplier->id)->first();
+
+        if (!$bankAccount) {
+            $bankAccount = new BankAccount;
+        }   
+
+        $bankAccount->iban = $request->input('iban');
+        $bankAccount->bank_account_prefix = $request->input('bank_account_prefix');
+        $bankAccount->bank_account_number = $request->input('bank_account_number');
+        $bankAccount->bank_account_code = $request->input('bank_account_code');
+        $bankAccount->swift = $request->input('swift');
+        $bankAccount->bank_name = $request->input('bank_name');
+        $bankAccount->supplier_id = $supplier->id;
+
+        $bankAccount->save();
+
+        // $supplier->bank_account_id = $supplier->id;
+
+        // $supplier->save();
+
         
         $address = Address::where('id', $supplier->address_id)->first();
 
@@ -119,7 +139,7 @@ class SuppliersController extends Controller
             
         $supplier->save();
             
-        $res = Supplier::with('bankAccounts', 'address')->where('user_id', $id)->first();
+        $res = Supplier::with('bankAccount', 'address')->where('user_id', $id)->first();
         
         // session()->flash('success_message', 'Supplier updated!');
         return $res;

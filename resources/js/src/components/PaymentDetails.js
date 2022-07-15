@@ -22,11 +22,11 @@ function PaymentDetails () {
 
         console.log(data);
 
-        setDetails(data);
+        setDetails(data.bank_account);
 
         const formData = { ...data }
 
-        setFormData(formData)
+        setFormData(formData.bank_account)
     };
 
     useEffect(() => {
@@ -69,41 +69,41 @@ function PaymentDetails () {
                   <Form.Group className="client_form_element client_reg_number_EU">
                     <Form.Label>BANK:</Form.Label>
                     <Form.Control type="text"
-                      name="reg_number_EU"
+                      name="bank_name"
                       onChange={(e) => handleChange(e)}
-                      value={formData} />
+                      value={formData.bank_name} />
                   </Form.Group>
                   <Row className="client_contact_row">
                     <Form.Group as={Col} className="client_form_element client_email">
                       <Form.Label>SWIFT:</Form.Label>
-                      <Form.Control type="email"
-                        name="email"
+                      <Form.Control type="text"
+                        name="swift"
                         onChange={(e) => handleChange(e)}
-                        value={formData.bank_accounts[0].bank_name} />
+                        value={formData.swift} />
                     </Form.Group>
                     <Form.Group as={Col} className="client_form_element client_phone">
                       <Form.Label>IBAN:</Form.Label>
                       <Form.Control type="text"
-                        name="phone"
+                        name="iban"
                         onChange={(e) => handleChange(e)}
-                        value={formData} />
+                        value={formData.iban} />
                     </Form.Group>
                   </Row>
 
                   <Row className="client_contact_row">
                     <Form.Group as={Col} className="client_form_element client_email">
                       <Form.Label>Bank code:</Form.Label>
-                      <Form.Control type="email"
-                        name="email"
+                      <Form.Control type="text"
+                        name="bank_account_code"
                         onChange={(e) => handleChange(e)}
-                        value={formData} />
+                        value={formData.bank_account_code} />
                     </Form.Group>
                     <Form.Group as={Col} className="client_form_element client_phone">
                       <Form.Label>Account N.:</Form.Label>
                       <Form.Control type="text"
-                        name="phone"
+                        name="bank_account_number"
                         onChange={(e) => handleChange(e)}
-                        value={formData} />
+                        value={formData.bank_account_number} />
                     </Form.Group>
                   </Row>
 
@@ -115,14 +115,14 @@ function PaymentDetails () {
                 </Form>) :
                 (
                   <div className="userdetails__container">
-                    <span className="userdetails__detail"><strong>BANK: </strong>{details.bank_accounts[0].bank_name}</span>
+                    <span className="userdetails__detail"><strong>BANK: </strong>{details.bank_name}</span>
 
-                    <span className="userdetails__detail"><strong>SWIFT: </strong>{details.bank_accounts[0].swift}</span>
+                    <span className="userdetails__detail"><strong>SWIFT: </strong>{details.swift}</span>
 
-                    <span className="userdetails__detail"><strong>IBAN: </strong>{details.bank_accounts[0].iban}</span>
+                    <span className="userdetails__detail"><strong>IBAN: </strong>{details.iban}</span>
 
-                    <span className="userdetails__detail"><strong>Bank code: </strong>{details.bank_accounts[0].bank_account_code}</span>
-                    <span className="userdetails__detail"><strong>Account N.: </strong>{details.bank_accounts[0].bank_account_number}</span>
+                    <span className="userdetails__detail"><strong>Bank code: </strong>{details.bank_account_code}</span>
+                    <span className="userdetails__detail"><strong>Account N.: </strong>{details.bank_account_number}</span>
 
                     <span className="userdetails__detail"><strong>Currency: </strong></span>
 

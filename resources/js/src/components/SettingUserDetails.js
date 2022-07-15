@@ -29,7 +29,7 @@ return (
             <h2>LOL</h2>
             :
             <div className="userdetails__container">
-                <span className="userdetails__detail"><strong>BANK: </strong>{details.bank_accounts[0].bank_name}</span>
+                <span className="userdetails__detail"><strong>BANK: </strong>{details.bank_account.bank_name}</span>
 
 
             </div>
