@@ -9,7 +9,7 @@ const Client = () => {
     console.log(params);
 
     return (
-        <div>
+        <div className='client-container'>
             <ClientDetails number={params.number} />
         </div>
     );
