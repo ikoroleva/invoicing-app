@@ -16,7 +16,7 @@ import CreateInvoice from "./pages/CreateInvoice";
 import UserDetails from "./pages/UserDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Client from './pages/Client';
+import Client from "./pages/Client";
 
 const Layout = () => {
     const { user } = useContext(UserContext);
@@ -29,7 +29,6 @@ const Layout = () => {
                     <Sidebar />
                     <main>
                         <Routes>
-
                             {user ? (
                                 <Fragment>
                                     <Route
@@ -63,7 +62,11 @@ const Layout = () => {
                                         path="/create-invoice"
                                         element={<CreateInvoice />}
                                     />
-                                    <Route exact path="/clients/:number" element={<Client />} />
+                                    <Route
+                                        exact
+                                        path="/clients/:number"
+                                        element={<Client />}
+                                    />
                                 </Fragment>
                             ) : (
                                 <Fragment>
@@ -94,7 +97,6 @@ const Layout = () => {
                                     />
                                 </Fragment>
                             )}
-
                         </Routes>
                     </main>
                 </div>
