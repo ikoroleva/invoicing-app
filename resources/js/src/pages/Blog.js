@@ -1,21 +1,12 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
 
 const Blog = () => {
     function rand() {
         return Math.floor(Math.random() * 1000) + 100;
     }
 
-    // document.querySelectorAll(".post:not(.featured)").forEach((post) => {
-    //     post.querySelector(
-    //         ".image"
-    //     ).style.backgroundImage = `url("https://unsplash.it/300/300/?image=${rand(
-    //         100,
-    //         1000
-    //     )}")`;
-    // });
     return (
         <>
             <Container fluid>

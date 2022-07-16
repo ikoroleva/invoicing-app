@@ -6,6 +6,7 @@ import UserContext from "./context/UserContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
+import InvoiceTemplate from "./components/InvoiceTemplate";
 
 //pages
 import Home from "./pages/Home";
@@ -67,6 +68,12 @@ const Layout = () => {
                                         path="/clients/:number"
                                         element={<Client />}
                                     />
+                                    {/* Path to test invoice template */}
+                                    <Route
+                                        exact
+                                        path="/invoice-template"
+                                        element={<InvoiceTemplate />}
+                                    />
                                 </Fragment>
                             ) : (
                                 <Fragment>
@@ -101,7 +108,7 @@ const Layout = () => {
                     </main>
                 </div>
             </Router>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 };

@@ -509,3 +509,61 @@ footer {
         left: 0;
     }
 }
+
+// <-- Invoice template styles -->
+.container_invoice {
+    display: flex;
+    flex-direction: column;
+    .invoice__header {
+        display: flex;
+        flex-direction: row;
+        .invoice__header_img {
+            width: 30em;
+            margin-left: 1em;
+        }
+        .invoice__header_data {
+            flex-direction: column;
+            margin-left: 15em;
+        }
+    }
+
+    .seperator_invoice {
+        margin: 1em;
+        width: 100%;
+        height: 3px;
+        background: $border-color;
+        border: none;
+    }
+    .invoice__counterparts {
+        display: flex;
+
+        .invoice__counterparts_supplier {
+            width: 30em;
+            margin-left: 1em;
+        }
+        .invoice__counterparts_client {
+            margin-left: 15em;
+        }
+    }
+
+    .invoice__payment_cash,
+    .invoice__payment_wire {
+        margin-left: 1em;
+    }
+    .invoice__payment_wire {
+        display: flex;
+        flex-direction: column;
+    }
+    .invoice__body {
+        margin-left: 1em;
+    }
+    .invoice__total {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        padding-right: 5em;
+        p {
+            padding-right: 2em;
+        }
+    }
+}
