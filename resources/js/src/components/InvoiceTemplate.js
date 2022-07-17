@@ -2,8 +2,25 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const InvoiceTemplate = () => {
+    const [invoiceData, setInvoiceData] = useState(null);
+    const { invoice_number } = useParams();
+    const url = `http://www.invoicing-app.test/api/invoices/${invoice_number}`;
+    const fetchInvoice = async () => {
+        const response = await axios.get(url);
+
+        setInvoiceData(response.data[0]);
+        console.log(response.data[0]);
+    };
+
+    useEffect(() => {
+        fetchInvoice();
+    }, [invoice_number]);
+
     return (
         <>
             {" "}
@@ -11,13 +28,13 @@ const InvoiceTemplate = () => {
                 <h1>Invoice template</h1>
                 <div className="invoice__header">
                     <div className="invoice__header_img">
-                        <img src="https://via.placeholder.com/100x100" />
+                        <img src="../images/logo.svg" alt="logo" />
                     </div>
 
                     <div className="invoice__header_data">
                         <p>Invoice #</p>
                         <p>Issued at:</p>
-                        <p>Due date:</p>
+                        <p>Due date: </p>
                     </div>
                 </div>
                 <div className="seperator_invoice"></div>

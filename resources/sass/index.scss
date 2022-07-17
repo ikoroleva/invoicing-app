@@ -520,6 +520,9 @@ footer {
         .invoice__header_img {
             width: 30em;
             margin-left: 1em;
+            img {
+                width: 10em;
+            }
         }
         .invoice__header_data {
             flex-direction: column;

@@ -70,8 +70,7 @@ const Layout = () => {
                                     />
                                     {/* Path to test invoice template */}
                                     <Route
-                                        exact
-                                        path="/invoice-template"
+                                        path="/invoice-template/:invoice_number"
                                         element={<InvoiceTemplate />}
                                     />
                                 </Fragment>

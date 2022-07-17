@@ -146,6 +146,13 @@ class InvoicesController extends Controller
         return $thisMonthInvoices;
     }
 
+    public function currentInvoice($invoice_id)
+    {
+
+        $currentInvoice = Invoice::with(['invoiceItems', 'client', 'supplier'])->where('id', $invoice_id)->get();
+        return $currentInvoice;
+    }
+
     public function create(Request $request)
     {
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import Table from "react-bootstrap/Table";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -60,7 +61,9 @@ export default function InvoicesList() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href="/invoice-template">
+                                        <Dropdown.Item
+                                            href={`/invoice-template/${invoice.id}`}
+                                        >
                                             Show
                                         </Dropdown.Item>
                                         <Dropdown.Item href="#/action-2">
