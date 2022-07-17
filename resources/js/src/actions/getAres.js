@@ -52,9 +52,26 @@ const getAres = async (ico) => {
         //     `D:OV`
         //   ]
         // );
+        return {
+            "name": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:OF`],
+            "reg_number": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:ICO`],
+            "reg_number_EU": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:DIC`],
+            "reg_type_court": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:ROR`][`D:SZ`][`D:SD`][`D:T`],
+            "reg_type_file": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:ROR`][`D:SZ`][`D:OV`],
+            "address": [{
+                "city": "Praha",
+                "street_name": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:NU`],
+                "house_number": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:CD`],
+                "house_orient": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:CO`],
+                "postal_code": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:PSC`],
+            }]
+
+
+        }
     } catch (error) {
         console.log(error); // information about the error
         console.log(error.response); // the response object from the failed request
+        return null;
     }
 };
 

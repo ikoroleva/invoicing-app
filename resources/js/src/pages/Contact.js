@@ -59,9 +59,6 @@ const Contact = () => {
                         <p>Phone: +420 000 000 001</p>
                     </div>
                     <div className='contact-info-contacts_icons'>
-                        {/* <img src={mdiTwitter} alt="twitter icon" />
-                        <img src={mdiInstagram} alt="instagram icon" />
-                        <img src={mdiFacebook} alt="facebook icon" /> */}
                         <Icon path={mdiTwitter}
                             title="twitter icon"
                             size={1} />

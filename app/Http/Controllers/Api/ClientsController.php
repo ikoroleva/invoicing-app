@@ -28,7 +28,7 @@ class ClientsController extends Controller
         }
         //dd($invoicesByClient);
         foreach ($clients as $client) {
-            $client_invoices = $invoicesByClient[$client->id];
+            $client_invoices = $invoicesByClient[$client->id] ?? [];
             $total_amount = 0;
             foreach ($client_invoices as $client_invoice) {
                 $total_amount += $client_invoice->total_amount;
@@ -150,9 +150,7 @@ class ClientsController extends Controller
         //$user_id = Auth::id();
 
         $client = Client::where('reg_number', $reg_number)->first();
-
         $address = Address::where('client_id', $client->id)->first();
-
 
 
         $client->name = $request->input('name');
@@ -169,6 +167,55 @@ class ClientsController extends Controller
 
         $client->save();
         $address->save();
+
+        return ['status' => 'success'];
+    }
+
+    public function store2(Request $request, $reg_number)
+    {
+        $user_id = Auth::id();
+        $supplier = Supplier::where('user_id', $user_id)->first();
+        $client = Client::where('reg_number', $reg_number)->first();
+
+        $createNew = false;
+
+        if (is_null($client)) {
+            $client = new Client();
+            $client->reg_number = $reg_number;
+
+            // todo: remove if will be shown on the form or there will be another default value
+            $client->reg_type_court = '';
+            $client->reg_type_file = '';
+
+            $address = new Address();
+
+            $createNew = true;
+        } else
+            $address = Address::where('client_id', $client->id)->first();
+
+        //dd($client);
+        //dd($address);
+
+        $client->name = $request->input('name');
+        $client->reg_number_EU = $request->input('reg_number_EU');
+        $client->email = $request->input('email');
+        $client->phone = $request->input('phone');
+
+        //dd($address);
+
+        $address->city = $request->input('address_city');
+        $address->street_name = $request->input('address_street_name');
+        $address->house_number = $request->input('address_house_number');
+        $address->house_orient = $request->input('address_house_orient');
+        $address->postal_code = $request->input('address_postal_code');
+
+        $client->save();
+        if ($createNew) {
+            // connect supplier to a client
+            $supplier->clients()->save($client);
+            $client->addresses()->save($address);
+        } else
+            $address->save();
 
         return ['status' => 'success'];
     }
