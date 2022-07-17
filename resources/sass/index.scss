@@ -190,6 +190,50 @@ main {
             }
         }
     }
+
+    .contact-info-container {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        //justify-content: center;
+
+        //align-items: center;
+
+        h2,
+        p {
+            text-align: left;
+        }
+
+        .contact-info-card {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-around;
+
+            .contact-info-form {
+                width: 70%;
+            }
+
+            .contact-info-line {
+                border-left: 1px solid #0275d8;
+                height: 250px;
+                margin: 4rem 1rem;
+
+            }
+
+            .contact-info-contacts {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                p {
+                    font-size: .8rem;
+                }
+            }
+
+        }
+
+    }
 }
 
 .sidebar {
