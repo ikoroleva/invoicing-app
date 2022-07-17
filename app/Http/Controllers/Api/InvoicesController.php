@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
+use App\Models\Client;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
@@ -150,6 +153,7 @@ class InvoicesController extends Controller
     {
 
         $currentInvoice = Invoice::with(['invoiceItems', 'client', 'supplier'])->where('id', $invoice_id)->get();
+
         return $currentInvoice;
     }
 
