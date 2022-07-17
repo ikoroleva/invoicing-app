@@ -1,15 +1,37 @@
-import ClientDetails from '../components/ClientDetails';
-import ClientSearch from '../components/ClientSearch';
+import ClientSearchBar from '../components/clients/ClientSearchBar';
+import ClientSearchResults from '../components/clients/ClientSearchResults';
+import { useEffect, useState } from "react";
+import ClientList from '../components/clients/ClientList';
+import Button from 'react-bootstrap/Button';
+import ModalGetClientFromAres from '../components/clients/ModalGetClientFromAres';
 
 
 
 const Clients = () => {
-
+    const [searchQuery, setSearchQuery] = useState("");
+    const [show, setShow] = useState(false);
 
     return (
         <div className='clients-container'>
-            {/* <ClientDetails /> */}
-            <ClientSearch />
+            <Button variant="primary" onClick={() => setShow(true)}>Add new client</Button>
+            <br />
+            <br />
+            <ModalGetClientFromAres
+                show={show}
+                setShow={setShow}
+            // flashMessage={flashMessage}
+            // handleSubmit={handleSubmit}
+            />
+            <ClientSearchBar
+                searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+
+            {
+                // <ClientSearchResults query={searchQuery} />
+                // : 
+                <ClientList query={searchQuery} />
+            }
+
+
         </div>
     );
 }
