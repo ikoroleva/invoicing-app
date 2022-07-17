@@ -41,7 +41,7 @@ const Sidebar = () => {
     // const [isClicked, setIsClicked] = useState(false);
 
     return (
-        <>
+        <div className="full-sidebar">
             {user && (
                 <div className={`sidebar ${expanded && "expanded"}`}>
 
@@ -116,7 +116,7 @@ const Sidebar = () => {
             )
             }
 
-        </>
+        </div>
     );
 };
 

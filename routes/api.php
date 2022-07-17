@@ -39,7 +39,7 @@ Route::get('/clients/search/{query}', [ClientsController::class, 'searchByIco'])
 //CLIENT by ICO
 Route::get('/clients/{ico}', [ClientsController::class, 'getClientByIco']);
 Route::get('/clients/{ico}/invoices', [ClientsController::class, 'getClientInvoicesByIco']);
-Route::post('/clients/{ico}', [ClientsController::class, 'store2']);
+Route::post('/clients/{ico}', [ClientsController::class, 'store']);
 
 
 //ALL SUPPLIERS

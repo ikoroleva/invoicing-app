@@ -18,12 +18,12 @@ body {
 
 #root {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 .layout {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     //padding-top: $header-height;
 }
 
@@ -95,8 +95,8 @@ header {
 
 .main-container {
     display: flex;
-    align-items: center;
-    height: 80%;
+    align-items: flex-start;
+    min-height: 80%;
 }
 
 main {
@@ -244,7 +244,7 @@ main {
 
 .sidebar {
     width: 4.2rem;
-    //min-height: 75%;
+    min-height: 100%;
     height: 100%;
     background-color: rgba(221, 221, 221, 0.842);
     display: flex;
