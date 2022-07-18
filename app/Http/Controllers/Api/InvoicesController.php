@@ -196,7 +196,7 @@ class InvoicesController extends Controller
         return 'Invoice created.';
     }
 
-    public function update(Request $request, $invoice_number)
+    public function update(Request $request, $invoice_id)
     {
         // check if exists, hidden id etc....
         $invoice = Invoice::with(['invoiceItems', 'supplier', 'client'])->where('id', $invoice_number)->where('user_id', Auth::id())->get();
@@ -216,5 +216,16 @@ class InvoicesController extends Controller
 
         // session()->flash('success_message', 'Invoice updated!');
         return 'Invoice updated!';
+    }
+
+    public function updateStatus(Request $request,$invoice_id)
+    {
+        $invoice = Invoice::with(['invoiceItems', 'supplier', 'client'])->where('id', $invoice_id)->where('supplier_id', \Auth::id())->first();
+        $status = $invoice->status;
+
+        $invoice->status = $status !== 'paid' ? 'paid' : 'unpaid';
+
+         $invoice->save();
+         return  $invoice->status;
     }
 }
