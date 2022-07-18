@@ -3,9 +3,7 @@ import { useParams } from "react-router-dom";
 import ClientInvoicesList from '../components/clients/ClientInvoicesList';
 import Button from 'react-bootstrap/Button';
 
-
 const Client = () => {
-
     const params = useParams();
 
     console.log(params);
@@ -17,6 +15,6 @@ const Client = () => {
             <ClientInvoicesList number={params.number} />
         </div>
     );
-}
+};
 
 export default Client;

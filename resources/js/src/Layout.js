@@ -6,6 +6,7 @@ import UserContext from "./context/UserContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
+import InvoiceTemplate from "./components/InvoiceTemplate";
 
 //pages
 import Home from "./pages/Home";
@@ -31,7 +32,6 @@ const Layout = () => {
                     <Sidebar />
                     <main>
                         <Routes>
-
                             {user ? (
                                 <Fragment>
                                     <Route
@@ -66,9 +66,17 @@ const Layout = () => {
                                         element={<CreateInvoice />}
                                     />
                                     <Route exact path="/clients" element={<Clients />} />
-                                    <Route exact path="/clients/:number" element={<Client />} />
-                                    <Route exact path="/clients/:query" element={<ClientSearchResults />} />
 
+                                    <Route
+                                        exact
+                                        path="/clients/:number"
+                                        element={<Client />}
+                                    />
+                                    {/* Path to test invoice template */}
+                                    <Route
+                                        path="/invoice-template/:invoice_number"
+                                        element={<InvoiceTemplate />}
+                                    />
                                 </Fragment>
                             ) : (
                                 <Fragment>
@@ -99,12 +107,11 @@ const Layout = () => {
                                     />
                                 </Fragment>
                             )}
-
                         </Routes>
                     </main>
                 </div>
             </Router>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 };
