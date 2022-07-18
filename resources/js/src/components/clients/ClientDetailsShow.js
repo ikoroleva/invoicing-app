@@ -9,7 +9,7 @@ const ClientDetailsShow = ({ clientData, editing, setEditing }) => {
                 <div className="client-details-items item">
                     <p><strong>ICO/REG N.</strong> {clientData.reg_number}</p>
                     <p><strong>DIC/VAT N.</strong> {clientData.reg_number_EU}</p>
-                    <p><strong>Address: </strong>{clientData.address[0].postal_code}, {clientData.address[0].city} {clientData.address[0].street_name} {clientData.address[0].house_number}/{clientData.address[0].house_orient} </p>
+                    <p><strong>Address: </strong>{clientData.address.postal_code}, {clientData.address.city} {clientData.address.street_name} {clientData.address.house_number}/{clientData.address.house_orient} </p>
                 </div>
                 <div className="client-details-items item">
                     <p><strong>Phone: </strong>{clientData.phone}</p>

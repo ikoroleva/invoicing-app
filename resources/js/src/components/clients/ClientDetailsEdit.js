@@ -12,11 +12,11 @@ const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
         name: clientData.name || '',
         // reg_number: clientData.reg_number,
         reg_number_EU: clientData.reg_number_EU || "",
-        address_city: clientData.address[0].city || '',
-        address_street_name: clientData.address[0].street_name || '',
-        address_house_number: clientData.address[0].house_number || '',
-        address_house_orient: clientData.address[0].house_orient || '',
-        address_postal_code: clientData.address[0].postal_code || '',
+        address_city: clientData.address.city || '',
+        address_street_name: clientData.address.street_name || '',
+        address_house_number: clientData.address.house_number || '',
+        address_house_orient: clientData.address.house_orient || '',
+        address_postal_code: clientData.address.postal_code || '',
         email: clientData.email || '',
         phone: clientData.phone || ''
 

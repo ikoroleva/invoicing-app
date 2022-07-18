@@ -10,7 +10,7 @@ const getAres = async (ico) => {
         console.log(data);
 
         //example to get data from response: Name of company
-        console.log(data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:OF`]);
+        //console.log(data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:OF`]);
 
         // -- ICO -->
         // console.log(response[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:ICO`]);
@@ -71,7 +71,7 @@ const getAres = async (ico) => {
                 "house_number": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:CD`],
                 "house_orient": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:CO`],
                 "postal_code": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:PSC`],
-            }]
+            },]
 
 
         }
