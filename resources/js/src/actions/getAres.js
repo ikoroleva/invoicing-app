@@ -65,13 +65,13 @@ const getAres = async (ico) => {
             "reg_number_EU": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:DIC`],
             "reg_type_court": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:ROR`][`D:SZ`][`D:SD`][`D:T`],
             "reg_type_file": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:ROR`][`D:SZ`][`D:OV`],
-            "address": [{
+            "address": {
                 "city": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:N`],
                 "street_name": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:NU`],
                 "house_number": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:CD`],
                 "house_orient": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:CO`],
                 "postal_code": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:PSC`],
-            },]
+            },
 
 
         }
