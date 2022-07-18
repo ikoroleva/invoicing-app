@@ -22,11 +22,11 @@ function PaymentDetails () {
 
         console.log(data);
 
-        setDetails(data.bank_account);
+        setDetails({...data.bank_account});
 
         const formData = { ...data }
 
-        setFormData(formData.bank_account)
+        setFormData({...formData.bank_account, 'data_batch': 'payment-details'})
     };
 
     useEffect(() => {
@@ -52,9 +52,9 @@ function PaymentDetails () {
     }
 
   return (
-
     <div>
-      {!details ?
+      {console.log(formData)}
+    {!details ?
         <h2>LOL</h2>
         :
         <div className="userdetails__box">
@@ -66,6 +66,7 @@ function PaymentDetails () {
 
               {editing ? (
                 <Form className="client_form">
+                  <input type="hidden" name="data_batch" value="payment-details" />
                   <Form.Group className="client_form_element client_reg_number_EU">
                     <Form.Label>BANK:</Form.Label>
                     <Form.Control type="text"

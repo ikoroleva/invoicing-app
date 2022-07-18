@@ -13,7 +13,7 @@ return (
     
     <PaymentDetails />
 
-    <SettingUserDetails />
+    {/* <SettingUserDetails /> */}
     
     </div>
 )
