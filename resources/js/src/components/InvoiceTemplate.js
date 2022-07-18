@@ -35,18 +35,14 @@ const InvoiceTemplate = () => {
     };
 
     const fetchClient = async () => {
-        const response = await axios.get(
-            `http://www.invoicing-app.test/api/clients/${clientIco}`
-        );
-        setClientData(response.data.addresses);
-        console.log(response.data.addresses.street_name);
+        const response = await axios.get(`/api/clients/${clientIco}`);
+        setClientData(response.data[0].address);
+        console.log(response.data[0]);
         setClientLoaded(true);
     };
 
     const fetchSupplier = async () => {
-        const response = await axios.get(
-            `http://www.invoicing-app.test/api/suppliers/${supplierIco}`
-        );
+        const response = await axios.get(`/api/suppliers/${supplierIco}`);
         setSupplierData(response.data[0]);
         console.log(response.data[0]);
         setSupplierLoaded(true);
