@@ -39,7 +39,7 @@ const InvoiceTemplate = () => {
             `http://www.invoicing-app.test/api/clients/${clientIco}`
         );
         setClientData(response.data.addresses);
-        console.log(response.data.addresses);
+        console.log(response.data.addresses.street_name);
         setClientLoaded(true);
     };
 

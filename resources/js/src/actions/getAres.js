@@ -39,6 +39,11 @@ const getAres = async (ico) => {
         //   response[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:PSC`]
         // );
 
+        // Company address_City - not ready yet
+        // console.log(
+        //   response[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:PSC`]
+        // );
+
         // Registered at Trade court
         // console.log(
         //   response[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:ROR`][`D:SZ`][
