@@ -27,7 +27,7 @@ const ClientDetails = ({ number }) => {
 
     }, [
         editing,
-        // clientData
+        //clientData
     ]
     );
 
