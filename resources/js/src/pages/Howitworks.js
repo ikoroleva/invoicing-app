@@ -15,7 +15,7 @@ function HowItWorks() {
 
                 <div className='HowItWorks__container_step'>
                     <div className='HowItWorks__step_iconContainer'>
-                        <img className='HowItWorks__step_icon'src='../images/idea.png'/>
+                        <img className='HowItWorks__step_icon'src='../images/edit.png'/>
                     </div>
                     <div className='HowItWorks__step_textContainer'>
                         <h2 className='HowItWorks__step_header'>Register</h2>
@@ -25,17 +25,17 @@ function HowItWorks() {
 
                 <div className='HowItWorks__container_step'>
                     <div className='HowItWorks__step_iconContainer'>
-                        <img className='HowItWorks__step_icon'></img>
+                        <img className='HowItWorks__step_icon' src='../images/idea.png'/>
                     </div>
                     <div className='HowItWorks__step_textContainer'>
-                        <h2 className='HowItWorks__step_header'>Crate</h2>
+                        <h2 className='HowItWorks__step_header'>Create</h2>
                         <p className='HowItWorks__step_p'>Use this space to describe this benefit.</p>
                     </div>
                 </div>
 
                 <div className='HowItWorks__container_step'>
                     <div className='HowItWorks__step_iconContainer'>
-                        <img className='HowItWorks__step_icon' src='../images/idea.png'/>
+                        <img className='HowItWorks__step_icon' src='../images/management.png'/>
                     </div>
                     <div className='HowItWorks__step_textContainer'>
                         <h2 className='HowItWorks__step_header'>Manage</h2>

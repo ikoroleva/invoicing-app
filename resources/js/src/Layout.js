@@ -18,6 +18,7 @@ import UserDetails from "./pages/UserDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Client from "./pages/Client";
+import Clients from "./pages/Clients"
 import HowItWorks from "./pages/Howitworks";
 
 const Layout = () => {
