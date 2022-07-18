@@ -98,6 +98,7 @@ class ClientsController extends Controller
 
 
         $response[] = [
+            'id' => $client->id,
             'name' => $client->name,
             'reg_number' => $client->reg_number,
             'reg_number_EU' => $client->reg_number_EU,
