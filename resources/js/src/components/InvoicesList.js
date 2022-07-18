@@ -92,6 +92,11 @@ export default function InvoicesList() {
                                         {/* <Dropdown.Item href="#/action-3">Send via EMAIL</Dropdown.Item> */}
                                         <Dropdown.Item onClick={() => toggleStatus()}>Set status {status !== 'paid' ? 'paid' : 'unpaid'}</Dropdown.Item>
                                         <Dropdown.Item >Delete</Dropdown.Item>
+                                       
+                                        <Dropdown.Item href="#/action-3">
+                                            Send via EMAIL
+                                        </Dropdown.Item>
+                                        
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </td>
