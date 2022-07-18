@@ -57,11 +57,6 @@ const InvoiceTemplate = () => {
     }, [invoice_number]);
 
     useEffect(() => {
-        // console.log(invoiceData.client.name);
-        //  setClientIco(invoiceData.client.reg_number);
-    }, [invoiceData]);
-
-    useEffect(() => {
         fetchClient();
         fetchSupplier();
     }, [dataLoaded]);

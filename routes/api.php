@@ -33,10 +33,12 @@ Route::get('/ares/{ico}', [AresController::class, 'getAres']);
 
 // APIs for our DB
 
-//All CLIENTS in our DB
+//All CLIENTS in our DB for current SUPPLIER
 Route::get('/clients', [ClientsController::class, 'index']);
+Route::get('/clients/search/{query}', [ClientsController::class, 'searchByIco']);
 //CLIENT by ICO
-Route::get('/clients/{ico}', [ClientsController::class, 'indexIco']);
+Route::get('/clients/{ico}', [ClientsController::class, 'getClientByIco']);
+Route::get('/clients/{ico}/invoices', [ClientsController::class, 'getClientInvoicesByIco']);
 Route::post('/clients/{ico}', [ClientsController::class, 'store']);
 
 

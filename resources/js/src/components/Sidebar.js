@@ -1,4 +1,4 @@
-import ClientList from "./ClientList";
+import ClientList from "./clients/ClientList";
 import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { Fragment, useContext, useState, useEffect } from "react";
@@ -29,7 +29,7 @@ const Sidebar = () => {
         {
             name: "Clients",
             iconName: "mdiAccountMultiple",
-            url: ""
+            url: "/clients"
         }
 
     ];
@@ -37,8 +37,8 @@ const Sidebar = () => {
     const [hovered, setHovered] = useState(null);
     const [active, setActive] = useState(1);
     const [expanded, setExpanded] = useState(false);
-    const [showClients, setShowClients] = useState(false);
-    const [isClicked, setIsClicked] = useState(false);
+    // const [showClients, setShowClients] = useState(false);
+    // const [isClicked, setIsClicked] = useState(false);
 
     return (
         <>
@@ -75,16 +75,16 @@ const Sidebar = () => {
                                 onClick={() => {
                                     if (middle) {
                                         setActive(index);
-                                        setShowClients(false);
+                                        // setShowClients(false);
                                     }
                                     if (index === 0) {
                                         setExpanded(!expanded);
-                                        setShowClients(!expanded && active == menuItems.length - 1);
+                                        // setShowClients(!expanded && active == menuItems.length - 1);
                                     }
-                                    if (last) {
-                                        setIsClicked(!isClicked);
-                                        setShowClients(expanded && isClicked);
-                                    }
+                                    // if (last) {
+                                    //     setIsClicked(!isClicked);
+                                    //     setShowClients(expanded && isClicked);
+                                    // }
                                 }}
                                 key={index}
                             >
@@ -111,7 +111,7 @@ const Sidebar = () => {
 
 
                     })}
-                    <ClientList showClients={showClients} />
+                    {/* <ClientList showClients={showClients} /> */}
                 </div>
             )
             }
