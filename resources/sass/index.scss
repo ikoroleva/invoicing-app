@@ -1,4 +1,5 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:400,300,700|Pacifico|Julius+Sans+One";
+@import './howItWorks.scss';
 
 $header-height: 100px;
 $metadata-color: lighten(black, 50%);
@@ -404,7 +405,7 @@ footer {
     margin-bottom: 30px;
     min-height: 1px;
     float: left;
-    -webkit-backface-visibility: hidden;
+    // -webkit-backface-visibility: hidden;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;

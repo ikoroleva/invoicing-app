@@ -18,6 +18,7 @@ import UserDetails from "./pages/UserDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Client from "./pages/Client";
+import HowItWorks from "./pages/Howitworks";
 
 const Layout = () => {
     const { user } = useContext(UserContext);
@@ -72,6 +73,12 @@ const Layout = () => {
                                     <Route
                                         path="/invoice-template/:invoice_number"
                                         element={<InvoiceTemplate />}
+                                    />
+
+                                    <Route
+                                        exact
+                                        path="/howitworks"
+                                        element={<HowItWorks />}
                                     />
                                 </Fragment>
                             ) : (
