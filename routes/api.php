@@ -33,10 +33,12 @@ Route::get('/ares/{ico}', [AresController::class, 'getAres']);
 
 // APIs for our DB
 
-//All CLIENTS in our DB
+//All CLIENTS in our DB for current SUPPLIER
 Route::get('/clients', [ClientsController::class, 'index']);
+Route::get('/clients/search/{query}', [ClientsController::class, 'searchByIco']);
 //CLIENT by ICO
-Route::get('/clients/{ico}', [ClientsController::class, 'indexIco']);
+Route::get('/clients/{ico}', [ClientsController::class, 'getClientByIco']);
+Route::get('/clients/{ico}/invoices', [ClientsController::class, 'getClientInvoicesByIco']);
 Route::post('/clients/{ico}', [ClientsController::class, 'store']);
 
 
@@ -50,7 +52,8 @@ Route::get('/suppliers/{ico}', [SuppliersController::class, 'indexIco']);
 Route::post('/suppliers/current', [SuppliersController::class, 'updateCurrent']);
 // should we add {ico} ?
 
-
+//update of invoice status
+Route::put('/invoices/changestatus', [InvoicesController::class, 'update']);
 //All invoices issued for current user
 Route::get('/invoices/suppliers/allinvoices/', [InvoicesController::class, 'currentSupplierInvoices']);
 //ALL invoices

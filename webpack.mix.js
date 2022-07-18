@@ -45,4 +45,5 @@ mix
 // mix.sass('resources/css/app.scss', 'public/css');
 // mix.js('resources/js/library.js', 'public/js');
 mix.js('resources/js/index.js', 'public/js').react()
-    .sass('resources/sass/index.scss', 'public/css');    
+    .sass('resources/sass/index.scss', 'public/css')
+    .sass('resources/sass/home.scss', 'public/css');    

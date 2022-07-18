@@ -11,7 +11,7 @@
   crossorigin="anonymous"
 />
     <title>Home</title>
-    <script src="{{ mix('js/index.js') }}" defer></script>
+    <script src= "{{ mix('js/index.js') }}" defer></script>
 </head>
 <body>
     <div id="root"></div>

@@ -19,18 +19,18 @@ body {
 
 #root {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 .layout {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     //padding-top: $header-height;
 }
 
 header {
     width: 100%;
-    height: 20%;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -93,8 +93,8 @@ header {
 
 .main-container {
     display: flex;
-    align-items: center;
-    height: 80%;
+    align-items: flex-start;
+    min-height: 80%;
 }
 
 main {
@@ -103,6 +103,7 @@ main {
     height: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 
     .form-container {
         width: 100%;
@@ -166,11 +167,72 @@ main {
             margin-top: 1rem;
         }
     }
+
+    .client-details.hidden {
+        display: none;
+    }
+
+    .client-search-form {
+        display: flex;
+        width: 100%;
+
+        button {
+            margin: 0 1rem;
+
+            a {
+                all: unset;
+            }
+        }
+    }
+
+    .contact-info-container {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        //justify-content: center;
+
+        //align-items: center;
+
+        h2,
+        p {
+            text-align: left;
+        }
+
+        .contact-info-card {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-around;
+
+            .contact-info-form {
+                width: 70%;
+            }
+
+            .contact-info-line {
+                border-left: 1px solid #0275d8;
+                height: 250px;
+                margin: 4rem 1rem;
+
+            }
+
+            .contact-info-contacts {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                p {
+                    font-size: .8rem;
+                }
+            }
+
+        }
+
+    }
 }
 
 .sidebar {
     width: 4.2rem;
-    //min-height: 75%;
+    min-height: 100%;
     height: 100%;
     background-color: rgba(221, 221, 221, 0.842);
     display: flex;
@@ -178,6 +240,11 @@ main {
     flex-direction: column;
     align-items: center;
     transition: 0.3s width;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    overflow-y: inherit;
+    overflow-x: hidden;
 
     // img {
     //     inline-size: 2rem;
@@ -260,12 +327,12 @@ footer {
     border-bottom-right-radius: 0.8rem;
 }
 
-.boxicon-container:hover > .boxicon::after {
+.boxicon-container:hover>.boxicon::after {
     opacity: 1;
     transition: 0.1s;
 }
 
-.sidebar > *:first-child {
+.sidebar>*:first-child {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -377,7 +444,10 @@ footer {
     .userdetails__detail {
         margin-top: 1rem;
     }
+
+
 }
+
 
 // <--- Blog styles --->
 
@@ -400,6 +470,7 @@ footer {
         margin: 0 auto 10px;
     }
 }
+
 .item {
     position: relative;
     margin-bottom: 30px;
@@ -435,6 +506,7 @@ footer {
         }
     }
 }
+
 .item {
     h4 {
         font-size: 1.5em;
@@ -442,10 +514,12 @@ footer {
         letter-spacing: 2px;
         text-transform: uppercase;
     }
+
     p {
         font-size: 1em;
         text-align: justify;
     }
+
     a {
         font-family: "Montserrat", sans-serif;
         font-size: 0.8em;
@@ -465,6 +539,7 @@ footer {
 
         &:hover {
             text-decoration: none;
+
             i {
                 padding-left: 10px;
                 opacity: 1;
@@ -473,11 +548,13 @@ footer {
         }
     }
 }
+
 .item .icon {
     position: absolute;
     top: 27px;
     left: -16px;
     cursor: pointer;
+
     a {
         font-family: "Merriweather", serif;
         font-size: 14px;
@@ -485,11 +562,13 @@ footer {
         color: #999;
         text-transform: none;
     }
+
     svg {
         width: 32px;
         height: 32px;
         float: left;
     }
+
     .icon-topic {
         opacity: 0;
         padding-left: 0px;
@@ -498,11 +577,13 @@ footer {
         top: 0px;
         position: relative;
     }
+
     &:hover .icon-topic {
         opacity: 1;
         padding-left: 10px;
     }
 }
+
 @media only screen and (max-width: 768px) {
     .item .icon {
         position: relative;
@@ -515,16 +596,20 @@ footer {
 .container_invoice {
     display: flex;
     flex-direction: column;
+
     .invoice__header {
         display: flex;
         flex-direction: row;
+
         .invoice__header_img {
             width: 30em;
             margin-left: 1em;
+
             img {
                 width: 10em;
             }
         }
+
         .invoice__header_data {
             flex-direction: column;
             margin-left: 15em;
@@ -538,6 +623,7 @@ footer {
         background: $border-color;
         border: none;
     }
+
     .invoice__counterparts {
         display: flex;
 
@@ -545,6 +631,7 @@ footer {
             width: 30em;
             margin-left: 1em;
         }
+
         .invoice__counterparts_client {
             margin-left: 15em;
         }
@@ -554,18 +641,22 @@ footer {
     .invoice__payment_wire {
         margin-left: 1em;
     }
+
     .invoice__payment_wire {
         display: flex;
         flex-direction: column;
     }
+
     .invoice__body {
         margin-left: 1em;
     }
+
     .invoice__total {
         display: flex;
         flex-direction: row;
         justify-content: end;
         padding-right: 5em;
+
         p {
             padding-right: 2em;
         }

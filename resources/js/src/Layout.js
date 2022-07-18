@@ -64,6 +64,8 @@ const Layout = () => {
                                         path="/create-invoice"
                                         element={<CreateInvoice />}
                                     />
+                                    <Route exact path="/clients" element={<Clients />} />
+
                                     <Route
                                         exact
                                         path="/clients/:number"
