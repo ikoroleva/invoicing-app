@@ -61,7 +61,6 @@ export default function InvoicesList() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-<<<<<<< HEAD
                                         <Dropdown.Item
                                             href={`/invoice-template/${invoice.id}`}
                                         >
@@ -79,13 +78,6 @@ export default function InvoicesList() {
                                         <Dropdown.Item href="#/action-3">
                                             Delete
                                         </Dropdown.Item>
-=======
-                                        <Dropdown.Item href="#/action-1">Show</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">Download</Dropdown.Item>
-                                        {/* <Dropdown.Item href="#/action-3">Send via EMAIL</Dropdown.Item> */}
-                                        <Dropdown.Item href="#/action-3">Set PAID status</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">Delete</Dropdown.Item>
->>>>>>> main
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </td>
