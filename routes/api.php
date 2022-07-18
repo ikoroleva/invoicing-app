@@ -70,3 +70,5 @@ Route::get('/invoices/issued', [InvoicesController::class, 'currentSupplierIssue
 Route::post('/create-invoice', [InvoicesController::class, 'create']);
 //Update existing invoice
 Route::put('/invoices/{invoice_number}', [InvoicesController::class, 'update']);
+//Get current particular invoice by invoice number
+Route::get('/invoices/{invoice_id}', [InvoicesController::class, 'currentInvoice']);

@@ -20,6 +20,7 @@ const CreateNewInvoice = () => {
         form_of_payment: "",
         additional_notes: "",
         invoice_items: [],
+        total: 0,
     });
 
     //success message, if any
@@ -65,14 +66,14 @@ const CreateNewInvoice = () => {
         event.preventDefault();
         console.log(values);
 
-        // const response = await axios.post("/api/create-invoice", values);
+        const response = await axios.post("/api/create-invoice", values);
         // const response = await axios.get("/development-test/invoice", values);
 
-        // const response_data = response.data;
-        // if (response_data) {
-        //     setFlashMessage(response_data);
-        //     setShow(false);
-        // }
+        const response_data = response.data;
+        if (response_data) {
+            setFlashMessage(response_data);
+            setShow(false);
+        }
     };
 
     // values?.invoice_items?.reduce((a, b) => a.unit_cost + b.unit_cost);
@@ -205,10 +206,10 @@ const CreateNewInvoice = () => {
 
                 <br />
                 <Col xs="auto">
-                    {/* <Button variant="primary" onClick={() => setShow(true)}>
+                    <Button variant="primary" onClick={() => setShow(true)}>
                         Generate invoice
-                    </Button> */}
-                    <Button type="submit">test values</Button>{" "}
+                    </Button>
+                    {/* <Button type="submit">test values</Button>{" "} */}
                 </Col>
             </Form>
         </>
