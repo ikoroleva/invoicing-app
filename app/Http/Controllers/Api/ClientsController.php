@@ -88,9 +88,10 @@ class ClientsController extends Controller
         $response = [];
         $user_id = Auth::id();
 
-        $client = Client::with('addresses', 'suppliers')->where('reg_number', $ico)->whereHas('suppliers', function (Builder $query) use ($user_id) {
-            $query->where('user_id', $user_id);
-        })
+        $client = Client::with('addresses', 'suppliers')
+            // ->where('reg_number', $ico)->whereHas('suppliers', function (Builder $query) use ($user_id) {
+            //     $query->where('user_id', $user_id);
+            // })
             ->orderBy('id')
             ->first();
 
