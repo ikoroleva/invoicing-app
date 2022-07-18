@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use Carbon\Carbon;
+use Auth;
 
 class InvoicesController extends Controller
 {
