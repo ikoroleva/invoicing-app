@@ -13,6 +13,8 @@ export default function InvoicesList() {
     const [totalCount, setTotalCount] = useState(0);
     const url = `api/invoices/suppliers/allinvoices?offset=${offset}`;
 
+    const [status, setStatus] = useState('new')
+
     //currently logged in user
     const fetchData = async () => {
         const resp = await fetch(url);
@@ -24,8 +26,28 @@ export default function InvoicesList() {
 
     //use effect hook to fetch the data
     useEffect(() => {
-        fetchData();
-    }, [offset]);
+    fetchData();
+  },[offset, status]);
+
+    //update status function - function that will go to /invoices/changestatus route and with PUT method will change the status of invoice
+    const updateStatus = (value) => {
+        
+    }
+
+
+
+    const toggleStatus = async () => {
+
+        const value = status !== 'paid' ? 'paid' : 'unpaid';
+
+
+        await updateStatus(value)
+
+
+        return setStatus(value)
+
+    }
+
 
     return (
         <div className="table__container">
@@ -66,18 +88,15 @@ export default function InvoicesList() {
                                         >
                                             Show
                                         </Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">
-                                            Download
-                                        </Dropdown.Item>
+                                        <Dropdown.Item >Download</Dropdown.Item>
+                                        {/* <Dropdown.Item href="#/action-3">Send via EMAIL</Dropdown.Item> */}
+                                        <Dropdown.Item onClick={() => toggleStatus()}>Set status {status !== 'paid' ? 'paid' : 'unpaid'}</Dropdown.Item>
+                                        <Dropdown.Item >Delete</Dropdown.Item>
+                                       
                                         <Dropdown.Item href="#/action-3">
                                             Send via EMAIL
                                         </Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">
-                                            Set PAID status
-                                        </Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">
-                                            Delete
-                                        </Dropdown.Item>
+                                        
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </td>
