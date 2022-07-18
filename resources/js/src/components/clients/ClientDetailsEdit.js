@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 
 import Form from 'react-bootstrap/Form';
@@ -30,14 +30,21 @@ const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
 
         e.preventDefault();
 
-        setEditing(false);
-        setShowEdit(false);
 
         const response = await axios.post(`/api/clients/${clientData.reg_number}`, formData);
         const response_data = response.data;
         console.log(response_data);
 
+        setShowEdit(false);
+        setEditing(false);
+
     }
+
+    useEffect(() => {
+        setFormData({ ...clientData })
+
+
+    }, [clientData])
 
     return (
         <Form className="client_form">
