@@ -10,7 +10,7 @@ class Client extends Model
     use HasFactory;
     public function addresses()
     {
-        return $this->hasMany(Address::class);
+        return $this->hasOne(Address::class);
     }
 
     public function invoices()
