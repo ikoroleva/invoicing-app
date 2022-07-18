@@ -7,6 +7,8 @@ const getAres = async (ico) => {
         const response = await axios.get(url_ares);
         const data = txml.simplify(txml.parse(response.data));
 
+        console.log(data);
+
         //example to get data from response: Name of company
         console.log(data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:OF`]);
 
@@ -59,7 +61,7 @@ const getAres = async (ico) => {
             "reg_type_court": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:ROR`][`D:SZ`][`D:SD`][`D:T`],
             "reg_type_file": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:ROR`][`D:SZ`][`D:OV`],
             "address": [{
-                "city": "Praha",
+                "city": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:N`],
                 "street_name": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:NU`],
                 "house_number": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:CD`],
                 "house_orient": data[`are:Ares_odpovedi`][`are:Odpoved`][`D:VBAS`][`D:AA`][`D:CO`],
