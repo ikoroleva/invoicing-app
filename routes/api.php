@@ -74,3 +74,5 @@ Route::post('/create-invoice', [InvoicesController::class, 'create']);
 Route::put('/invoices/{invoice_number}', [InvoicesController::class, 'update']);
 //Get current particular invoice by invoice number
 Route::get('/invoices/{invoice_id}', [InvoicesController::class, 'currentInvoice']);
+//delete specific invoice via it's ID
+Route::delete('/invoices/delete/{invoice_id}', [InvoicesController::class, 'deleteInvoice']);

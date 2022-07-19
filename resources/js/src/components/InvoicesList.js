@@ -40,7 +40,20 @@ export default function InvoicesList() {
             })
         
 
-        return setStatus(res.data)
+        return fetchData()
+    }
+
+    // function to delte invoice after clicking on dropdown menu
+    const deleteInvoice = async (id) => {
+            console.log(id)
+
+            await axios({
+                url: '/api/invoices/delete/'+id,
+                method: 'delete',
+                data: id
+                })
+
+            return fetchData()
     }
 
 
@@ -87,17 +100,13 @@ console.log(status)
                                             Show
                                         </Dropdown.Item>
 
-                                        <Dropdown.Item >Download</Dropdown.Item>
+                                        <Dropdown.Item  >Download</Dropdown.Item>
 
                                         {/* <Dropdown.Item href="#/action-3">Send via EMAIL</Dropdown.Item> */}
 
                                         <Dropdown.Item onClick={(e) => toggleStatus(e)}><span onClick={()=>toggleStatus(invoice.id)}>Set status {invoice.status !== 'paid' ? 'paid' : 'unpaid'}</span></Dropdown.Item>
 
-                                        <Dropdown.Item >Delete</Dropdown.Item>
-                                       
-                                        <Dropdown.Item href="#/action-3">
-                                            Send via EMAIL
-                                        </Dropdown.Item>
+                                        <Dropdown.Item ><span onClick={()=>deleteInvoice(invoice.id)}>Delete</span></Dropdown.Item>
                                         
                                     </Dropdown.Menu>
                                 </Dropdown>

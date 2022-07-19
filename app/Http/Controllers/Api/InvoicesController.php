@@ -229,4 +229,13 @@ class InvoicesController extends Controller
          $invoice->save();
          return  $invoice->status;
     }
+
+    public function deleteInvoice(Request $request, $invoice_id)
+    {
+        $invoice = Invoice::with(['invoiceItems', 'supplier', 'client'])->where('id', $invoice_id)->where('supplier_id', \Auth::id())->first();
+
+        $invoice->delete();
+
+        // dd($request);
+    }
 }

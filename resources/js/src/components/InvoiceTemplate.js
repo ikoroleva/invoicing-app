@@ -36,7 +36,7 @@ const InvoiceTemplate = () => {
 
     const fetchClient = async () => {
         const response = await axios.get(`/api/clients/${clientIco}`);
-        setClientData(response.data[0].address);
+        setClientData(response.data[0]);
         console.log(response.data[0]);
         setClientLoaded(true);
     };
