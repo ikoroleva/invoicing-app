@@ -206,10 +206,10 @@ const CreateNewInvoice = () => {
 
                 <br />
                 <Col xs="auto">
-                    <Button variant="primary" onClick={() => setShow(true)}>
+                    {/* <Button variant="primary" onClick={() => setShow(true)}>
                         Generate invoice
-                    </Button>
-                    {/* <Button type="submit">test values</Button>{" "} */}
+                    </Button> */}
+                    <Button type="submit">test values</Button>{" "}
                 </Col>
             </Form>
         </>
