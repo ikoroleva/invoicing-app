@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use Carbon\Carbon;
+use Auth;
 
 class InvoicesController extends Controller
 {
@@ -124,7 +125,7 @@ class InvoicesController extends Controller
     // all paid invoices for current user will be in API together with other information about invoices
     public function currentSupplierPaidInvoices()
     {
-        $currentSupplierPaidInvoices = Invoice::where('supplier_id', \Auth::id())->where('status', 'paid')->pluck('total_amount');
+        $currentSupplierPaidInvoices = Invoice::where('supplier_id',\Auth::id())->where('status','paid')->pluck('total_amount');
 
         return $currentSupplierPaidInvoices;
     }
@@ -137,8 +138,8 @@ class InvoicesController extends Controller
         return $currentSupplierIssuedInvoices;
     }
 
-    // all issued invoices in curretn month for currently loged in supplier 
-    public function thisMonthInvoices()
+     // all issued invoices in curretn month for currently loged in supplier 
+     public function thisMonthInvoices()
     {
         $thisMonthInvoices = Invoice::where('supplier_id', \Auth::id())
             ->select('total_amount')
