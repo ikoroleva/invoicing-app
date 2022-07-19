@@ -168,31 +168,28 @@ class InvoicesController extends Controller
         $invoice->number = $request->input('number');
         $invoice->additional_notes = $request->input('additional_notes');
         $invoice->status = $request->input('status');
-        $invoice->total_amount = $request->input('total');
         $invoice->currency = $request->input('currency');
         $invoice->form_of_payment = $request->input('form_of_payment');
         $invoice->issued_on = $request->input('issued_on');
         $invoice->due_date = $request->input('due_date');
 
+        foreach ($request->invoice_items as $item) {
+            $invoice->total_amount += $item['unit_cost'] *
+                $item['unit_quantity'];
+        }
+
         $invoice->save();
 
-        // foreach ($request->invoice_items as $item) {
-        //     $invoiceItems = new InvoiceItem;
-        //     $invoiceItems->invoice_id = $invoice->id;
-        //     $invoiceItems->invoice_description = $item->invoice_description;
-        //     $invoiceItems->unit_cost = $item->unit_cost;
-        //     $invoiceItems->unit_quantity = $item->unit_quantity;
-        //     $invoiceItems->save();
-        // }
+        foreach ($request->invoice_items as $item) {
+            $invoiceItems = new InvoiceItem;
+            $invoiceItems->invoice_id = $invoice->id;
+            $invoiceItems->invoice_description = $item['invoice_description'];
+            $invoiceItems->unit_cost = $item['unit_cost'];
+            $invoiceItems->unit_quantity = $item['unit_quantity'];
 
-        // $invoiceItems = new InvoiceItem;
+            $invoiceItems->save();
+        }
 
-        // $invoiceItems->invoice_id = $invoice->id;
-        // $invoiceItems->invoice_description = $request->invoice_items['invoice_description'];
-        // $invoiceItems->unit_cost = $request->input('unit_cost');
-        // $invoiceItems->unit_quantity = $request->input('unit_quantity');
-
-        // $invoiceItems->save();
 
         return 'Invoice created.';
     }

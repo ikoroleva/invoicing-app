@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 
-const InvoiceItem = ({ handleChange, id }) => {
+const InvoiceItem = ({ handleChange, id, total, setTotal }) => {
     // total Sub-total state
     const [subtotal, setSubtotal] = useState(0);
 
@@ -15,7 +15,7 @@ const InvoiceItem = ({ handleChange, id }) => {
         invoice_description: "",
         unit_cost: 0,
         unit_quantity: 0,
-        sub_total: 0,
+        sub_total: subtotal,
         id,
     });
 
@@ -34,6 +34,9 @@ const InvoiceItem = ({ handleChange, id }) => {
         setSubtotal(invoiceData.unit_cost * invoiceData.unit_quantity);
     }, [invoiceData]);
 
+    useEffect(() => {
+        setTotal(total + subtotal);
+    }, [subtotal]);
     const handleChangeInput = (e) => {
         const newValue = {
             ...invoiceData,

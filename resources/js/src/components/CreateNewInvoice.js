@@ -78,16 +78,15 @@ const CreateNewInvoice = () => {
 
     // values?.invoice_items?.reduce((a, b) => a.unit_cost + b.unit_cost);
 
-    // const totalAmount = () => {
-    //     values.invoice_items.map((el, i) => {
-    //         setTotal(total + el.sub_total);
-    //         console.log(total);
-    //     });
-    // };
+    const totalAmount = () => {
+        values.invoice_items.map((el, i) => {
+            setTotal(total + el.sub_total);
+        });
+    };
 
-    // useEffect(() => {
-    //     totalAmount();
-    // }, [values.invoice_items]);
+    useEffect(() => {
+        totalAmount();
+    }, [values.invoice_items]);
 
     return (
         <>
@@ -206,10 +205,10 @@ const CreateNewInvoice = () => {
 
                 <br />
                 <Col xs="auto">
-                    <Button variant="primary" onClick={() => setShow(true)}>
+                    {/* <Button variant="primary" onClick={() => setShow(true)}>
                         Generate invoice
-                    </Button>
-                    {/* <Button type="submit">test values</Button>{" "} */}
+                    </Button> */}
+                    <Button type="submit">test values</Button>{" "}
                 </Col>
             </Form>
         </>
