@@ -14,9 +14,9 @@ class Supplier extends Model
     {
         return $this->hasOne(Address::class);
     }
-    public function bankAccounts()
+    public function bankAccount()
     {
-        return $this->hasMany(BankAccount::class);
+        return $this->hasOne(BankAccount::class);
     }
     public function invoices()
     {

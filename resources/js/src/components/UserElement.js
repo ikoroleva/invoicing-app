@@ -16,7 +16,7 @@ const UserElement = () => {
                 </Fragment>
             ) : (
                 <Fragment>
-                    <Button variant="primary"><Link to="/login">Log in</Link></Button>
+                    <div><Button variant="primary"><Link to="/login">Log in</Link></Button></div>
                     {/* <Link to="/register">Register</Link> */}
                 </Fragment>
             )}

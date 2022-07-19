@@ -25,7 +25,11 @@ const ClientDetails = ({ number }) => {
         fetchData();
 
 
-    }, [editing]);
+    }, [
+        editing,
+        //clientData
+    ]
+    );
 
 
     return (
