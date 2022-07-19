@@ -14,7 +14,24 @@ const Clients = () => {
     const [clientData, setClientData] = useState(null);
     const [showEdit, setShowEdit] = useState(false);
 
+    const [clients, setClients] = useState([]);
+    // const [clientsFiltered, setClientsFiltered] = useState([]);
 
+    const url = `/api/clients/`;
+
+    const fetchData = async () => {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        setClients(data);
+        //   setClientsFiltered(data);
+    }
+
+    useEffect(() => {
+
+        fetchData();
+
+    }, [showEdit, clientData]);
 
 
     return (
@@ -44,7 +61,7 @@ const Clients = () => {
             {
                 // <ClientSearchResults query={searchQuery} />
                 // : 
-                <ClientList query={searchQuery} />
+                <ClientList query={searchQuery} clients={clients} />
             }
 
 

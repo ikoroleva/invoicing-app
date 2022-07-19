@@ -211,6 +211,8 @@ class ClientsController extends Controller
         $address->house_orient = $request->input('address_house_orient');
         $address->postal_code = $request->input('address_postal_code');
 
+        //dd($address);
+
         $client->save();
         if ($createNew) {
             // connect supplier to a client

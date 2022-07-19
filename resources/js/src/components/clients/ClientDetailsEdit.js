@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 
 import Form from 'react-bootstrap/Form';
@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
 
     const [formData, setFormData] = useState({
+        //...clientData
         name: clientData.name || '',
         // reg_number: clientData.reg_number,
         reg_number_EU: clientData.reg_number_EU || "",
@@ -24,20 +25,43 @@ const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        //console.log(formData);
     }
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
 
-        setEditing(false);
-        setShowEdit(false);
 
         const response = await axios.post(`/api/clients/${clientData.reg_number}`, formData);
         const response_data = response.data;
         console.log(response_data);
 
+        setShowEdit(false);
+        setEditing(false);
+
     }
+
+    useEffect(() => {
+        //console.log(formData);
+        //console.log(clientData);
+        //console.log(formData.clientData.address.postal_code);
+        //console.log(formData.address['postal_code']);
+        setFormData({
+            name: clientData.name || '',
+            // reg_number: clientData.reg_number,
+            reg_number_EU: clientData.reg_number_EU || "",
+            address_city: clientData.address.city || '',
+            address_street_name: clientData.address.street_name || '',
+            address_house_number: clientData.address.house_number || '',
+            address_house_orient: clientData.address.house_orient || '',
+            address_postal_code: clientData.address.postal_code || '',
+            email: clientData.email || '',
+            phone: clientData.phone || ''
+        })
+
+
+    }, [clientData, setShowEdit])
 
     return (
         <Form className="client_form">
@@ -47,14 +71,14 @@ const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
                     <Form.Control type="text"
                         name="name"
                         onChange={(e) => handleChange(e)}
-                        value={formData.name} />
+                        value={formData.name || ''} />
                 </Form.Group>
                 <Form.Group as={Col} className="client_form_element client_reg_number_EU">
                     <Form.Label>DIC/VAT N:</Form.Label>
                     <Form.Control type="text"
                         name="reg_number_EU"
                         onChange={(e) => handleChange(e)}
-                        value={formData.reg_number_EU} />
+                        value={formData.reg_number_EU || ''} />
                 </Form.Group>
             </Row>
 
@@ -64,14 +88,14 @@ const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
                     <Form.Control type="email"
                         name="email"
                         onChange={(e) => handleChange(e)}
-                        value={formData.email} />
+                        value={formData.email || ''} />
                 </Form.Group>
                 <Form.Group as={Col} className="client_form_element client_phone">
                     <Form.Label>Phone:</Form.Label>
                     <Form.Control type="text"
                         name="phone"
                         onChange={(e) => handleChange(e)}
-                        value={formData.phone} />
+                        value={formData.phone || ''} />
                 </Form.Group>
             </Row>
 
