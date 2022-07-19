@@ -37,9 +37,9 @@ class SuppliersController extends Controller
 
     public function currentSupplier()
     {
-            $user_id = Auth::id();
-            $currentSupplier = Supplier::with('bankAccount','address')->where('user_id', $user_id)->first();  
-            
+        $user_id = Auth::id();
+        $currentSupplier = Supplier::with('bankAccount', 'address')->where('user_id', $user_id)->first();
+
         return $currentSupplier;
     }
 
@@ -56,9 +56,15 @@ class SuppliersController extends Controller
             'name' => $supplier->name,
             'reg_number' =>  $supplier->reg_number,
             'reg_number_EU' =>  $supplier->reg_number_EU,
-            'reg_type' =>  $supplier->reg_type_court . ', složka ' . $supplier->reg_type_file,
+            'reg_type_court' =>  $supplier->reg_type_court,
+            'reg_type_file' => $supplier->reg_type_file,
             'address_id' => $supplier->address_id,
             'bank_name' => $supplier->bankAccount->bank_name,
+            'bank_account_prefix' => $supplier->bankAccount->bank_account_prefix,
+            'bank_account_number' => $supplier->bankAccount->bank_account_number,
+            'bank_account_code' => $supplier->bankAccount->bank_account_code,
+            'swift' => $supplier->bankAccount->swift,
+            'iban' => $supplier->bankAccount->iban,
             'address' => $supplier->address,
             'email' =>  $supplier->email,
             'phone' => $supplier->phone,
@@ -86,7 +92,7 @@ class SuppliersController extends Controller
         $supplier->reg_number_EU = $request->input('reg_number_EU');
         $supplier->reg_type_court = $request->input('reg_type_court');
         $supplier->reg_type_file = $request->input('reg_type_file');
-        
+
         $supplier->email = $request->input('email');
         $supplier->phone = $request->input('phone');
         $supplier->alias = $request->input('alias');
@@ -101,7 +107,7 @@ class SuppliersController extends Controller
 
         if (!$bankAccount) {
             $bankAccount = new BankAccount;
-        }   
+        }
 
         $bankAccount->iban = $request->input('iban');
         $bankAccount->bank_account_prefix = $request->input('bank_account_prefix');
@@ -117,15 +123,14 @@ class SuppliersController extends Controller
 
         // $supplier->save();
 
-        
+
         $address = Address::where('id', $supplier->address_id)->first();
 
         if (!$address) {
-            
-            $address = new Address;
 
+            $address = new Address;
         }
-        
+
         $address->street_name = $request->input('street_name');
         $address->house_number = $request->input('house_number');
         $address->house_orient = $request->input('house_orient');
@@ -134,13 +139,13 @@ class SuppliersController extends Controller
         $address->supplier_id = $supplier->id;
 
         $address->save();
-        
+
         $supplier->address_id = $address->id;
-            
+
         $supplier->save();
-            
+
         $res = Supplier::with('bankAccount', 'address')->where('user_id', $id)->first();
-        
+
         // session()->flash('success_message', 'Supplier updated!');
         return $res;
     }

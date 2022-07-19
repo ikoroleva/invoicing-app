@@ -72,11 +72,12 @@ const CreateNewInvoice = () => {
         const response_data = response.data;
         if (response_data) {
             setFlashMessage(response_data);
-            setShow(false);
+            function closeModal() {
+                setShow(false);
+            }
+            setTimeout(closeModal, 2500);
         }
     };
-
-    // values?.invoice_items?.reduce((a, b) => a.unit_cost + b.unit_cost);
 
     const totalAmount = () => {
         values.invoice_items.map((el, i) => {
@@ -96,6 +97,7 @@ const CreateNewInvoice = () => {
                     setShow={setShow}
                     flashMessage={flashMessage}
                     handleSubmit={handleSubmit}
+                    formData={values}
                 />
                 <Row className="align-items-center">
                     <Col xs="auto">
@@ -205,10 +207,10 @@ const CreateNewInvoice = () => {
 
                 <br />
                 <Col xs="auto">
-                    {/* <Button variant="primary" onClick={() => setShow(true)}>
+                    <Button variant="primary" onClick={() => setShow(true)}>
                         Generate invoice
-                    </Button> */}
-                    <Button type="submit">test values</Button>{" "}
+                    </Button>
+                    {/* <Button type="submit">test values</Button>{" "} */}
                 </Col>
             </Form>
         </>

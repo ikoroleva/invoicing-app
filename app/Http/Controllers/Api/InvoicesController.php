@@ -191,7 +191,7 @@ class InvoicesController extends Controller
         }
 
 
-        return 'Invoice created.';
+        return 'Invoice saved. Thank you!';
     }
 
     public function update(Request $request, $invoice_number)

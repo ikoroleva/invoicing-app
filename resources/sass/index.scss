@@ -1,5 +1,5 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:400,300,700|Pacifico|Julius+Sans+One";
-@import './howItWorks.scss';
+@import "./howItWorks.scss";
 
 $header-height: 100px;
 $metadata-color: lighten(black, 50%);
@@ -85,7 +85,6 @@ header {
             display: flex;
             flex-direction: row;
 
-
             a {
                 text-decoration: none;
                 color: #fff;
@@ -112,7 +111,6 @@ header {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
-
             }
 
             p {
@@ -125,7 +123,6 @@ header {
                 border: none;
             }
 
-
             .dropdown-item {
                 a {
                     all: unset;
@@ -135,8 +132,6 @@ header {
                     margin-right: 1rem;
                 }
             }
-
-
         }
     }
 }
@@ -266,7 +261,6 @@ main {
                 border-left: 1px solid #0275d8;
                 height: 250px;
                 margin: 4rem 1rem;
-
             }
 
             .contact-info-contacts {
@@ -275,12 +269,10 @@ main {
                 justify-content: space-between;
 
                 p {
-                    font-size: .8rem;
+                    font-size: 0.8rem;
                 }
             }
-
         }
-
     }
 }
 
@@ -384,12 +376,12 @@ footer {
     border-bottom-right-radius: 0.8rem;
 }
 
-.boxicon-container:hover>.boxicon::after {
+.boxicon-container:hover > .boxicon::after {
     opacity: 1;
     transition: 0.1s;
 }
 
-.sidebar>*:first-child {
+.sidebar > *:first-child {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -501,10 +493,7 @@ footer {
     .userdetails__detail {
         margin-top: 1rem;
     }
-
-
 }
-
 
 // <--- Blog styles --->
 
@@ -653,6 +642,9 @@ footer {
 .container_invoice {
     display: flex;
     flex-direction: column;
+    padding: 2em;
+    border: 2px solid #e6e6e6;
+    margin: 2em;
 
     .invoice__header {
         display: flex;
@@ -711,8 +703,9 @@ footer {
     .invoice__total {
         display: flex;
         flex-direction: row;
-        justify-content: end;
+        justify-content: space-between;
         padding-right: 5em;
+        padding-left: 1em;
 
         p {
             padding-right: 2em;
