@@ -125,7 +125,7 @@ class InvoicesController extends Controller
     // all paid invoices for current user will be in API together with other information about invoices
     public function currentSupplierPaidInvoices()
     {
-        $currentSupplierPaidInvoices = Invoice::where('supplier_id',\Auth::id())->where('status','paid')->pluck('total_amount');
+        $currentSupplierPaidInvoices = Invoice::where('supplier_id', \Auth::id())->where('status', 'paid')->pluck('total_amount');
 
         return $currentSupplierPaidInvoices;
     }
@@ -138,8 +138,8 @@ class InvoicesController extends Controller
         return $currentSupplierIssuedInvoices;
     }
 
-     // all issued invoices in curretn month for currently loged in supplier 
-     public function thisMonthInvoices()
+    // all issued invoices in curretn month for currently loged in supplier 
+    public function thisMonthInvoices()
     {
         $thisMonthInvoices = Invoice::where('supplier_id', \Auth::id())
             ->select('total_amount')
@@ -168,11 +168,15 @@ class InvoicesController extends Controller
         $invoice->number = $request->input('number');
         $invoice->additional_notes = $request->input('additional_notes');
         $invoice->status = $request->input('status');
-        $invoice->total_amount = $request->input('total');
         $invoice->currency = $request->input('currency');
         $invoice->form_of_payment = $request->input('form_of_payment');
         $invoice->issued_on = $request->input('issued_on');
         $invoice->due_date = $request->input('due_date');
+
+        foreach ($request->invoice_items as $item) {
+            $invoice->total_amount += $item['unit_cost'] *
+                $item['unit_quantity'];
+        }
 
         $invoice->save();
 
@@ -182,6 +186,7 @@ class InvoicesController extends Controller
             $invoiceItems->invoice_description = $item['invoice_description'];
             $invoiceItems->unit_cost = $item['unit_cost'];
             $invoiceItems->unit_quantity = $item['unit_quantity'];
+
             $invoiceItems->save();
         }
 
