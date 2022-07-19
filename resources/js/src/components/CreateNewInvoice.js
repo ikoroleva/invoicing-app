@@ -4,14 +4,32 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import ModalGetClientFromAres from '../components/clients/ModalGetClientFromAres';
+import ClientCreateForm from "../components/clients/ClientCreateForm";
+
 
 import ModalCreateInvoice from "./ModalCreateInvoice";
 import InvoiceItem from "./InvoiceItem";
 
 const CreateNewInvoice = () => {
     const [values, setValues] = useState({
-        supplier_id: "1",
-        client_id: "1",
+
+        client: {
+            name: "",
+            reg_number: "",
+            reg_number_EU: "",
+            reg_type_court: "",
+            reg_type_file: "",
+            email: "",
+            phone: "",
+            address: {
+                city: "",
+                street_name: "",
+                house_number: "",
+                house_orient: "",
+                postal_code: "",
+            }
+        },
         status: "new",
         currency: "CZK",
         number: "",
@@ -22,6 +40,14 @@ const CreateNewInvoice = () => {
         invoice_items: [],
         total: 0,
     });
+
+    console.log(values);
+
+    const [showAres, setShowAres] = useState(false);
+    const [showCreateForm, setShowCreateForm] = useState(false);
+    const [clientData, setClientData] = useState(null);
+
+    //console.log(values);
 
     //success message, if any
     const [flashMessage, setFlashMessage] = useState("");
@@ -89,8 +115,31 @@ const CreateNewInvoice = () => {
     //     totalAmount();
     // }, [values.invoice_items]);
 
+    useEffect(() => {
+        setValues({ ...values, client: clientData });
+
+    }, [clientData])
+
     return (
         <>
+            <div className="new-client-component">
+                <Button variant="primary" onClick={() => setShowAres(true)}>Add new client</Button>
+                <br />
+                <br />
+                <ModalGetClientFromAres
+                    showAres={showAres}
+                    setShowAres={setShowAres}
+                    setClientData={setClientData}
+                    setShowEdit={() => { }}
+                    setShowCreateForm={setShowCreateForm}
+                />
+                {clientData &&
+                    <div className={`client-details ${!showCreateForm && "hidden"}`}>
+                        <ClientCreateForm clientData={clientData} setClientData={setClientData} />
+                        <br />
+                    </div>
+                }
+            </div>
             <Form onSubmit={handleSubmit}>
                 <ModalCreateInvoice
                     show={show}

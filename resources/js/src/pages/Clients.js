@@ -10,7 +10,7 @@ import ClientDetailsEdit from '../components/clients/ClientDetailsEdit';
 
 const Clients = () => {
     const [searchQuery, setSearchQuery] = useState("");
-    const [show, setShow] = useState(false);
+    const [showAres, setShowAres] = useState(false);
     const [clientData, setClientData] = useState(null);
     const [showEdit, setShowEdit] = useState(false);
 
@@ -36,15 +36,16 @@ const Clients = () => {
 
     return (
         <div className='clients-container'>
-            <Button variant="primary" onClick={() => setShow(true)}>Add new client</Button>
+            <Button variant="primary" onClick={() => setShowAres(true)}>Add new client</Button>
             <br />
 
             <br />
             <ModalGetClientFromAres
-                show={show}
-                setShow={setShow}
+                showAres={showAres}
+                setShowAres={setShowAres}
                 setClientData={setClientData}
                 setShowEdit={setShowEdit}
+                setShowCreateForm={() => { }}
             // flashMessage={flashMessage}
             // handleSubmit={handleSubmit}
             />
