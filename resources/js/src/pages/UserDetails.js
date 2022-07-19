@@ -9,6 +9,8 @@ function UserDetails () {
 
 return (
     <div className="userdetails__section">
+
+    <h1><strong>User Details</strong></h1>
     <CompanyDetails />
     
     <PaymentDetails />

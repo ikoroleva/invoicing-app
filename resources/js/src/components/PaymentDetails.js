@@ -6,55 +6,55 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-    
 
-function PaymentDetails () {
 
-    const [details, setDetails] = useState(null);
-    const [editing, setEditing] = useState(false);
-    const [formData, setFormData] = useState(null)
+function PaymentDetails() {
 
-    const url = "/api/suppliers/current";
+  const [details, setDetails] = useState(null);
+  const [editing, setEditing] = useState(false);
+  const [formData, setFormData] = useState(null)
 
-    const fetchData = async () => {
-        const response = await fetch(url);
-        const data = await response.json();
+  const url = "/api/suppliers/current";
 
-        console.log(data);
+  const fetchData = async () => {
+    const response = await fetch(url);
+    const data = await response.json();
 
-        setDetails({...data.bank_account});
+    console.log(data);
 
-        const formData = { ...data }
+    setDetails({ ...data.bank_account });
 
-        setFormData({...formData.bank_account, 'data_batch': 'payment-details'})
-    };
+    const formData = { ...data }
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    setFormData({ ...formData.bank_account, 'data_batch': 'payment-details' })
+  };
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
 
-        e.preventDefault();
+  const handleSubmit = async (e) => {
 
-        setEditing(false);
+    e.preventDefault();
 
-        const response = await axios.post(`/api/suppliers/current`, formData);
-        const response_data = response.data;
-        
-        setFormData({...formData, ...response_data})
-        setDetails({...details, ...response_data});
+    setEditing(false);
 
-    }
+    const response = await axios.post(`/api/suppliers/current`, formData);
+    const response_data = response.data;
+
+    setFormData({ ...formData, ...response_data })
+    setDetails({ ...details, ...response_data });
+
+  }
 
   return (
     <div>
       {console.log(formData)}
-    {!details ?
+      {!details ?
         <h2>LOL</h2>
         :
         <div className="userdetails__box">
@@ -125,20 +125,21 @@ function PaymentDetails () {
                     <span className="userdetails__detail"><strong>Bank code: </strong>{details.bank_account_code}</span>
                     <span className="userdetails__detail"><strong>Account N.: </strong>{details.bank_account_number}</span>
 
-                    <span className="userdetails__detail"><strong>Currency: </strong></span>
+                    {/* <span className="userdetails__detail"><strong>Currency: </strong></span> */}
 
 
 
-                    <button type="button" onClick={() => setEditing(true)}>
-                      Edit
-                    </button>
+
 
 
                   </div>
                 )}
             </div>
 
-          }
+          } 
+          <Button type="button" onClick={() => setEditing(true)}>
+            Edit
+          </Button>
         </div>
       }
     </div>

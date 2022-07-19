@@ -26,7 +26,7 @@ function CompanyDetails() {
 
         const formData = { ...data }
 
-        setFormData({...formData.bank_account, 'data_batch': 'company-details'})
+        setFormData({ ...formData.bank_account, 'data_batch': 'company-details' })
     };
 
     useEffect(() => {
@@ -66,7 +66,7 @@ function CompanyDetails() {
 
                             {editing ? (
                                 <Form className="client_form">
-                                     <input type="hidden" name="data_batch" value="company-details" />
+                                    <input type="hidden" name="data_batch" value="company-details" />
                                     <Form.Group className="client_form_element client_reg_number_EU">
                                         <Form.Label>ICO/Reg. N.:</Form.Label>
                                         <Form.Control type="text"
@@ -154,9 +154,9 @@ function CompanyDetails() {
 
                                         <div className='userdetails__address'>
 
-                                            <h3 className='userdetails__address_heading'>Address</h3>
+                                            <span className='userdetails__address_heading'><strong>Address</strong></span>
 
-                                            <div className='serdetails__address_container'>
+                                            <div className='userdetails__address_container'>
 
                                                 <span className="userdetails__detail">{details.address.street_name}</span><br />
 
@@ -165,9 +165,8 @@ function CompanyDetails() {
                                                 <span className="userdetails__detail">{details.address.postal_code} {details.address.city}</span><br />
 
                                             </div>
-                                            <button type="button" onClick={() => setEditing(true)}>
-                                                Edit
-                                            </button>
+
+
                                         </div>
 
                                     </div>
@@ -175,6 +174,11 @@ function CompanyDetails() {
                         </div>
 
                     }
+
+                    
+                    <Button type="button" onClick={() => setEditing(true)}>
+                        Edit
+                    </Button>
                 </div>
             }
         </div>
