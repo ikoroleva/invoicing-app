@@ -1,6 +1,7 @@
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Loader from "./Loader";
 
 const InvoiceTemplateModal = ({ formData }) => {
     console.log(formData);
@@ -62,7 +63,7 @@ const InvoiceTemplateModal = ({ formData }) => {
     return (
         <>
             {!clientLoaded || !supplierLoaded ? (
-                <p>Loading....</p>
+                <Loader />
             ) : (
                 <div className="container_invoice">
                     <div className="invoice__header">
@@ -203,7 +204,7 @@ const InvoiceTemplateModal = ({ formData }) => {
                         <div>
                             <p>
                                 <b>Additional Notes: </b>
-                                {invoiceData.additional_notes}
+                                {formData.additional_notes}
                             </p>
                         </div>
                         <div>

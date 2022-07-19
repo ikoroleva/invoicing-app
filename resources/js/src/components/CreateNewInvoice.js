@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -22,6 +23,8 @@ const CreateNewInvoice = () => {
         invoice_items: [],
         total: 0,
     });
+
+    const navigate = useNavigate();
 
     //success message, if any
     const [flashMessage, setFlashMessage] = useState("");
@@ -72,10 +75,11 @@ const CreateNewInvoice = () => {
         const response_data = response.data;
         if (response_data) {
             setFlashMessage(response_data);
+
             function closeModal() {
-                setShow(false);
+                navigate("/dashboard");
             }
-            setTimeout(closeModal, 2500);
+            setTimeout(closeModal, 2000);
         }
     };
 

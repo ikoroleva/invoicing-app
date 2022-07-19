@@ -5,6 +5,7 @@ import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Loader from "./Loader";
 
 const InvoiceTemplate = () => {
     const [invoiceData, setInvoiceData] = useState([]);
@@ -76,7 +77,7 @@ const InvoiceTemplate = () => {
     return (
         <>
             {!dataLoaded || !clientLoaded || !supplierLoaded ? (
-                <p>Loading...</p>
+                <Loader />
             ) : (
                 <div className="container_invoice">
                     <div className="invoice__header">
