@@ -144,7 +144,7 @@ header {
 .main-container {
     display: flex;
     align-items: flex-start;
-    height: 100%;
+    height: 80vh;
 }
 
 main {
@@ -154,6 +154,8 @@ main {
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     .form-container {
         width: 100%;
@@ -320,7 +322,7 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 5%;
+    height: 5vh;
     border-top: 1px solid $border-color;
     font-size: 0.8rem;
     text-align: right;
