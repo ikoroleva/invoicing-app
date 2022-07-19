@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use Carbon\Carbon;
-use Auth;   
+use Auth;
 
 class InvoicesController extends Controller
 {
@@ -190,7 +190,7 @@ class InvoicesController extends Controller
         $client->email = $request->client["email"] ?? "";
         $client->phone =  $request->client["phone"] ?? "";
 
-        dd($request);
+        //dd($request);
 
         $address->city = $request->input('address_city');
         $address->street_name = $request->input('address_street_name');
@@ -212,7 +212,7 @@ class InvoicesController extends Controller
         $invoice->supplier_id = $supplier->id;
 
 
-        $invoice->client_id = $request->input('client_id');
+        $invoice->client_id = $client->id;
         $invoice->number = $request->input('number');
         $invoice->additional_notes = $request->input('additional_notes');
         $invoice->status = $request->input('status');

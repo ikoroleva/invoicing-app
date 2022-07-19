@@ -35,7 +35,7 @@ const Clients = () => {
 
 
     return (
-        <div className='clients-container'>
+        <div className="action-page">
             <Button variant="primary" onClick={() => setShowAres(true)}>Add new client</Button>
             <br />
 

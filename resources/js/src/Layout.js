@@ -117,7 +117,7 @@ const Layout = () => {
                     </main>
                 </div>
             </Router>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 };
