@@ -37,9 +37,9 @@ class SuppliersController extends Controller
 
     public function currentSupplier()
     {
-            $user_id = Auth::id();
-            $currentSupplier = Supplier::with('bankAccount','address')->where('user_id', $user_id)->first();  
-            
+        $user_id = Auth::id();
+        $currentSupplier = Supplier::with('bankAccount', 'address')->where('user_id', $user_id)->first();
+
         return $currentSupplier;
     }
 
@@ -81,17 +81,20 @@ class SuppliersController extends Controller
     {
         $supplier = Supplier::with('bankAccount', 'address')->where('user_id', $id)->first();
 
-        $supplier->name = $request->input('name');
-        $supplier->reg_number = $request->input('reg_number');
-        $supplier->reg_number_EU = $request->input('reg_number_EU');
-        $supplier->reg_type_court = $request->input('reg_type_court');
-        $supplier->reg_type_file = $request->input('reg_type_file');
-        
-        $supplier->email = $request->input('email');
-        $supplier->phone = $request->input('phone');
-        $supplier->alias = $request->input('alias');
+        if ($request->input('data_batch') == "company-details") {
+            $supplier->name = $request->input('name');
+            $supplier->reg_number = $request->input('reg_number');
+            $supplier->reg_number_EU = $request->input('reg_number_EU');
+            $supplier->reg_type_court = $request->input('reg_type_court');
+            $supplier->reg_type_file = $request->input('reg_type_file');
 
-        $supplier->save();
+            $supplier->email = $request->input('email');
+            $supplier->phone = $request->input('phone');
+            $supplier->alias = $request->input('alias');
+
+            $supplier->save();
+        }
+
 
         // return Auth::id();
 
@@ -101,46 +104,49 @@ class SuppliersController extends Controller
 
         if (!$bankAccount) {
             $bankAccount = new BankAccount;
-        }   
+        }
+        if ($request->input('data_batch') == "company-details") {
+            $bankAccount->iban = $request->input('iban');
+            $bankAccount->bank_account_prefix = $request->input('bank_account_prefix');
+            $bankAccount->bank_account_number = $request->input('bank_account_number');
+            $bankAccount->bank_account_code = $request->input('bank_account_code');
+            $bankAccount->swift = $request->input('swift');
+            $bankAccount->bank_name = $request->input('bank_name');
+            $bankAccount->supplier_id = $supplier->id;
 
-        $bankAccount->iban = $request->input('iban');
-        $bankAccount->bank_account_prefix = $request->input('bank_account_prefix');
-        $bankAccount->bank_account_number = $request->input('bank_account_number');
-        $bankAccount->bank_account_code = $request->input('bank_account_code');
-        $bankAccount->swift = $request->input('swift');
-        $bankAccount->bank_name = $request->input('bank_name');
-        $bankAccount->supplier_id = $supplier->id;
-
-        $bankAccount->save();
-
+            $bankAccount->save();
+        }
         // $supplier->bank_account_id = $supplier->id;
 
         // $supplier->save();
 
-        
+
         $address = Address::where('id', $supplier->address_id)->first();
 
         if (!$address) {
-            
+
             $address = new Address;
-
         }
-        
-        $address->street_name = $request->input('street_name');
-        $address->house_number = $request->input('house_number');
-        $address->house_orient = $request->input('house_orient');
-        $address->city = $request->input('city');
-        $address->postal_code = $request->input('postal_code');
-        $address->supplier_id = $supplier->id;
 
-        $address->save();
-        
-        $supplier->address_id = $address->id;
-            
-        $supplier->save();
-            
+        if ($request->input('data_batch') == "company-details") {
+
+            $address->street_name = $request->input('street_name');
+            $address->house_number = $request->input('house_number');
+            $address->house_orient = $request->input('house_orient');
+            $address->city = $request->input('city');
+            $address->postal_code = $request->input('postal_code');
+            $address->supplier_id = $supplier->id;
+
+            $address->save();
+
+
+            $supplier->address_id = $address->id;
+
+            $supplier->save();
+        }
+
         $res = Supplier::with('bankAccount', 'address')->where('user_id', $id)->first();
-        
+
         // session()->flash('success_message', 'Supplier updated!');
         return $res;
     }

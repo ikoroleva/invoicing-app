@@ -5,7 +5,7 @@ function HowItWorks() {
 
         <div className="HowItWorks__mainContainer">
             <div className='HowItWorks__container_picture'>
-                <img></img>
+                <img src='../images/invoiceLogo.jpg'/>
             </div>
 
             <div className='HowItWorks__container__steps'>

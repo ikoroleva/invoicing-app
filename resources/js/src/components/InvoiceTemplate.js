@@ -21,6 +21,9 @@ const InvoiceTemplate = () => {
     const [clientLoaded, setClientLoaded] = useState(false);
     const [supplierLoaded, setSupplierLoaded] = useState(false);
 
+    //total amount state
+    const [total, setTotal] = useState(0);
+
     const { invoice_number } = useParams();
     const url = `http://www.invoicing-app.test/api/invoices/${invoice_number}`;
 
@@ -48,6 +51,18 @@ const InvoiceTemplate = () => {
         setSupplierLoaded(true);
     };
 
+    const totalAmount = () => {
+        if (typeof invoiceData.invoice_items === "undefined") {
+            console.log("console 1 undefined");
+        } else {
+            let total = 0;
+            invoiceData.invoice_items.map((item, i) => {
+                total += item.unit_cost * item.unit_quantity;
+            });
+            setTotal(total);
+        }
+    };
+
     useEffect(() => {
         fetchInvoice();
     }, [invoice_number]);
@@ -55,6 +70,7 @@ const InvoiceTemplate = () => {
     useEffect(() => {
         fetchClient();
         fetchSupplier();
+        totalAmount();
     }, [dataLoaded]);
 
     return (
@@ -223,7 +239,7 @@ const InvoiceTemplate = () => {
                         <p>
                             <b>Total:</b>
                         </p>
-                        <p>{invoiceData.total_amount},- CZK</p>
+                        <p>{total},- CZK</p>
                     </div>
                 </div>
             )}
