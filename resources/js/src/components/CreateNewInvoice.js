@@ -89,6 +89,10 @@ const CreateNewInvoice = () => {
         });
     };
 
+    const removeLine = (id) => {
+        document.getElementById(id).remove();
+    };
+
     useEffect(() => {
         totalAmount();
     }, [values.invoice_items]);
@@ -170,9 +174,14 @@ const CreateNewInvoice = () => {
                         setTotal={setTotal}
                         id={0}
                     />
-
-                    {listOfNewLines.map((Element, index) => (
-                        <Col xs={7} key={index}>
+                </Row>
+                {listOfNewLines.map((Element, index) => (
+                    <>
+                        <Row
+                            className="align-items-center"
+                            key={index}
+                            id={index + 1}
+                        >
                             <Element
                                 values={{ values }}
                                 handleChange={handleInvoiceChange}
@@ -180,22 +189,28 @@ const CreateNewInvoice = () => {
                                 setTotal={setTotal}
                                 id={index + 1}
                             />
-                        </Col>
-                    ))}
-                    <Col xs="auto">
-                        <Button
-                            variant="secondary"
-                            onClick={() =>
-                                setListOfNewLines([
-                                    ...listOfNewLines,
-                                    InvoiceItem,
-                                ])
-                            }
-                        >
-                            add new line
-                        </Button>
-                    </Col>
-                </Row>
+
+                            <Col xs="auto">
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => removeLine(index + 1)}
+                                >
+                                    remove line
+                                </Button>
+                            </Col>
+                        </Row>
+                    </>
+                ))}
+                <Col xs="auto">
+                    <Button
+                        onClick={() =>
+                            setListOfNewLines([...listOfNewLines, InvoiceItem])
+                        }
+                    >
+                        add new line
+                    </Button>
+                </Col>
+
                 <Col xs={7}>
                     <Form.Control
                         name="additional_notes"
