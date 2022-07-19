@@ -4,24 +4,8 @@ import Table from 'react-bootstrap/Table';
 
 
 
-const ClientList = ({ query }) => {
-    const [clients, setClients] = useState([]);
-    const [clientsFiltered, setClientsFiltered] = useState([]);
+const ClientList = ({ query, clients }) => {
 
-    const url = `/api/clients/`;
-
-    const fetchData = async () => {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        setClients(data);
-        setClientsFiltered(data);
-    }
-
-    useEffect(() => {
-        fetchData();
-
-    }, []);
 
 
     //console.log(clients.filter(client => client.name.toLowerCase().includes(query)));
@@ -47,8 +31,8 @@ const ClientList = ({ query }) => {
                         } */}
                         {query.length !== 0 ?
 
-                            clients.filter(client => client.name.toLowerCase().includes(query)
-                                || client.reg_number.toString().toLowerCase().includes(query)).map((client, i) =>
+                            clients.filter(client => client.name.toLowerCase().includes(query.toLowerCase())
+                                || client.reg_number.toString().toLowerCase().includes(query.toLowerCase())).map((client, i) =>
                                     <ClientMinInfo client={client} key={i} />
                                     // <Link to={`/clients/${client.reg_number}`} key={i}>{client.name}</Link>
                                 )

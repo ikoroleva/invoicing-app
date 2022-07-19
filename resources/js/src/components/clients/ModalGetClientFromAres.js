@@ -8,12 +8,12 @@ import getAres from "../../actions/getAres";
 const ModalGetClientFromAres = ({ show, setShow, setClientData, setShowEdit }) => {
 
     const [number, setNumber] = useState('');
-    const handleClick = async (e) => {
+    const handleClick = async () => {
 
         console.log(number);
 
         const aresData = await getAres(number);
-        setClientData(aresData);
+        await setClientData(aresData);
 
         console.log(aresData);
         setShow(false);
@@ -38,7 +38,7 @@ const ModalGetClientFromAres = ({ show, setShow, setClientData, setShowEdit }) =
                 <Modal.Body>
                     <Form className="client-search-ares-modal">
 
-                        <Form.Control type="text" placeholder="Enter client number" onChange={(e) => setNumber(e.target.value)} />
+                        <Form.Control type="text" placeholder="Enter client number" value={number} onChange={(e) => setNumber(e.target.value)} />
                         <br />
                         <Button variant="primary" onClick={(e) => handleClick(e)}>Load client</Button>
 
