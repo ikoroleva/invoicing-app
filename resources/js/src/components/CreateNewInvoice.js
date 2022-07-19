@@ -11,7 +11,7 @@ import ClientCreateForm from "../components/clients/ClientCreateForm";
 import ModalCreateInvoice from "./ModalCreateInvoice";
 import InvoiceItem from "./InvoiceItem";
 
-const CreateNewInvoice = () => {
+const CreateNewInvoice = ({ client_number }) => {
     const [values, setValues] = useState({
 
         client: {
@@ -45,7 +45,7 @@ const CreateNewInvoice = () => {
 
     const [showAres, setShowAres] = useState(false);
     const [showCreateForm, setShowCreateForm] = useState(false);
-    const [clientData, setClientData] = useState(null);
+    const [clientData, setClientData] = useState(values.client);
 
     //console.log(values);
 
@@ -60,6 +60,27 @@ const CreateNewInvoice = () => {
 
     //state for total
     const [total, setTotal] = useState(0);
+
+
+
+    const url = `/api/clients/${client_number}`;
+
+    const fetchData = async () => {
+        console.log(url);
+
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data[0]);
+        setClientData(data[0]);
+    }
+
+    useEffect(() => {
+
+        if (client_number)
+            fetchData();
+
+
+    }, [])
 
     const handleChange = (event) => {
         setValues((previous_values) => {
@@ -132,13 +153,15 @@ const CreateNewInvoice = () => {
                     setShowEdit={() => { }}
                     setShowCreateForm={setShowCreateForm}
                 />
-                {clientData &&
-                    <div className={`client-details ${!showCreateForm && "hidden"}`}>
-                        <ClientCreateForm clientData={clientData} setClientData={setClientData} />
-                        <br />
-                    </div>
-                }
+
+                <div className={`client-details`}>
+                    <ClientCreateForm clientData={clientData} setClientData={setClientData} />
+                    <br />
+                </div>
+
             </div>
+            <br />
+            <br />
             <Form onSubmit={handleSubmit}>
                 <ModalCreateInvoice
                     show={show}

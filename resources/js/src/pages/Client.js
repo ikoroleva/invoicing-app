@@ -4,6 +4,7 @@ import ClientInvoicesList from '../components/clients/ClientInvoicesList';
 import Button from 'react-bootstrap/Button';
 import ClientTotalInvoicesValue from "../components/clients/ClientTotalInvoicesValue";
 import ClientMonthInvoicesValue from '../components/clients/ClientMonthInvoicesValue';
+import { Link } from 'react-router-dom';
 
 
 const Client = () => {
@@ -13,7 +14,10 @@ const Client = () => {
 
     return (
         <div className="action-page">
-            <Button variant="primary">Create new invoice</Button>
+            <Button variant="primary"><Link to={`/create-invoice/${params.number}`}
+            // clientData={clientData}
+            >Create new invoice</Link>
+            </Button>
             <br />
             <br />
             <div className="sum-container">

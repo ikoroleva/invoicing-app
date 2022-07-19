@@ -175,6 +175,10 @@ main {
     .action-page {
         margin: 1rem;
 
+        a {
+            all: unset;
+        }
+
         .sum-container {
             display: flex;
             flex-direction: row;
