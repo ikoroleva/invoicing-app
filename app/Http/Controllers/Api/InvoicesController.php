@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use Carbon\Carbon;
+use Auth;
 
 class InvoicesController extends Controller
 {
@@ -175,23 +176,15 @@ class InvoicesController extends Controller
 
         $invoice->save();
 
-        // foreach ($request->invoice_items as $item) {
-        //     $invoiceItems = new InvoiceItem;
-        //     $invoiceItems->invoice_id = $invoice->id;
-        //     $invoiceItems->invoice_description = $item->invoice_description;
-        //     $invoiceItems->unit_cost = $item->unit_cost;
-        //     $invoiceItems->unit_quantity = $item->unit_quantity;
-        //     $invoiceItems->save();
-        // }
+        foreach ($request->invoice_items as $item) {
+            $invoiceItems = new InvoiceItem;
+            $invoiceItems->invoice_id = $invoice->id;
+            $invoiceItems->invoice_description = $item['invoice_description'];
+            $invoiceItems->unit_cost = $item['unit_cost'];
+            $invoiceItems->unit_quantity = $item['unit_quantity'];
+            $invoiceItems->save();
+        }
 
-        // $invoiceItems = new InvoiceItem;
-
-        // $invoiceItems->invoice_id = $invoice->id;
-        // $invoiceItems->invoice_description = $request->invoice_items['invoice_description'];
-        // $invoiceItems->unit_cost = $request->input('unit_cost');
-        // $invoiceItems->unit_quantity = $request->input('unit_quantity');
-
-        // $invoiceItems->save();
 
         return 'Invoice created.';
     }
