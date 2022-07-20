@@ -163,8 +163,56 @@ class InvoicesController extends Controller
 
         $invoice = new Invoice;
 
-        $invoice->supplier_id = $request->input('supplier_id');
-        $invoice->client_id = $request->input('client_id');
+        $user_id = Auth::id();
+        $supplier = Supplier::where('user_id', $user_id)->first();
+        $client = Client::where('reg_number', $request->client["reg_number"])->first();
+
+        $createNewClient = false;
+
+        if (is_null($client)) {
+            $client = new Client();
+            $client->reg_number = $request->client["reg_number"];
+
+            //dd($client);
+
+            // todo: remove if will be shown on the form or there will be another default value
+            $client->reg_type_court = '';
+            $client->reg_type_file = '';
+
+            $address = new Address();
+
+            $createNewClient = true;
+        } else
+            $address = Address::where('client_id', $client->id)->first();
+
+        $client->name = $request->client["name"];
+        $client->reg_number_EU = $request->client["reg_number_EU"] ?? "";
+        $client->email = $request->client["email"] ?? "";
+        $client->phone =  $request->client["phone"] ?? "";
+
+        //dd($request);
+
+        $address->city = $request->input('address_city');
+        $address->street_name = $request->input('address_street_name');
+        $address->house_number = $request->input('address_house_number');
+        $address->house_orient = $request->input('address_house_orient');
+        $address->postal_code = $request->input('address_postal_code');
+
+        //dd($address);
+
+        $client->save();
+        if ($createNewClient) {
+            // connect supplier to a client
+            $supplier->clients()->save($client);
+            $client->addresses()->save($address);
+        } else
+            $address->save();
+
+
+        $invoice->supplier_id = $supplier->id;
+
+
+        $invoice->client_id = $client->id;
         $invoice->number = $request->input('number');
         $invoice->additional_notes = $request->input('additional_notes');
         $invoice->status = $request->input('status');

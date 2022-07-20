@@ -83,6 +83,10 @@ const Layout = () => {
                                         path="/howitworks"
                                         element={<HowItWorks />}
                                     />
+                                    <Route
+                                        path="/create-invoice/:client_number"
+                                        element={<CreateInvoice />}
+                                    />
                                 </Fragment>
                             ) : (
                                 <Fragment>
@@ -117,7 +121,7 @@ const Layout = () => {
                     </main>
                 </div>
             </Router>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 };
