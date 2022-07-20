@@ -1,17 +1,34 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import ModalGetClientFromAres from "../components/clients/ModalGetClientFromAres";
+import ClientCreateForm from "../components/clients/ClientCreateForm";
 
 import ModalCreateInvoice from "./ModalCreateInvoice";
 import InvoiceItem from "./InvoiceItem";
 
-const CreateNewInvoice = () => {
+const CreateNewInvoice = ({ client_number }) => {
     const [values, setValues] = useState({
-        supplier_id: "1",
-        client_id: "1",
+        client: {
+            name: "",
+            reg_number: "",
+            reg_number_EU: "",
+            reg_type_court: "",
+            reg_type_file: "",
+            email: "",
+            phone: "",
+            address: {
+                city: "",
+                street_name: "",
+                house_number: "",
+                house_orient: "",
+                postal_code: "",
+            },
+        },
         status: "new",
         currency: "CZK",
         number: "",
@@ -22,6 +39,15 @@ const CreateNewInvoice = () => {
         invoice_items: [],
         total: 0,
     });
+
+    const navigate = useNavigate();
+    console.log(values);
+
+    const [showAres, setShowAres] = useState(false);
+    const [showCreateForm, setShowCreateForm] = useState(false);
+    const [clientData, setClientData] = useState(values.client);
+
+    //console.log(values);
 
     //success message, if any
     const [flashMessage, setFlashMessage] = useState("");
@@ -34,6 +60,21 @@ const CreateNewInvoice = () => {
 
     //state for total
     const [total, setTotal] = useState(0);
+
+    const url = `/api/clients/${client_number}`;
+
+    const fetchData = async () => {
+        console.log(url);
+
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data[0]);
+        setClientData(data[0]);
+    };
+
+    useEffect(() => {
+        if (client_number) fetchData();
+    }, []);
 
     const handleChange = (event) => {
         setValues((previous_values) => {
@@ -72,31 +113,65 @@ const CreateNewInvoice = () => {
         const response_data = response.data;
         if (response_data) {
             setFlashMessage(response_data);
-            setShow(false);
+
+            function closeModal() {
+                navigate("/dashboard");
+            }
+            setTimeout(closeModal, 2000);
         }
     };
 
-    // values?.invoice_items?.reduce((a, b) => a.unit_cost + b.unit_cost);
+    const totalAmount = () => {
+        values.invoice_items.map((el, i) => {
+            setTotal(total + el.sub_total);
+        });
+    };
 
-    // const totalAmount = () => {
-    //     values.invoice_items.map((el, i) => {
-    //         setTotal(total + el.sub_total);
-    //         console.log(total);
-    //     });
-    // };
+    const removeLine = (id) => {
+        document.getElementById(id).remove();
+    };
 
-    // useEffect(() => {
-    //     totalAmount();
-    // }, [values.invoice_items]);
+    useEffect(() => {
+        totalAmount();
+    }, [values.invoice_items]);
+
+    useEffect(() => {
+        setValues({ ...values, client: clientData });
+    }, [clientData]);
 
     return (
         <>
+            <div className="new-client-component">
+                <Button variant="primary" onClick={() => setShowAres(true)}>
+                    Add new client
+                </Button>
+                <br />
+                <br />
+                <ModalGetClientFromAres
+                    showAres={showAres}
+                    setShowAres={setShowAres}
+                    setClientData={setClientData}
+                    setShowEdit={() => {}}
+                    setShowCreateForm={setShowCreateForm}
+                />
+
+                <div className={`client-details`}>
+                    <ClientCreateForm
+                        clientData={clientData}
+                        setClientData={setClientData}
+                    />
+                    <br />
+                </div>
+            </div>
+            <br />
+            <br />
             <Form onSubmit={handleSubmit}>
                 <ModalCreateInvoice
                     show={show}
                     setShow={setShow}
                     flashMessage={flashMessage}
                     handleSubmit={handleSubmit}
+                    formData={values}
                 />
                 <Row className="align-items-center">
                     <Col xs="auto">
@@ -165,9 +240,14 @@ const CreateNewInvoice = () => {
                         setTotal={setTotal}
                         id={0}
                     />
-
-                    {listOfNewLines.map((Element, index) => (
-                        <Col xs={7} key={index}>
+                </Row>
+                {listOfNewLines.map((Element, index) => (
+                    <>
+                        <Row
+                            className="align-items-center"
+                            key={index}
+                            id={index + 1}
+                        >
                             <Element
                                 values={{ values }}
                                 handleChange={handleInvoiceChange}
@@ -175,22 +255,28 @@ const CreateNewInvoice = () => {
                                 setTotal={setTotal}
                                 id={index + 1}
                             />
-                        </Col>
-                    ))}
-                    <Col xs="auto">
-                        <Button
-                            variant="secondary"
-                            onClick={() =>
-                                setListOfNewLines([
-                                    ...listOfNewLines,
-                                    InvoiceItem,
-                                ])
-                            }
-                        >
-                            add new line
-                        </Button>
-                    </Col>
-                </Row>
+
+                            <Col xs="auto">
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => removeLine(index + 1)}
+                                >
+                                    remove line
+                                </Button>
+                            </Col>
+                        </Row>
+                    </>
+                ))}
+                <Col xs="auto">
+                    <Button
+                        onClick={() =>
+                            setListOfNewLines([...listOfNewLines, InvoiceItem])
+                        }
+                    >
+                        add new line
+                    </Button>
+                </Col>
+
                 <Col xs={7}>
                     <Form.Control
                         name="additional_notes"

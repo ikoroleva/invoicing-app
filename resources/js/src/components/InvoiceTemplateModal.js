@@ -1,52 +1,28 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import Loader from "./Loader";
 
-const InvoiceTemplate = () => {
-    const [invoiceData, setInvoiceData] = useState([]);
-    //Client state
-    const [clientIco, setClientIco] = useState("");
+const InvoiceTemplateModal = ({ formData }) => {
+    console.log(formData);
+    // //Client state
+    // const [clientIco, setClientIco] = useState("");
     const [clientData, setClientData] = useState("");
 
-    //Supplier state
-    const [supplierIco, setSupplierIco] = useState("");
+    // //Supplier state
+    // const [supplierIco, setSupplierIco] = useState("");
     const [supplierData, setSupplierData] = useState("");
 
-    //data loading states
-    const [dataLoaded, setDataLoaded] = useState(false);
+    // //data loading states
+    // const [dataLoaded, setDataLoaded] = useState(false);
     const [clientLoaded, setClientLoaded] = useState(false);
     const [supplierLoaded, setSupplierLoaded] = useState(false);
 
     //total amount state
     const [total, setTotal] = useState(0);
 
-    const { invoice_number } = useParams();
-    const url = `/api/invoices/${invoice_number}`;
-
-    //pdf download function
-    const generatePDF = async () => {
-			// Choose the element that our invoice is rendered in.
-			const element = document.getElementById('container_invoice');
-			// Choose the element and save the PDF for our user.
-			await html2pdf(element);
-             console.log('hey')
-			}
-
-    const fetchInvoice = async () => {
-        const response = await axios.get(url);
-        console.log(response.data[0]);
-        setInvoiceData(response.data[0]);
-        setClientIco(response.data[0].client.reg_number);
-        setSupplierIco(response.data[0].supplier.reg_number);
-
-        setDataLoaded(true);
-    };
+    const clientIco = 27074358;
+    const supplierIco = 87654321;
 
     const fetchClient = async () => {
         const response = await axios.get(`/api/clients/${clientIco}`);
@@ -63,55 +39,46 @@ const InvoiceTemplate = () => {
     };
 
     const totalAmount = () => {
-        if (typeof invoiceData.invoice_items === "undefined") {
+        if (typeof formData.invoice_items === "undefined") {
             console.log("console 1 undefined");
         } else {
             let total = 0;
-            invoiceData.invoice_items.map((item, i) => {
+            formData.invoice_items.map((item) => {
                 total += item.unit_cost * item.unit_quantity;
             });
             setTotal(total);
+            console.log(total);
         }
     };
-
-    useEffect(() => {
-        fetchInvoice();
-    }, [invoice_number]);
 
     useEffect(() => {
         fetchClient();
         fetchSupplier();
         totalAmount();
-    }, [dataLoaded]);
+    }, [formData]);
 
     return (
         <>
-            {!dataLoaded || !clientLoaded || !supplierLoaded ? (
+            {!clientLoaded || !supplierLoaded ? (
                 <Loader />
             ) : (
-                <>
-                <Button variant="primary" className='btn' onClick={() => generatePDF()}>
-                Download as PDF</Button>
-                <div className="container_invoice" id="container_invoice">
-                    <h1>Invoice template</h1>
+                <div className="container_invoice">
                     <div className="invoice__header">
                         <div className="invoice__header_img">
                             <img src="../images/logo.svg" alt="logo" />
                         </div>
 
                         <div className="invoice__header_data">
-                            <p>Invoice # {invoiceData.number}</p>
-                            <p>Issued at: {invoiceData.issued_on}</p>
-                            <p>Due date: {invoiceData.due_date}</p>
+                            <p>Invoice # {formData.number}</p>
+                            <p>Issued at: {formData.issued_on}</p>
+                            <p>Due date: {formData.due_date}</p>
                         </div>
                     </div>
                     <div className="seperator_invoice"></div>
                     <div className="invoice__counterparts">
                         <div className="invoice__counterparts_supplier">
                             <p>
-                                <b>
-                                    Supplier name: {invoiceData.supplier.name}
-                                </b>
+                                <b>Supplier name: {supplierData.name}</b>
                             </p>
                             <p>
                                 {" "}
@@ -124,36 +91,36 @@ const InvoiceTemplate = () => {
                                 {supplierData.address.postal_code}{" "}
                                 {supplierData.address.city}
                             </p>
-                            <p>Reg.#: {invoiceData.supplier.reg_number} </p>
+                            <p>Reg.#: {supplierData.reg_number} </p>
                             <p>
-                                Registred at:{" "}
-                                {invoiceData.supplier.reg_type_court}, file{" "}
-                                {invoiceData.supplier.reg_type_file}
+                                Registred at: {supplierData.reg_type_court},
+                                file {supplierData.reg_type_file}
                             </p>
+                            <p>I am not a VAT payer</p>
                         </div>
                         <div className="invoice__counterparts_client">
                             <p>
-                                <b>Bill to: {invoiceData.client.name}</b>
+                                <b>Bill to: {clientData.name}</b>
                             </p>
                             <p>
-                                {clientData.street_name}{" "}
-                                {clientData.house_number} /{" "}
-                                {clientData.house_orient}
+                                {clientData.address.street_name}{" "}
+                                {clientData.address.house_number} /{" "}
+                                {clientData.address.house_orient}
                             </p>
                             <p>
-                                {clientData.postal_code} {clientData.city}
+                                {clientData.address.postal_code}{" "}
+                                {clientData.address.city}
                             </p>
-                            <p>Reg.#: {invoiceData.client.reg_number} </p>
-                            <p>VAT.#: {invoiceData.client.reg_number_EU} </p>
+                            <p>Reg.#: {clientData.reg_number} </p>
+                            <p>VAT.#: {clientData.reg_number_EU} </p>
                             <p>
-                                Registred at:{" "}
-                                {invoiceData.client.reg_type_court}, file{" "}
-                                {invoiceData.client.reg_type_file}
+                                Registred at: {clientData.reg_type_court}, file{" "}
+                                {clientData.reg_type_file}
                             </p>
                         </div>
                     </div>
                     <div className="seperator_invoice"></div>
-                    {invoiceData.form_of_payment === "Cash" ? (
+                    {formData.form_of_payment === "Cash" ? (
                         <div className="invoice__payment_cash">
                             <p>
                                 <b>Payment Method:</b> Cash
@@ -215,7 +182,7 @@ const InvoiceTemplate = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {invoiceData.invoice_items.map((item, index) => (
+                            {formData.invoice_items.map((item, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{item.invoice_description}</td>
@@ -234,7 +201,7 @@ const InvoiceTemplate = () => {
                         <div>
                             <p>
                                 <b>Additional Notes: </b>
-                                {invoiceData.additional_notes}
+                                {formData.additional_notes}
                             </p>
                         </div>
                         <div>
@@ -245,9 +212,9 @@ const InvoiceTemplate = () => {
                         </div>
                     </div>
                 </div>
-                </>
             )}
         </>
     );
 };
-export default InvoiceTemplate;
+
+export default InvoiceTemplateModal;

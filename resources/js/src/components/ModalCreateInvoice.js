@@ -6,14 +6,22 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Modal from "react-bootstrap/Modal";
+import InvoiceTemplateModal from "./InvoiceTemplateModal";
 
-const ModalCreateInvoice = ({ show, setShow, flashMessage, handleSubmit }) => {
+const ModalCreateInvoice = ({
+    show,
+    setShow,
+    flashMessage,
+    handleSubmit,
+    formData,
+}) => {
     return (
         <>
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
-                dialogClassName="modal-100w"
+                fullscreen={true}
+                // dialogClassName="modal-100w"
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <Modal.Header closeButton>
@@ -23,17 +31,8 @@ const ModalCreateInvoice = ({ show, setShow, flashMessage, handleSubmit }) => {
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        <p>
-                            Here is custom width modal! Ipsum molestiae natus
-                            adipisci modi eligendi? Debitis amet quae unde
-                            commodi aspernatur enim, consectetur. Cumque
-                            deleniti temporibus ipsam atque a dolores quisquam
-                            quisquam adipisci possimus laboriosam. Quibusdam
-                            facilis doloribus debitis! Sit quasi quod accusamus
-                            eos quod. Ab quos consequuntur eaque quo rem!
-                            Mollitia reiciendis porro quo magni incidunt dolore
-                            amet atque facilis ipsum deleniti rem!
-                        </p>
+                        <InvoiceTemplateModal formData={formData} />
+
                         <ButtonGroup className="me-2" aria-label="First group">
                             <Button
                                 variant="primary"

@@ -1,48 +1,59 @@
 import Container from "react-bootstrap/Container";
+
 import Row from "react-bootstrap/Row";
+
 import Col from "react-bootstrap/Col";
+
 import Table from "react-bootstrap/Table";
+
 import axios from "axios";
+
 import { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
+
 import Loader from "./Loader";
 
 const InvoiceTemplate = () => {
     const [invoiceData, setInvoiceData] = useState([]);
+
     //Client state
+
     const [clientIco, setClientIco] = useState("");
+
     const [clientData, setClientData] = useState("");
 
     //Supplier state
+
     const [supplierIco, setSupplierIco] = useState("");
+
     const [supplierData, setSupplierData] = useState("");
 
     //data loading states
+
     const [dataLoaded, setDataLoaded] = useState(false);
+
     const [clientLoaded, setClientLoaded] = useState(false);
+
     const [supplierLoaded, setSupplierLoaded] = useState(false);
 
     //total amount state
+
     const [total, setTotal] = useState(0);
 
     const { invoice_number } = useParams();
-    const url = `/api/invoices/${invoice_number}`;
 
-    //pdf download function
-    const generatePDF = async () => {
-			// Choose the element that our invoice is rendered in.
-			const element = document.getElementById('container_invoice');
-			// Choose the element and save the PDF for our user.
-			await html2pdf(element);
-             console.log('hey')
-			}
+    const url = `/api/invoices/${invoice_number}`;
 
     const fetchInvoice = async () => {
         const response = await axios.get(url);
+
         console.log(response.data[0]);
+
         setInvoiceData(response.data[0]);
+
         setClientIco(response.data[0].client.reg_number);
+
         setSupplierIco(response.data[0].supplier.reg_number);
 
         setDataLoaded(true);
@@ -50,15 +61,21 @@ const InvoiceTemplate = () => {
 
     const fetchClient = async () => {
         const response = await axios.get(`/api/clients/${clientIco}`);
-        setClientData(response.data[0]);
+
+        setClientData(response.data[0].address);
+
         console.log(response.data[0]);
+
         setClientLoaded(true);
     };
 
     const fetchSupplier = async () => {
         const response = await axios.get(`/api/suppliers/${supplierIco}`);
+
         setSupplierData(response.data[0]);
+
         console.log(response.data[0]);
+
         setSupplierLoaded(true);
     };
 
@@ -67,9 +84,11 @@ const InvoiceTemplate = () => {
             console.log("console 1 undefined");
         } else {
             let total = 0;
+
             invoiceData.invoice_items.map((item, i) => {
                 total += item.unit_cost * item.unit_quantity;
             });
+
             setTotal(total);
         }
     };
@@ -80,7 +99,9 @@ const InvoiceTemplate = () => {
 
     useEffect(() => {
         fetchClient();
+
         fetchSupplier();
+
         totalAmount();
     }, [dataLoaded]);
 
@@ -89,11 +110,7 @@ const InvoiceTemplate = () => {
             {!dataLoaded || !clientLoaded || !supplierLoaded ? (
                 <Loader />
             ) : (
-                <>
-                <Button variant="primary" className='btn' onClick={() => generatePDF()}>
-                Download as PDF</Button>
-                <div className="container_invoice" id="container_invoice">
-                    <h1>Invoice template</h1>
+                <div className="container_invoice">
                     <div className="invoice__header">
                         <div className="invoice__header_img">
                             <img src="../images/logo.svg" alt="logo" />
@@ -101,11 +118,15 @@ const InvoiceTemplate = () => {
 
                         <div className="invoice__header_data">
                             <p>Invoice # {invoiceData.number}</p>
+
                             <p>Issued at: {invoiceData.issued_on}</p>
+
                             <p>Due date: {invoiceData.due_date}</p>
                         </div>
                     </div>
+
                     <div className="seperator_invoice"></div>
+
                     <div className="invoice__counterparts">
                         <div className="invoice__counterparts_supplier">
                             <p>
@@ -113,38 +134,48 @@ const InvoiceTemplate = () => {
                                     Supplier name: {invoiceData.supplier.name}
                                 </b>
                             </p>
+
                             <p>
                                 {" "}
                                 {supplierData.address.street_name}{" "}
                                 {supplierData.address.house_number} /
                                 {supplierData.address.house_orient}
                             </p>
+
                             <p>
                                 {" "}
                                 {supplierData.address.postal_code}{" "}
                                 {supplierData.address.city}
                             </p>
+
                             <p>Reg.#: {invoiceData.supplier.reg_number} </p>
+
                             <p>
                                 Registred at:{" "}
                                 {invoiceData.supplier.reg_type_court}, file{" "}
                                 {invoiceData.supplier.reg_type_file}
                             </p>
                         </div>
+
                         <div className="invoice__counterparts_client">
                             <p>
                                 <b>Bill to: {invoiceData.client.name}</b>
                             </p>
+
                             <p>
                                 {clientData.street_name}{" "}
                                 {clientData.house_number} /{" "}
                                 {clientData.house_orient}
                             </p>
+
                             <p>
                                 {clientData.postal_code} {clientData.city}
                             </p>
+
                             <p>Reg.#: {invoiceData.client.reg_number} </p>
+
                             <p>VAT.#: {invoiceData.client.reg_number_EU} </p>
+
                             <p>
                                 Registred at:{" "}
                                 {invoiceData.client.reg_type_court}, file{" "}
@@ -152,7 +183,9 @@ const InvoiceTemplate = () => {
                             </p>
                         </div>
                     </div>
+
                     <div className="seperator_invoice"></div>
+
                     {invoiceData.form_of_payment === "Cash" ? (
                         <div className="invoice__payment_cash">
                             <p>
@@ -174,15 +207,21 @@ const InvoiceTemplate = () => {
                                 <thead>
                                     <tr>
                                         <th>Bank name</th>
+
                                         <th>Account number</th>
+
                                         <th>Bank code</th>
+
                                         <th>SWIFT</th>
+
                                         <th>IBAN (BIC)</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     <tr>
                                         <td> {supplierData.bank_name}</td>
+
                                         <td>
                                             {" "}
                                             {
@@ -190,11 +229,14 @@ const InvoiceTemplate = () => {
                                             } -{" "}
                                             {supplierData.bank_account_number}
                                         </td>
+
                                         <td>
                                             {" "}
                                             {supplierData.bank_account_code}
                                         </td>
+
                                         <td> {supplierData.iban}</td>
+
                                         <td> {supplierData.swift}</td>
                                     </tr>
                                 </tbody>
@@ -208,19 +250,28 @@ const InvoiceTemplate = () => {
                         <thead>
                             <tr>
                                 <th>#</th>
+
                                 <th>Service name</th>
+
                                 <th>Unit price</th>
+
                                 <th>Unit quantity</th>
+
                                 <th>Sub-Total</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             {invoiceData.invoice_items.map((item, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
+
                                     <td>{item.invoice_description}</td>
+
                                     <td>{item.unit_cost}</td>
+
                                     <td>{item.unit_quantity}</td>
+
                                     <td>
                                         {item.unit_cost * item.unit_quantity},-
                                         CZK
@@ -229,25 +280,30 @@ const InvoiceTemplate = () => {
                             ))}
                         </tbody>
                     </Table>
+
                     <div className="seperator_invoice"></div>
+
                     <div className="invoice__total">
                         <div>
                             <p>
                                 <b>Additional Notes: </b>
+
                                 {invoiceData.additional_notes}
                             </p>
                         </div>
+
                         <div>
                             <p>
                                 <b>Total:</b>
                             </p>
+
                             <p>{total},- CZK</p>
                         </div>
                     </div>
                 </div>
-                </>
             )}
         </>
     );
 };
+
 export default InvoiceTemplate;
