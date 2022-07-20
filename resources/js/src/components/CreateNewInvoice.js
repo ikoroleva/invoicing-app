@@ -70,6 +70,33 @@ const CreateNewInvoice = ({ client_number }) => {
         const data = await response.json();
         console.log(data[0]);
         setClientData(data[0]);
+        /*setClientData({
+            client: {
+                name: data[0].name ?? '',
+                reg_number: data[0].reg_number ?? '',
+                reg_number_EU: data[0].reg_number_EU ?? '',
+                reg_type_court: data[0].reg_type_court ?? '',
+                reg_type_file: data[0].reg_type_file ?? '',
+                email: data[0].email ?? '',
+                phone: data[0].phone ?? '',
+                address: {
+                    city: data[0].address.city ?? '',
+                    street_name: data[0].address.street_name ?? '',
+                    house_number: data[0].address.house_number ?? '',
+                    house_orient: data[0].address.house_orient ?? '',
+                    postal_code: data[0].address.postal_code ?? '',
+                },
+            },
+            status: "new",
+            currency: "CZK",
+            number: "",
+            issued_on: "",
+            due_date: "",
+            form_of_payment: "",
+            additional_notes: "",
+            invoice_items: [],
+            total: 0,
+        });*/
     };
 
     useEffect(() => {
@@ -151,7 +178,7 @@ const CreateNewInvoice = ({ client_number }) => {
                     showAres={showAres}
                     setShowAres={setShowAres}
                     setClientData={setClientData}
-                    setShowEdit={() => {}}
+                    setShowEdit={() => { }}
                     setShowCreateForm={setShowCreateForm}
                 />
 
