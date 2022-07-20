@@ -40,6 +40,13 @@ const ClientCreateForm = ({ clientData, setClientData }) => {
                         onChange={(e) => handleChange(e)}
                         value={clientData.name || ''} />
                 </Form.Group>
+                <Form.Group as={Col} className="client_form_element client_reg_number">
+                    <Form.Label>ICO / REG N.:</Form.Label>
+                    <Form.Control type="text"
+                        name="reg_number"
+                        onChange={(e) => handleChange(e)}
+                        value={clientData.reg_number || ''} />
+                </Form.Group>
                 <Form.Group as={Col} className="client_form_element client_reg_number_EU">
                     <Form.Label>DIC/VAT N:</Form.Label>
                     <Form.Control type="text"
