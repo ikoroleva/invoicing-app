@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import Loader from "./Loader";
 
 const InvoiceTemplateModal = ({ formData }) => {
-    console.log("formdata from INvoiceTemplateModal");
-    console.log(formData);
     // //Client state
     // const [clientIco, setClientIco] = useState("");
     const [clientData, setClientData] = useState("");
@@ -22,20 +20,19 @@ const InvoiceTemplateModal = ({ formData }) => {
     //total amount state
     const [total, setTotal] = useState(0);
 
-    const clientIco = 27074358;
+    // const clientIco = 27074358;
     const supplierIco = 87654321;
 
-    const fetchClient = async () => {
-        const response = await axios.get(`/api/clients/${clientIco}`);
-        setClientData(response.data[0]);
-        console.log(response.data[0]);
-        setClientLoaded(true);
-    };
+    // const fetchClient = async () => {
+    //     const response = await axios.get(`/api/clients/${clientIco}`);
+    //     setClientData(response.data[0]);
+    //     console.log(response.data[0]);
+    //     setClientLoaded(true);
+    // };
 
     const fetchSupplier = async () => {
-        const response = await axios.get(`/api/suppliers/${supplierIco}`);
-        setSupplierData(response.data[0]);
-        console.log(response.data[0]);
+        const response = await axios.get(`/api/suppliers/current`);
+        setSupplierData(response.data);
         setSupplierLoaded(true);
     };
 
@@ -53,7 +50,6 @@ const InvoiceTemplateModal = ({ formData }) => {
     };
 
     useEffect(() => {
-        // fetchClient();
         fetchSupplier();
         totalAmount();
     }, [formData]);
