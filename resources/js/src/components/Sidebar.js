@@ -14,7 +14,7 @@ const Sidebar = () => {
         {
             name: "",
             iconName: "menu",
-            url: "/home",
+            url: "",
         },
         {
             name: "Dashboard",
