@@ -131,6 +131,7 @@ class ClientsController extends Controller
         foreach ($client->invoices as $client_invoice) {
 
             $response[] = [
+                'id' => $client_invoice->id,
                 'number' => $client_invoice->number,
                 'additional_notes' => $client_invoice->additional_notes,
                 'status' => $client_invoice->status,
