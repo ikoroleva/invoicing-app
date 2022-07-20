@@ -235,7 +235,5 @@ class InvoicesController extends Controller
         $invoice = Invoice::with(['invoiceItems', 'supplier', 'client'])->where('id', $invoice_id)->where('supplier_id', \Auth::id())->first();
 
         $invoice->delete();
-
-        // dd($request);
     }
 }

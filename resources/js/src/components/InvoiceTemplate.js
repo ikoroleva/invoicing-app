@@ -5,6 +5,8 @@ import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
 
 const InvoiceTemplate = () => {
     const [invoiceData, setInvoiceData] = useState([]);
@@ -23,6 +25,15 @@ const InvoiceTemplate = () => {
 
     const { invoice_number } = useParams();
     const url = `http://www.invoicing-app.test/api/invoices/${invoice_number}`;
+
+    //pdf download function
+    const generatePDF = async () => {
+			// Choose the element that our invoice is rendered in.
+			const element = document.getElementById('container_invoice');
+			// Choose the element and save the PDF for our user.
+			await html2pdf(element);
+             console.log('hey')
+			}
 
     const fetchInvoice = async () => {
         const response = await axios.get(url);
@@ -62,7 +73,10 @@ const InvoiceTemplate = () => {
             {!dataLoaded || !clientLoaded || !supplierLoaded ? (
                 <p>Loading...</p>
             ) : (
-                <div className="container_invoice">
+                <>
+                <Button variant="primary" className='btn' onClick={() => generatePDF()}>
+                Download as PDF</Button>
+                <div className="container_invoice" id="container_invoice">
                     <h1>Invoice template</h1>
                     <div className="invoice__header">
                         <div className="invoice__header_img">
@@ -226,6 +240,7 @@ const InvoiceTemplate = () => {
                         <p>{invoiceData.total_amount},- CZK</p>
                     </div>
                 </div>
+                </>
             )}
         </>
     );
