@@ -680,6 +680,18 @@ footer {
     }
 }
 
+// <-- Create invoice component styles -->
+.create-invoice-component {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 0;
+    padding: 1rem;
+    border: #0274d87c solid 2px;
+    border-radius: 5px;
+}
+
 // <-- Invoice template styles -->
 .container_invoice {
     display: flex;

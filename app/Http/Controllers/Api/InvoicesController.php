@@ -242,37 +242,37 @@ class InvoicesController extends Controller
         return 'Invoice saved. Thank you!';
     }
 
-    public function update(Request $request, $invoice_id)
-    {
-        // check if exists, hidden id etc....
-        $invoice = Invoice::with(['invoiceItems', 'supplier', 'client'])->where('id', $invoice_number)->where('user_id', Auth::id())->get();
+    // public function update(Request $request, $invoice_id)
+    // {
+    //     // check if exists, hidden id etc....
+    //     $invoice = Invoice::with(['invoiceItems', 'supplier', 'client'])->where('id', $invoice_number)->where('user_id', Auth::id())->get();
 
-        $invoice->supplier_id = $request->input('supplier_id');
-        $invoice->client_id = $request->input('client_id');
-        $invoice->number = $request->input('number');
-        $invoice->additional_notes = $request->input('additional_notes');
-        $invoice->status = $request->input('status');
-        $invoice->total_amount = $request->input('total_amount');
-        $invoice->currency = $request->input('currency');
-        $invoice->form_of_payment = $request->input('form_of_payment');
-        $invoice->issued_on = $request->input('issued_on');
-        $invoice->due_date = $request->input('due_date');
+    //     $invoice->supplier_id = $request->input('supplier_id');
+    //     $invoice->client_id = $request->input('client_id');
+    //     $invoice->number = $request->input('number');
+    //     $invoice->additional_notes = $request->input('additional_notes');
+    //     $invoice->status = $request->input('status');
+    //     $invoice->total_amount = $request->input('total_amount');
+    //     $invoice->currency = $request->input('currency');
+    //     $invoice->form_of_payment = $request->input('form_of_payment');
+    //     $invoice->issued_on = $request->input('issued_on');
+    //     $invoice->due_date = $request->input('due_date');
 
-        $invoice->save();
+    //     $invoice->save();
 
-        // session()->flash('success_message', 'Invoice updated!');
-        return 'Invoice updated!';
-    }
+    //     // session()->flash('success_message', 'Invoice updated!');
+    //     return 'Invoice updated!';
+    // }
 
-    public function updateStatus(Request $request,$invoice_id)
+    public function updateStatus(Request $request, $invoice_id)
     {
         $invoice = Invoice::with(['invoiceItems', 'supplier', 'client'])->where('id', $invoice_id)->where('supplier_id', \Auth::id())->first();
         $status = $invoice->status;
 
         $invoice->status = $status !== 'paid' ? 'paid' : 'unpaid';
 
-         $invoice->save();
-         return  $invoice->status;
+        $invoice->save();
+        return  $invoice->status;
     }
 
     public function deleteInvoice(Request $request, $invoice_id)
