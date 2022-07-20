@@ -18,3 +18,4 @@ yarn-error.log
 /public/mix.js.map
 # /app/Http/Controllers/TestController.php
 /resources/views/development-test/index.blade.php
+phploy.ini
