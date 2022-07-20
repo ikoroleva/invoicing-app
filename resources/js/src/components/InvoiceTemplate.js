@@ -26,7 +26,7 @@ const InvoiceTemplate = () => {
     const [total, setTotal] = useState(0);
 
     const { invoice_number } = useParams();
-    const url = `http://www.invoicing-app.test/api/invoices/${invoice_number}`;
+    const url = `/api/invoices/${invoice_number}`;
 
     const fetchInvoice = async () => {
         const response = await axios.get(url);
