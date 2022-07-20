@@ -165,7 +165,8 @@ const CreateNewInvoice = ({ client_number }) => {
             </div>
             <br />
             <br />
-            <Form onSubmit={handleSubmit}>
+
+            <Form onSubmit={handleSubmit} className="create-invoice-component">
                 <ModalCreateInvoice
                     show={show}
                     setShow={setShow}
@@ -173,7 +174,7 @@ const CreateNewInvoice = ({ client_number }) => {
                     handleSubmit={handleSubmit}
                     formData={values}
                 />
-                <Row className="align-items-center">
+                <Row className="create-invoice-row">
                     <Col xs="auto">
                         <Form.Label htmlFor="inlineFormInput" visuallyHidden>
                             Invoice number
@@ -232,7 +233,7 @@ const CreateNewInvoice = ({ client_number }) => {
                         </Form.Select>
                     </Col>
                 </Row>
-                <Row className="align-items-center">
+                <Row className="create-invoice-row">
                     <InvoiceItem
                         values={{ values }}
                         handleChange={handleInvoiceChange}
@@ -244,7 +245,7 @@ const CreateNewInvoice = ({ client_number }) => {
                 {listOfNewLines.map((Element, index) => (
                     <>
                         <Row
-                            className="align-items-center"
+                            className="create-invoice-row"
                             key={index}
                             id={index + 1}
                         >

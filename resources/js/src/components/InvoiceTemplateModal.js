@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Loader from "./Loader";
 
 const InvoiceTemplateModal = ({ formData }) => {
+    console.log("formdata from INvoiceTemplateModal");
     console.log(formData);
     // //Client state
     // const [clientIco, setClientIco] = useState("");
@@ -52,14 +53,14 @@ const InvoiceTemplateModal = ({ formData }) => {
     };
 
     useEffect(() => {
-        fetchClient();
+        // fetchClient();
         fetchSupplier();
         totalAmount();
     }, [formData]);
 
     return (
         <>
-            {!clientLoaded || !supplierLoaded ? (
+            {!supplierLoaded ? (
                 <Loader />
             ) : (
                 <div className="container_invoice">
@@ -100,22 +101,22 @@ const InvoiceTemplateModal = ({ formData }) => {
                         </div>
                         <div className="invoice__counterparts_client">
                             <p>
-                                <b>Bill to: {clientData.name}</b>
+                                <b>Bill to: {formData.client.name}</b>
                             </p>
                             <p>
-                                {clientData.address.street_name}{" "}
-                                {clientData.address.house_number} /{" "}
-                                {clientData.address.house_orient}
+                                {formData.client.address.street_name}{" "}
+                                {formData.client.address.house_number} /{" "}
+                                {formData.client.address.house_orient}
                             </p>
                             <p>
-                                {clientData.address.postal_code}{" "}
-                                {clientData.address.city}
+                                {formData.client.address.postal_code}{" "}
+                                {formData.client.address.city}
                             </p>
-                            <p>Reg.#: {clientData.reg_number} </p>
-                            <p>VAT.#: {clientData.reg_number_EU} </p>
+                            <p>Reg.#: {formData.client.reg_number} </p>
+                            <p>VAT.#: {formData.client.reg_number_EU} </p>
                             <p>
-                                Registred at: {clientData.reg_type_court}, file{" "}
-                                {clientData.reg_type_file}
+                                Registred at: {formData.client.reg_type_court},
+                                file {formData.client.reg_type_file}
                             </p>
                         </div>
                     </div>
