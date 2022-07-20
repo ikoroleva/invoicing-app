@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import getAres from "../../actions/getAres";
 
-const ModalGetClientFromAres = ({ show, setShow, setClientData, setShowEdit }) => {
+const ModalGetClientFromAres = ({ showAres, setShowAres, setClientData, setShowEdit, setShowCreateForm }) => {
 
     const [number, setNumber] = useState('');
     const handleClick = async () => {
@@ -16,8 +16,9 @@ const ModalGetClientFromAres = ({ show, setShow, setClientData, setShowEdit }) =
         await setClientData(aresData);
 
         console.log(aresData);
-        setShow(false);
+        setShowAres(false);
         setShowEdit(true);
+        setShowCreateForm(true);
     }
 
 
@@ -25,8 +26,8 @@ const ModalGetClientFromAres = ({ show, setShow, setClientData, setShowEdit }) =
     return (
         <>
             <Modal
-                show={show}
-                onHide={() => setShow(false)}
+                show={showAres}
+                onHide={() => setShowAres(false)}
                 dialogClassName="modal-100w"
                 aria-labelledby="example-custom-modal-styling-title"
             >
