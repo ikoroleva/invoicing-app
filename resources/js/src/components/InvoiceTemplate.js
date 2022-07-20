@@ -5,6 +5,7 @@ import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import Loader from "./Loader";
 
 const InvoiceTemplate = () => {
@@ -28,6 +29,15 @@ const InvoiceTemplate = () => {
     const { invoice_number } = useParams();
     const url = `/api/invoices/${invoice_number}`;
 
+    //pdf download function
+    const generatePDF = async () => {
+			// Choose the element that our invoice is rendered in.
+			const element = document.getElementById('container_invoice');
+			// Choose the element and save the PDF for our user.
+			await html2pdf(element);
+             console.log('hey')
+			}
+
     const fetchInvoice = async () => {
         const response = await axios.get(url);
         console.log(response.data[0]);
@@ -40,7 +50,7 @@ const InvoiceTemplate = () => {
 
     const fetchClient = async () => {
         const response = await axios.get(`/api/clients/${clientIco}`);
-        setClientData(response.data[0].address);
+        setClientData(response.data[0]);
         console.log(response.data[0]);
         setClientLoaded(true);
     };
@@ -79,7 +89,11 @@ const InvoiceTemplate = () => {
             {!dataLoaded || !clientLoaded || !supplierLoaded ? (
                 <Loader />
             ) : (
-                <div className="container_invoice">
+                <>
+                <Button variant="primary" className='btn' onClick={() => generatePDF()}>
+                Download as PDF</Button>
+                <div className="container_invoice" id="container_invoice">
+                    <h1>Invoice template</h1>
                     <div className="invoice__header">
                         <div className="invoice__header_img">
                             <img src="../images/logo.svg" alt="logo" />
@@ -231,6 +245,7 @@ const InvoiceTemplate = () => {
                         </div>
                     </div>
                 </div>
+                </>
             )}
         </>
     );

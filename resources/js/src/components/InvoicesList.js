@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-
+import axios from "axios";
 import Table from "react-bootstrap/Table";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import SplitButton from "react-bootstrap/SplitButton";
+// import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function InvoicesList() {
     //state to store all  invoices into - for curently logged in user
@@ -21,33 +19,45 @@ export default function InvoicesList() {
         const data = await resp.json();
         setInvoices(data.data);
         setTotalCount(data.totalCount);
-        console.log(data);
+        // console.log(data);
     };
 
     //use effect hook to fetch the data
     useEffect(() => {
-    fetchData();
+    fetchData()
   },[offset, status]);
 
-    //update status function - function that will go to /invoices/changestatus route and with PUT method will change the status of invoice
-    const updateStatus = (value) => {
+    // //update status function - function that will go to /invoices/changestatus route and with PUT method will change the status of invoice
+    // const updateStatus = (value) => {  
+    // }    
+    //probably don't need
+    
+    const toggleStatus = async (id) => {
+
+        const res = await axios({
+            url: '/api/invoices/updatestatus/'+id,
+            method: 'put'
+            })
         
+
+        return fetchData()
+    }
+
+    // function to delte invoice after clicking on dropdown menu
+    const deleteInvoice = async (id) => {
+            console.log(id)
+
+            await axios({
+                url: '/api/invoices/delete/'+id,
+                method: 'delete',
+                data: id
+                })
+
+            return fetchData()
     }
 
 
-
-    const toggleStatus = async () => {
-
-        const value = status !== 'paid' ? 'paid' : 'unpaid';
-
-
-        await updateStatus(value)
-
-
-        return setStatus(value)
-
-    }
-
+console.log(status)
 
     return (
         <div className="table__container">
@@ -83,19 +93,20 @@ export default function InvoicesList() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
+
                                         <Dropdown.Item
                                             href={`/invoice-template/${invoice.id}`}
                                         >
                                             Show
                                         </Dropdown.Item>
-                                        <Dropdown.Item >Download</Dropdown.Item>
+
+                                        <Dropdown.Item  >Download</Dropdown.Item>
+
                                         {/* <Dropdown.Item href="#/action-3">Send via EMAIL</Dropdown.Item> */}
-                                        <Dropdown.Item onClick={() => toggleStatus()}>Set status {status !== 'paid' ? 'paid' : 'unpaid'}</Dropdown.Item>
-                                        <Dropdown.Item >Delete</Dropdown.Item>
-                                       
-                                        <Dropdown.Item href="#/action-3">
-                                            Send via EMAIL
-                                        </Dropdown.Item>
+
+                                        <Dropdown.Item onClick={(e) => toggleStatus(e)}><span onClick={()=>toggleStatus(invoice.id)}>Set status {invoice.status !== 'paid' ? 'paid' : 'unpaid'}</span></Dropdown.Item>
+
+                                        <Dropdown.Item ><span onClick={()=>deleteInvoice(invoice.id)}>Delete</span></Dropdown.Item>
                                         
                                     </Dropdown.Menu>
                                 </Dropdown>

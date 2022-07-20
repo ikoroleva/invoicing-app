@@ -52,8 +52,8 @@ Route::get('/suppliers/{ico}', [SuppliersController::class, 'indexIco']);
 Route::post('/suppliers/current', [SuppliersController::class, 'updateCurrent']);
 // should we add {ico} ?
 
-//update of invoice status
-Route::put('/invoices/changestatus', [InvoicesController::class, 'update']);
+//update of invoice status from dashboard dropdown menu
+Route::put('/invoices/updatestatus/{invoice_id}', [InvoicesController::class, 'updateStatus']);
 //All invoices issued for current user
 Route::get('/invoices/suppliers/allinvoices/', [InvoicesController::class, 'currentSupplierInvoices']);
 //ALL invoices
@@ -74,3 +74,5 @@ Route::post('/create-invoice', [InvoicesController::class, 'create']);
 Route::put('/invoices/{invoice_number}', [InvoicesController::class, 'update']);
 //Get current particular invoice by invoice number
 Route::get('/invoices/{invoice_id}', [InvoicesController::class, 'currentInvoice']);
+//delete specific invoice via it's ID
+Route::delete('/invoices/delete/{invoice_id}', [InvoicesController::class, 'deleteInvoice']);

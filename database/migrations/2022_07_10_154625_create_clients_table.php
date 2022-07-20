@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('reg_number_EU')->nullable();
             $table->string('reg_type_court');
             $table->string('reg_type_file');
-            $table->unsignedBigInteger('address_id');
+            $table->unsignedBigInteger('address_id')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('alias')->nullable();
