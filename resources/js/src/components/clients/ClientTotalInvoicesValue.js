@@ -2,15 +2,22 @@ import { mdiChartAreasplineVariant } from '@mdi/js';
 import Icon from '@mdi/react';
 import Alert from 'react-bootstrap/Alert';
 
-const ClientTotalInvoicesValue = () => {
+const ClientTotalInvoicesValue = ({ clientInvoicesData }) => {
 
+    //console.log(clientInvoicesData);
+
+    let totalAmount = 0;
+
+    clientInvoicesData.forEach(element => {
+        totalAmount += element.total_amount;
+    });
     return (
 
         <Alert variant="secondary">
             <div className="sum-container-element">
                 <Alert.Heading>Total value</Alert.Heading>
                 <p>
-                    49000
+                    {totalAmount}
                 </p>
             </div>
             <Icon path={mdiChartAreasplineVariant}

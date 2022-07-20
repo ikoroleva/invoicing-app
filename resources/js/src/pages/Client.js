@@ -5,12 +5,28 @@ import Button from 'react-bootstrap/Button';
 import ClientTotalInvoicesValue from "../components/clients/ClientTotalInvoicesValue";
 import ClientMonthInvoicesValue from '../components/clients/ClientMonthInvoicesValue';
 import { Link } from 'react-router-dom';
-
+import { useEffect, useState } from "react";
 
 const Client = () => {
     const params = useParams();
 
-    console.log(params);
+    //console.log(params);
+
+    const [clientInvoicesData, setClientInvoicesData] = useState([]);
+
+    const url = `/api/clients/${params.number}/invoices`;
+
+    const fetchData = async () => {
+        const response = await fetch(url);
+        const data = await response.json();
+        //    console.log(data);
+        setClientInvoicesData(data);
+    }
+
+    useEffect(() => {
+        fetchData();
+
+    }, []);
 
     return (
         <div className="action-page">
@@ -21,13 +37,13 @@ const Client = () => {
             <br />
             <br />
             <div className="sum-container">
-                <ClientTotalInvoicesValue />
-                <ClientMonthInvoicesValue />
+                <ClientTotalInvoicesValue clientInvoicesData={clientInvoicesData} />
+                <ClientMonthInvoicesValue clientInvoicesData={clientInvoicesData} />
             </div>
             <ClientDetails number={params.number} />
             <br />
             <br />
-            <ClientInvoicesList number={params.number} />
+            <ClientInvoicesList clientInvoicesData={clientInvoicesData} setClientInvoicesData={setClientInvoicesData} />
         </div>
     );
 };

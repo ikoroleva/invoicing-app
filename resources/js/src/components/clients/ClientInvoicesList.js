@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
+
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 
-const ClientInvoicesList = ({ number }) => {
-    const [clientInvoicesData, setClientInvoicesData] = useState([]);
+const ClientInvoicesList = ({ clientInvoicesData, setClientInvoicesData }) => {
+    // const [clientInvoicesData, setClientInvoicesData] = useState([]);
 
-    const url = `/api/clients/${number}/invoices`;
+    // const url = `/api/clients/${number}/invoices`;
 
-    const fetchData = async () => {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        setClientInvoicesData(data);
-    }
+    // const fetchData = async () => {
+    //     const response = await fetch(url);
+    //     const data = await response.json();
+    //     console.log(data);
+    //     setClientInvoicesData(data);
+    // }
 
-    useEffect(() => {
-        fetchData();
+    // useEffect(() => {
+    //     fetchData();
 
-    }, []);
+    // }, []);
 
 
     return (
