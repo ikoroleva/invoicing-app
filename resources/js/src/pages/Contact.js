@@ -10,9 +10,12 @@ import Icon from "@mdi/react";
 import { mdiTwitter } from "@mdi/js";
 import { mdiInstagram } from "@mdi/js";
 import { mdiFacebook } from "@mdi/js";
+import MailFeedbackModal from "../components/MailFeedbackModal";
 
 const Contact = () => {
     const [message, setMessage] = useState({});
+    const [respond, setRespond] = useState("");
+    const [show, setShow] = useState(false);
 
     const handleChange = (e) => {
         setMessage({ ...message, [e.target.name]: e.target.value });
@@ -24,10 +27,18 @@ const Contact = () => {
 
         const response = await axios.post("/api/sendbasicemail", message);
         const response_data = response.data;
+        console.log(response_data);
+        setRespond(response_data);
+        setShow(true);
     };
 
     return (
         <div className="contact-info-container">
+            <MailFeedbackModal
+                show={show}
+                setShow={setShow}
+                respond={respond}
+            />
             <h2>Contact us</h2>
             <p>
                 We love questions and feedback – and we're always happy to help!
