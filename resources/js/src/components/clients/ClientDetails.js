@@ -16,7 +16,7 @@ const ClientDetails = ({ number }) => {
 
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data[0]);
+        // console.log(data[0]);
         setClientData(data[0]);
         setDataLoaded(true);
     }

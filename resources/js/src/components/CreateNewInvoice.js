@@ -132,7 +132,7 @@ const CreateNewInvoice = ({ client_number }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(values);
+        //    console.log(values);
 
         const response = await axios.post("/api/create-invoice", values);
         // const response = await axios.get("/development-test/invoice", values);
