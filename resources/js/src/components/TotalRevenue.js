@@ -1,40 +1,15 @@
-import { useEffect,useState } from "react";
+import { useContext, useEffect,useState } from "react";
 import Card from 'react-bootstrap/Card';
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import InvoicesContext from "../context/InvoicesContext";
 
 
 // this component will show total amlount of already paid invoices
 export default function TotalRevenueInvoices(){
 
-    // function to sum all paid invoices fetched from API
-    const [revenue, setRevenue] = useState(null)
-    const revenues = () => {
-        const value = invoices.reduce((a, b) => (a + b), 0)
-        console.log(value)
-        setRevenue(value)
-    }
-    
-    
-    //state to store all paid invoices into
-    const [invoices, setInvoices] = useState([])
-    const url = 'api/invoices/paid' ;
 
-
+    const { revenue } = useContext(InvoicesContext)
     //currently logged in user
-    const fetchData = async() => {
-        const resp = await fetch(url);
-        const data = await resp.json();
-        setInvoices(data);
-    };
-
-    //watching fetch data and also revenues function 
-    useEffect(() => {
-        fetchData()
-    }, []);
-
-    useEffect(() => {
-        revenues();
-    }, [invoices]);
 
     return(
         
@@ -49,7 +24,7 @@ export default function TotalRevenueInvoices(){
                 Total Revenue:
             </CardHeader>
             <Card.Body>
-             <Card.Title>{revenue} CZK</Card.Title>
+             <Card.Title>{revenue || 0} CZK</Card.Title>
               </Card.Body>
         </Card>
     )
