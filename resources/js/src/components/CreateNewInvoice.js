@@ -151,6 +151,7 @@ const CreateNewInvoice = ({ client_number }) => {
     const totalAmount = () => {
         values.invoice_items.map((el, i) => {
             setTotal(total + el.sub_total);
+            console.log(total);
         });
     };
 
@@ -178,7 +179,7 @@ const CreateNewInvoice = ({ client_number }) => {
                     showAres={showAres}
                     setShowAres={setShowAres}
                     setClientData={setClientData}
-                    setShowEdit={() => { }}
+                    setShowEdit={() => {}}
                     setShowCreateForm={setShowCreateForm}
                 />
 
