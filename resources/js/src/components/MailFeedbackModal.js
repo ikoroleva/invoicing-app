@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const MailFeedbackModal = ({ show, setShow, respond }) => {
     const handleClose = () => {
         setShow(false);
-        navigate("/dashboard");
+        navigate("/");
     };
     const navigate = useNavigate();
     return (
