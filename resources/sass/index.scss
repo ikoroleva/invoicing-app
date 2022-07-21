@@ -708,7 +708,7 @@ footer {
             width: 30em;
             margin-left: 1em;
 
-            img {
+            .image-featured {
                 width: 10em;
             }
         }
@@ -765,4 +765,10 @@ footer {
             padding-right: 2em;
         }
     }
+}
+
+.dashboard__cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

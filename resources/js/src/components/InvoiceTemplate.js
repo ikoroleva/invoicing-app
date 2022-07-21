@@ -31,12 +31,17 @@ const InvoiceTemplate = () => {
 
     //pdf download function
     const generatePDF = async () => {
-        // Choose the element that our invoice is rendered in.
-        const element = document.getElementById("container_invoice");
-        // Choose the element and save the PDF for our user.
-        await html2pdf(element);
-        console.log("hey");
-    };
+			// Choose the element that our invoice is rendered in.
+			const element = document.getElementById('container_invoice');
+            const opt = {
+                margin:       1,
+                filename:     `Invoice_${invoiceData.number}.pdf`,
+                html2canvas:  { scale: 2 },
+};
+			// Choose the element and save the PDF for our user.
+			await html2pdf().set(opt).from(element).save();;
+             console.log('hey')
+			}
 
     const fetchInvoice = async () => {
         const response = await axios.get(url);
@@ -90,19 +95,14 @@ const InvoiceTemplate = () => {
                 <Loader />
             ) : (
                 <>
-                    <Button
-                        variant="primary"
-                        className="btn"
-                        onClick={() => generatePDF()}
-                    >
-                        Download as PDF
-                    </Button>
-                    <div className="container_invoice" id="container_invoice">
-                        <h1>Invoice template</h1>
-                        <div className="invoice__header">
-                            <div className="invoice__header_img">
-                                <img src="../images/logo.svg" alt="logo" />
-                            </div>
+                <Button variant="primary" className='btn' onClick={() => generatePDF()}>
+                Download as PDF</Button>
+                <div className="container_invoice" id="container_invoice">
+                    <h1>Invoice #{invoiceData.number}</h1>
+                    <div className="invoice__header">
+                        <div className="invoice__header_img">
+                            <img src="../images/logo.svg" alt="logo" />
+                        </div>
 
                             <div className="invoice__header_data">
                                 <p>Invoice # {invoiceData.number}</p>
@@ -141,11 +141,11 @@ const InvoiceTemplate = () => {
                                 <p>
                                     <b>Bill to: {invoiceData.client.name}</b>
                                 </p>
-                                <p>
+                                {/* <p>
                                     {clientData.address.street_name}{" "}
                                     {clientData.address.house_number} /{" "}
                                     {clientData.address.house_orient}
-                                </p>
+                                </p> */}
                                 <p>
                                     {clientData.postal_code} {clientData.city}
                                 </p>

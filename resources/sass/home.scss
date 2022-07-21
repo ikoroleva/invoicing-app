@@ -18,7 +18,7 @@ body {
 
 // main {}
 
-img {
+.header-logo-img {
     height: 250px;
     width: 250px;
 }
@@ -58,7 +58,6 @@ img {
     width: 30%;
     height: 90%;
 
-
     h1 {
         margin-bottom: 5%;
     }
@@ -88,7 +87,5 @@ img {
         align-items: center;
         padding: 1%;
         width: 25%;
-
     }
-
 }

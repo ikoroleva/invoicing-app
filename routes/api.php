@@ -23,8 +23,10 @@ use Illuminate\Support\Facades\Route;
 // Mail 
 
 Route::post('/sendbasicemail', [MailController::class, 'basic_email']);
-Route::get('/sendhtmlemail', [MailController::class, 'html_email']);
-Route::get('/sendattachmentemail', [MailController::class, 'attachment_email']);
+
+Route::post('/sendtestemail', [MailController::class, 'test_email']);
+//Route::get('/sendhtmlemail', [MailController::class, 'html_email']);
+//Route::get('/sendattachmentemail', [MailController::class, 'attachment_email']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

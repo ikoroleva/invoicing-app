@@ -1,4 +1,6 @@
 import { useEffect,useState } from "react";
+import Card from 'react-bootstrap/Card';
+import CardHeader from "react-bootstrap/esm/CardHeader";
 
 // this component will show total amlount of already paid invoices
 export default function ThisMonthInvoicesValue(){
@@ -31,6 +33,21 @@ export default function ThisMonthInvoicesValue(){
 
 
     return(
-        <h4>This month issued invoices amount: {sumOfInvoices()} CZK</h4>
+
+        <Card
+        bg='Secondary'
+        key='Secondary' 
+        text="dark"
+        style={{ width: '14rem' }}
+        className="mb-2"
+        >
+            <CardHeader>
+                This month invoices:
+            </CardHeader>
+            <Card.Body>
+             <Card.Title>{sumOfInvoices()} CZK</Card.Title>
+              </Card.Body>
+        </Card>
+        
     )
 }
