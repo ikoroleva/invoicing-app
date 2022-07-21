@@ -58,7 +58,7 @@ const ClientInvoicesList = ({ clientInvoicesData, setClientInvoicesData, toggleS
 
                                         <Dropdown.Menu>
                                             <Dropdown.Item href={`/invoice-template/${invoice.id}`}>Show</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-2">Download</Dropdown.Item>
+                                            {/* <Dropdown.Item href="#/action-2">Download</Dropdown.Item> */}
                                             {/* <Dropdown.Item href="#/action-3">Send via EMAIL</Dropdown.Item> */}
                                             <Dropdown.Item><span onClick={() => toggleStatus(invoice.id)}>Set status {invoice.status !== 'paid' ? 'paid' : 'unpaid'}</span></Dropdown.Item>
                                             <Dropdown.Item href="#/action-3"><span onClick={() => deleteInvoice(invoice.id)}>Delete</span></Dropdown.Item>
