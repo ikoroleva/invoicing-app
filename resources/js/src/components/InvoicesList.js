@@ -46,25 +46,9 @@ export default function InvoicesList() {
 
     // function to delte invoice after clicking on dropdown menu
     const deleteInvoice = async (id) => {
-<<<<<<< HEAD
-            console.log(id)
-
-            await axios({
-                url: '/api/invoices/delete/'+id,
-                method: 'delete',
-                data: id
-                })
-            
-            ;
-            console.log(response);
-
-            return fetchData()
-    }
-
-=======
         console.log(id);
 
-        await await axios({
+        await axios({
             url: "/api/invoices/delete/" + id,
             method: "delete",
             data: id,
@@ -72,7 +56,6 @@ export default function InvoicesList() {
         setShow(true);
         return fetchData();
     };
->>>>>>> main
 
     console.log(status);
 
