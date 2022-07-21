@@ -1,25 +1,21 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useNavigate } from "react-router-dom";
 
-const MailFeedbackModal = ({ show, setShow, respond }) => {
-    const navigate = useNavigate();
-    const handleClose = () => {
-        setShow(false);
-        navigate("/");
-    };
+const DeleteInvoiceModal = ({ show, setShow }) => {
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     return (
         <>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{respond}</Modal.Title>
+                    <Modal.Title>Done!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>We'll get back to you asap!</Modal.Body>
+                <Modal.Body>Invoice successfuly deleted.</Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleClose}>
-                        Noted
+                        Noted. Thank you!
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -27,4 +23,4 @@ const MailFeedbackModal = ({ show, setShow, respond }) => {
     );
 };
 
-export default MailFeedbackModal;
+export default DeleteInvoiceModal;
