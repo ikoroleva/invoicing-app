@@ -170,7 +170,7 @@ main {
     .action-page {
         margin: 1rem;
 
-        .btn-primary > a {
+        .btn-primary>a {
             all: unset;
         }
 
@@ -418,12 +418,12 @@ footer {
     border-bottom-right-radius: 0.8rem;
 }
 
-.boxicon-container:hover > .boxicon::after {
+.boxicon-container:hover>.boxicon::after {
     opacity: 1;
     transition: 0.1s;
 }
 
-.sidebar > *:first-child {
+.sidebar>*:first-child {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -753,4 +753,10 @@ footer {
             padding-right: 2em;
         }
     }
+}
+
+.dashboard__cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

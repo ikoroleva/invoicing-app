@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import Dropdown from "react-bootstrap/Dropdown";
+import InvoicesContext from "../context/InvoicesContext";
 // import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function InvoicesList() {
     //state to store all  invoices into - for curently logged in user
-    const [invoices, setInvoices] = useState([]);
+    const { invoices, setInvoices } = useContext(InvoicesContext)
     const [offset, setOffset] = useState(0);
     const [totalCount, setTotalCount] = useState(0);
     const url = `api/invoices/suppliers/allinvoices?offset=${offset}`;
@@ -46,6 +47,8 @@ export default function InvoicesList() {
     // function to delte invoice after clicking on dropdown menu
     const deleteInvoice = async (id) => {
             console.log(id)
+
+            await
 
             await axios({
                 url: '/api/invoices/delete/'+id,
@@ -100,7 +103,7 @@ console.log(status)
                                             Show
                                         </Dropdown.Item>
 
-                                        <Dropdown.Item  >Download</Dropdown.Item>
+                                        {/* <Dropdown.Item  >Download</Dropdown.Item> */}
 
                                         {/* <Dropdown.Item href="#/action-3">Send via EMAIL</Dropdown.Item> */}
 

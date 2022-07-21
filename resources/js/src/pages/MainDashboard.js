@@ -4,13 +4,15 @@ import TotalRevenueInvoices from "../components/TotalRevenue";
 import TotalValueInvoices from "../components/TotalValueInvoices";
 import ThisMonthInvoicesValue from "../components/ThisMonthInvoicesValue";
 import InvoicesList from "../components/InvoicesList";
+import InvoicesContext from "../context/InvoicesContext";
 
 export default function MainDashboard() {
     const [supplier, setSupplier] = useState({});
 
-
+const [invoices, setInvoices] = useState([]);
     const url = '/api/suppliers/current';
     //currently logged in use
+
     const fetchData = async () => {
         const resp = await fetch(url);
         const data = await resp.json();
@@ -23,16 +25,32 @@ export default function MainDashboard() {
         fetchData();
     }, []);
 
+    const [revenue, setRevenue] = useState(null)
+    const revenues = () => {
+        const value = invoices.reduce((a, b) => (a + b), 0)
+        console.log(value)
+        setRevenue(value)
+    }
+
+
+    useEffect(() => {
+        revenues();
+    }, []);
+
     console.log(supplier);
 
     return (
+                <InvoicesContext.Provider value={{ invoices, setInvoices }}>
         <div className="action-page">
-            <h2>Main Dashboard of: {supplier.name}</h2>
-            <h3>View Invoices:</h3>
-            <TotalRevenueInvoices />
-            <TotalValueInvoices />
-            <ThisMonthInvoicesValue />
+            <h2>Welcome {supplier.name} !</h2>
+            <h3>Invoices overview:</h3>
+            <div className="dashboard__cards">
+                    <TotalRevenueInvoices />
+                    <TotalValueInvoices />
+                    <ThisMonthInvoicesValue />
+            </div>
             <InvoicesList />
         </div>
+                </InvoicesContext.Provider>
     )
 }

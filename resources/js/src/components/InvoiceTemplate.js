@@ -33,8 +33,13 @@ const InvoiceTemplate = () => {
     const generatePDF = async () => {
 			// Choose the element that our invoice is rendered in.
 			const element = document.getElementById('container_invoice');
+            const opt = {
+                margin:       1,
+                filename:     `Invoice_${invoiceData.number}.pdf`,
+                html2canvas:  { scale: 2 },
+};
 			// Choose the element and save the PDF for our user.
-			await html2pdf(element);
+			await html2pdf().set(opt).from(element).save();;
              console.log('hey')
 			}
 
@@ -93,7 +98,7 @@ const InvoiceTemplate = () => {
                 <Button variant="primary" className='btn' onClick={() => generatePDF()}>
                 Download as PDF</Button>
                 <div className="container_invoice" id="container_invoice">
-                    <h1>Invoice template</h1>
+                    <h1>Invoice #{invoiceData.number}</h1>
                     <div className="invoice__header">
                         <div className="invoice__header_img">
                             <img src="../images/logo.svg" alt="logo" />

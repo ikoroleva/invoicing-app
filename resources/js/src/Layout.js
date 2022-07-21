@@ -30,10 +30,15 @@ const Layout = () => {
                 <Header />
                 <div className="main-container">
                     <Sidebar />
-                    <main>
+                    <main id="main">
                         <Routes>
                             {user ? (
                                 <Fragment>
+                                    <Route
+                                        exact
+                                        path="/"
+                                        element={<Home />}
+                                    />
                                     <Route
                                         exact
                                         path="/home"
