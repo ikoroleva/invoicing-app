@@ -131,6 +131,7 @@ class ClientsController extends Controller
         foreach ($client->invoices as $client_invoice) {
 
             $response[] = [
+                'id' => $client_invoice->id,
                 'number' => $client_invoice->number,
                 'additional_notes' => $client_invoice->additional_notes,
                 'status' => $client_invoice->status,
@@ -185,10 +186,6 @@ class ClientsController extends Controller
             $client = new Client();
             $client->reg_number = $reg_number;
 
-            // todo: remove if will be shown on the form or there will be another default value
-            $client->reg_type_court = '';
-            $client->reg_type_file = '';
-
             $address = new Address();
 
             $createNew = true;
@@ -202,6 +199,8 @@ class ClientsController extends Controller
         $client->reg_number_EU = $request->input('reg_number_EU');
         $client->email = $request->input('email');
         $client->phone = $request->input('phone');
+        $client->reg_type_court = $request->input('reg_type_court') ?? "";
+        $client->reg_type_file = $request->input('reg_type_file') ?? "";
 
         //dd($address);
 

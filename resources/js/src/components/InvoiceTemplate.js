@@ -104,152 +104,161 @@ const InvoiceTemplate = () => {
                             <img src="../images/logo.svg" alt="logo" />
                         </div>
 
-                        <div className="invoice__header_data">
-                            <p>Invoice # {invoiceData.number}</p>
-                            <p>Issued at: {invoiceData.issued_on}</p>
-                            <p>Due date: {invoiceData.due_date}</p>
+                            <div className="invoice__header_data">
+                                <p>Invoice # {invoiceData.number}</p>
+                                <p>Issued at: {invoiceData.issued_on}</p>
+                                <p>Due date: {invoiceData.due_date}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="seperator_invoice"></div>
-                    <div className="invoice__counterparts">
-                        <div className="invoice__counterparts_supplier">
-                            <p>
-                                <b>
-                                    Supplier name: {invoiceData.supplier.name}
-                                </b>
-                            </p>
-                            <p>
-                                {" "}
-                                {supplierData.address.street_name}{" "}
-                                {supplierData.address.house_number} /
-                                {supplierData.address.house_orient}
-                            </p>
-                            <p>
-                                {" "}
-                                {supplierData.address.postal_code}{" "}
-                                {supplierData.address.city}
-                            </p>
-                            <p>Reg.#: {invoiceData.supplier.reg_number} </p>
-                            <p>
-                                Registred at:{" "}
-                                {invoiceData.supplier.reg_type_court}, file{" "}
-                                {invoiceData.supplier.reg_type_file}
-                            </p>
+                        <div className="seperator_invoice"></div>
+                        <div className="invoice__counterparts">
+                            <div className="invoice__counterparts_supplier">
+                                <p>
+                                    <b>
+                                        Supplier name:{" "}
+                                        {invoiceData.supplier.name}
+                                    </b>
+                                </p>
+                                <p>
+                                    {" "}
+                                    {supplierData.address.street_name}{" "}
+                                    {supplierData.address.house_number} /
+                                    {supplierData.address.house_orient}
+                                </p>
+                                <p>
+                                    {" "}
+                                    {supplierData.address.postal_code}{" "}
+                                    {supplierData.address.city}
+                                </p>
+                                <p>Reg.#: {invoiceData.supplier.reg_number} </p>
+                                <p>
+                                    Registred at:{" "}
+                                    {invoiceData.supplier.reg_type_court}, file{" "}
+                                    {invoiceData.supplier.reg_type_file}
+                                </p>
+                            </div>
+                            <div className="invoice__counterparts_client">
+                                <p>
+                                    <b>Bill to: {invoiceData.client.name}</b>
+                                </p>
+                                <p>
+                                    {clientData.address.street_name}{" "}
+                                    {clientData.address.house_number} /{" "}
+                                    {clientData.address.house_orient}
+                                </p>
+                                <p>
+                                    {clientData.postal_code} {clientData.city}
+                                </p>
+                                <p>Reg.#: {invoiceData.client.reg_number} </p>
+                                <p>
+                                    VAT.#: {invoiceData.client.reg_number_EU}{" "}
+                                </p>
+                                <p>
+                                    Registred at:{" "}
+                                    {invoiceData.client.reg_type_court}, file{" "}
+                                    {invoiceData.client.reg_type_file}
+                                </p>
+                            </div>
                         </div>
-                        <div className="invoice__counterparts_client">
-                            <p>
-                                <b>Bill to: {invoiceData.client.name}</b>
-                            </p>
-                            <p>
-                                {clientData.street_name}{" "}
-                                {clientData.house_number} /{" "}
-                                {clientData.house_orient}
-                            </p>
-                            <p>
-                                {clientData.postal_code} {clientData.city}
-                            </p>
-                            <p>Reg.#: {invoiceData.client.reg_number} </p>
-                            <p>VAT.#: {invoiceData.client.reg_number_EU} </p>
-                            <p>
-                                Registred at:{" "}
-                                {invoiceData.client.reg_type_court}, file{" "}
-                                {invoiceData.client.reg_type_file}
-                            </p>
-                        </div>
-                    </div>
-                    <div className="seperator_invoice"></div>
-                    {invoiceData.form_of_payment === "Cash" ? (
-                        <div className="invoice__payment_cash">
-                            <p>
-                                <b>Payment Method:</b> Cash
-                            </p>
-                        </div>
-                    ) : (
-                        <div className="invoice__payment_wire">
-                            <p>
-                                <b>Payment Method:</b> Wire Transfer
-                            </p>
+                        <div className="seperator_invoice"></div>
+                        {invoiceData.form_of_payment === "Cash" ? (
+                            <div className="invoice__payment_cash">
+                                <p>
+                                    <b>Payment Method:</b> Cash
+                                </p>
+                            </div>
+                        ) : (
+                            <div className="invoice__payment_wire">
+                                <p>
+                                    <b>Payment Method:</b> Wire Transfer
+                                </p>
 
-                            <Table
-                                striped
-                                bordered
-                                hover
-                                className="bank_details"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th>Bank name</th>
-                                        <th>Account number</th>
-                                        <th>Bank code</th>
-                                        <th>SWIFT</th>
-                                        <th>IBAN (BIC)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td> {supplierData.bank_name}</td>
-                                        <td>
-                                            {" "}
-                                            {
-                                                supplierData.bank_account_prefix
-                                            } -{" "}
-                                            {supplierData.bank_account_number}
-                                        </td>
-                                        <td>
-                                            {" "}
-                                            {supplierData.bank_account_code}
-                                        </td>
-                                        <td> {supplierData.iban}</td>
-                                        <td> {supplierData.swift}</td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        </div>
-                    )}
+                                <Table
+                                    striped
+                                    bordered
+                                    hover
+                                    className="bank_details"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th>Bank name</th>
+                                            <th>Account number</th>
+                                            <th>Bank code</th>
+                                            <th>SWIFT</th>
+                                            <th>IBAN (BIC)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> {supplierData.bank_name}</td>
+                                            <td>
+                                                {" "}
+                                                {
+                                                    supplierData.bank_account_prefix
+                                                }{" "}
+                                                -{" "}
+                                                {
+                                                    supplierData.bank_account_number
+                                                }
+                                            </td>
+                                            <td>
+                                                {" "}
+                                                {supplierData.bank_account_code}
+                                            </td>
+                                            <td> {supplierData.iban}</td>
+                                            <td> {supplierData.swift}</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                            </div>
+                        )}
 
-                    <div className="seperator_invoice"></div>
+                        <div className="seperator_invoice"></div>
 
-                    <Table striped bordered hover className="invoice__body">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Service name</th>
-                                <th>Unit price</th>
-                                <th>Unit quantity</th>
-                                <th>Sub-Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {invoiceData.invoice_items.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{item.invoice_description}</td>
-                                    <td>{item.unit_cost}</td>
-                                    <td>{item.unit_quantity}</td>
-                                    <td>
-                                        {item.unit_cost * item.unit_quantity},-
-                                        CZK
-                                    </td>
+                        <Table striped bordered hover className="invoice__body">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Service name</th>
+                                    <th>Unit price</th>
+                                    <th>Unit quantity</th>
+                                    <th>Sub-Total</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                    <div className="seperator_invoice"></div>
-                    <div className="invoice__total">
-                        <div>
-                            <p>
-                                <b>Additional Notes: </b>
-                                {invoiceData.additional_notes}
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                <b>Total:</b>
-                            </p>
-                            <p>{total},- CZK</p>
+                            </thead>
+                            <tbody>
+                                {invoiceData.invoice_items.map(
+                                    (item, index) => (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{item.invoice_description}</td>
+                                            <td>{item.unit_cost}</td>
+                                            <td>{item.unit_quantity}</td>
+                                            <td>
+                                                {item.unit_cost *
+                                                    item.unit_quantity}
+                                                ,- CZK
+                                            </td>
+                                        </tr>
+                                    )
+                                )}
+                            </tbody>
+                        </Table>
+                        <div className="seperator_invoice"></div>
+                        <div className="invoice__total">
+                            <div>
+                                <p>
+                                    <b>Additional Notes: </b>
+                                    {invoiceData.additional_notes}
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    <b>Total:</b>
+                                </p>
+                                <p>{total},- CZK</p>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </>
             )}
         </>

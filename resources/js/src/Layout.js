@@ -97,7 +97,7 @@ const Layout = () => {
                                 <Fragment>
                                     <Route
                                         exact
-                                        path="/home"
+                                        path="/"
                                         element={<Home />}
                                     />
                                     <Route
@@ -109,6 +109,11 @@ const Layout = () => {
                                         exact
                                         path="/contact"
                                         element={<Contact />}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/howitworks"
+                                        element={<HowItWorks />}
                                     />
                                     <Route
                                         exact

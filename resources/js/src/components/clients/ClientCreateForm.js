@@ -57,6 +57,23 @@ const ClientCreateForm = ({ clientData, setClientData }) => {
             </Row>
 
             <Row className="client_contact_row">
+                <Form.Group as={Col} className="client_form_element client_reg_type_court">
+                    <Form.Label>Registration court:</Form.Label>
+                    <Form.Control type="text"
+                        name="reg_type_court"
+                        onChange={(e) => handleChange(e)}
+                        value={clientData.reg_type_court || ''} />
+                </Form.Group>
+                <Form.Group as={Col} className="client_form_element client_reg_type_file">
+                    <Form.Label>Registration file:</Form.Label>
+                    <Form.Control type="text"
+                        name="reg_type_file"
+                        onChange={(e) => handleChange(e)}
+                        value={clientData.reg_type_file || ''} />
+                </Form.Group>
+            </Row>
+
+            <Row className="client_contact_row">
                 <Form.Group as={Col} className="client_form_element client_email">
                     <Form.Label>Email:</Form.Label>
                     <Form.Control type="email"

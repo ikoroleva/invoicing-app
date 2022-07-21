@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Loader from "./Loader";
 
 const InvoiceTemplateModal = ({ formData }) => {
-    console.log(formData);
     // //Client state
     // const [clientIco, setClientIco] = useState("");
     const [clientData, setClientData] = useState("");
@@ -21,20 +20,19 @@ const InvoiceTemplateModal = ({ formData }) => {
     //total amount state
     const [total, setTotal] = useState(0);
 
-    const clientIco = 27074358;
+    // const clientIco = 27074358;
     const supplierIco = 87654321;
 
-    const fetchClient = async () => {
-        const response = await axios.get(`/api/clients/${clientIco}`);
-        setClientData(response.data[0]);
-        console.log(response.data[0]);
-        setClientLoaded(true);
-    };
+    // const fetchClient = async () => {
+    //     const response = await axios.get(`/api/clients/${clientIco}`);
+    //     setClientData(response.data[0]);
+    //     console.log(response.data[0]);
+    //     setClientLoaded(true);
+    // };
 
     const fetchSupplier = async () => {
-        const response = await axios.get(`/api/suppliers/${supplierIco}`);
-        setSupplierData(response.data[0]);
-        console.log(response.data[0]);
+        const response = await axios.get(`/api/suppliers/current`);
+        setSupplierData(response.data);
         setSupplierLoaded(true);
     };
 
@@ -52,14 +50,13 @@ const InvoiceTemplateModal = ({ formData }) => {
     };
 
     useEffect(() => {
-        fetchClient();
         fetchSupplier();
         totalAmount();
     }, [formData]);
 
     return (
         <>
-            {!clientLoaded || !supplierLoaded ? (
+            {!supplierLoaded ? (
                 <Loader />
             ) : (
                 <div className="container_invoice">
@@ -100,22 +97,22 @@ const InvoiceTemplateModal = ({ formData }) => {
                         </div>
                         <div className="invoice__counterparts_client">
                             <p>
-                                <b>Bill to: {clientData.name}</b>
+                                <b>Bill to: {formData.client.name}</b>
                             </p>
                             <p>
-                                {clientData.address.street_name}{" "}
-                                {clientData.address.house_number} /{" "}
-                                {clientData.address.house_orient}
+                                {formData.client.address.street_name}{" "}
+                                {formData.client.address.house_number} /{" "}
+                                {formData.client.address.house_orient}
                             </p>
                             <p>
-                                {clientData.address.postal_code}{" "}
-                                {clientData.address.city}
+                                {formData.client.address.postal_code}{" "}
+                                {formData.client.address.city}
                             </p>
-                            <p>Reg.#: {clientData.reg_number} </p>
-                            <p>VAT.#: {clientData.reg_number_EU} </p>
+                            <p>Reg.#: {formData.client.reg_number} </p>
+                            <p>VAT.#: {formData.client.reg_number_EU} </p>
                             <p>
-                                Registred at: {clientData.reg_type_court}, file{" "}
-                                {clientData.reg_type_file}
+                                Registred at: {formData.client.reg_type_court},
+                                file {formData.client.reg_type_file}
                             </p>
                         </div>
                     </div>

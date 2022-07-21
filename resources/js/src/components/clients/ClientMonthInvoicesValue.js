@@ -2,7 +2,26 @@ import Icon from '@mdi/react';
 import { mdiWallet } from '@mdi/js';
 import Alert from 'react-bootstrap/Alert';
 
-const ClientMonthInvoicesValue = () => {
+const ClientMonthInvoicesValue = ({ clientInvoicesData }) => {
+
+    console.log(clientInvoicesData);
+
+    let totalMounthAmount = 0;
+    let now = new Date();
+
+
+
+    //console.log(now.getMonth() + 1);
+
+    clientInvoicesData.forEach(element => {
+
+        const date = new Date(element.issued_on);
+
+        //console.log(date.getMonth()+1);
+
+        if (date.getMonth() == now.getMonth())
+            totalMounthAmount += element.total_amount;
+    });
 
     return (
 
@@ -10,7 +29,7 @@ const ClientMonthInvoicesValue = () => {
             <div className="sum-container-element">
                 <Alert.Heading>This month value</Alert.Heading>
                 <p>
-                    10000
+                    {totalMounthAmount}
                 </p>
             </div>
             <Icon path={mdiWallet}
