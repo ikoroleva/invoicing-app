@@ -4,11 +4,12 @@ import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
 const MailFeedbackModal = ({ show, setShow, respond }) => {
+    const navigate = useNavigate();
     const handleClose = () => {
         setShow(false);
         navigate("/");
     };
-    const navigate = useNavigate();
+
     return (
         <>
             <Modal show={show} onHide={handleClose}>
