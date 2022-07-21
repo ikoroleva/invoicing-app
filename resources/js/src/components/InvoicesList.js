@@ -12,7 +12,7 @@ export default function InvoicesList() {
     const [totalCount, setTotalCount] = useState(0);
     const url = `api/invoices/suppliers/allinvoices?offset=${offset}`;
 
-    const [status, setStatus] = useState('new')
+    const [status, setStatus] = useState('unpaid')
 
     //currently logged in user
     const fetchData = async () => {
@@ -48,13 +48,14 @@ export default function InvoicesList() {
     const deleteInvoice = async (id) => {
             console.log(id)
 
-            await
-
             await axios({
                 url: '/api/invoices/delete/'+id,
                 method: 'delete',
                 data: id
                 })
+            
+            ;
+            console.log(response);
 
             return fetchData()
     }
@@ -79,7 +80,7 @@ console.log(status)
                 <tbody>
                     {invoices.map((invoice, index) => (
                         <tr key={index}>
-                            <td>{invoice.id}</td>
+                            <td>{invoice.number}</td>
                             <td>{invoice.client.name}</td>
                             <td>{invoice.total_amount} CZK</td>
                             <td>{invoice.issued_on}</td>
