@@ -108,10 +108,13 @@ class SuppliersController extends Controller
 
         // $bankAccount = BankAccount::where('supplier_id', $supplier->id)->first();
 
-        if (!$bankAccount) {
-            $bankAccount = new BankAccount;
-        }
-        if ($request->input('data_batch') == "company-details") {
+        if ($request->input('data_batch') == "payment-details") {
+
+            
+            if (!$bankAccount) {
+                $bankAccount = new BankAccount;
+            }
+
             $bankAccount->iban = $request->input('iban');
             $bankAccount->bank_account_prefix = $request->input('bank_account_prefix');
             $bankAccount->bank_account_number = $request->input('bank_account_number');
@@ -127,14 +130,17 @@ class SuppliersController extends Controller
         // $supplier->save();
 
 
-        $address = Address::where('id', $supplier->address_id)->first();
-
-        if (!$address) {
-
-            $address = new Address;
-        }
+        
 
         if ($request->input('data_batch') == "company-details") {
+
+            $address = Address::where('id', $supplier->address_id)->first();
+
+            if (!$address) {
+
+                $address = new Address;
+                
+            }
 
             $address->street_name = $request->input('street_name');
             $address->house_number = $request->input('house_number');

@@ -25,8 +25,8 @@ function CompanyDetails() {
         setDetails(data);
 
         const formData = { ...data }
-
-        setFormData({ ...formData.bank_account, 'data_batch': 'company-details' })
+        console.log(formData)
+        setFormData({ ...formData, ...formData.bank_account, ...formData.address, 'data_batch': 'company-details' })
     };
 
     useEffect(() => {
@@ -72,7 +72,7 @@ function CompanyDetails() {
                                         <Form.Control type="text"
                                             name="reg_number"
                                             onChange={(e) => handleChange(e)}
-                                            value={formData.reg_number} />
+                                            value={formData.reg_number || ""} />
                                     </Form.Group>
                                     <Row className="client_contact_row">
                                         <Form.Group as={Col} className="client_form_element client_email">
@@ -80,14 +80,14 @@ function CompanyDetails() {
                                             <Form.Control type="email"
                                                 name="email"
                                                 onChange={(e) => handleChange(e)}
-                                                value={formData.email} />
+                                                value={formData.email || ""} />
                                         </Form.Group>
                                         <Form.Group as={Col} className="client_form_element client_phone">
                                             <Form.Label>Phone:</Form.Label>
                                             <Form.Control type="text"
                                                 name="phone"
                                                 onChange={(e) => handleChange(e)}
-                                                value={formData.phone} />
+                                                value={formData.phone || ""} />
                                         </Form.Group>
                                     </Row>
 
@@ -100,14 +100,14 @@ function CompanyDetails() {
                                             <Form.Control type="text"
                                                 name="postal_code"
                                                 onChange={(e) => handleChange(e)}
-                                                value={formData.postal_code} />
+                                                value={formData.postal_code || ""} />
                                         </Form.Group>
                                         <Form.Group as={Col} className="client_form_element client_address_city">
                                             <Form.Label>City:</Form.Label>
                                             <Form.Control type="text"
                                                 name="city"
                                                 onChange={(e) => handleChange(e)}
-                                                value={formData.city} />
+                                                value={formData.city || ""} />
                                         </Form.Group>
 
                                     </Row>
@@ -116,7 +116,7 @@ function CompanyDetails() {
                                         <Form.Control type="text"
                                             name="street_name"
                                             onChange={(e) => handleChange(e)}
-                                            value={formData.street_name} />
+                                            value={formData?.street_name || ""} />
                                     </Form.Group>
                                     <Row className="client_address_house">
 
@@ -125,19 +125,23 @@ function CompanyDetails() {
                                             <Form.Control type="text"
                                                 name="house_number"
                                                 onChange={(e) => handleChange(e)}
-                                                value={formData.house_number} />
+                                                value={formData.house_number || ""} />
                                         </Form.Group>
                                         <Form.Group as={Col} className="client_form_element client_address_house_orient">
                                             <Form.Label>House orient number:</Form.Label>
                                             <Form.Control type="text"
                                                 name="house_orient"
                                                 onChange={(e) => handleChange(e)}
-                                                value={formData.house_orient} />
+                                                value={formData.house_orient || ""} />
                                         </Form.Group>
 
                                     </Row>
-                                    <Button type="submit" variant="primary" onClick={(e) => handleSubmit(e)}>
+                                    <Button type="button" variant="primary" onClick={(e) => handleSubmit(e)}>
                                         Save
+                                    </Button>
+
+                                    <Button type="button" variant="primary" onClick={() => { setEditing(false); setShowEdit(false); }}>
+                                        Cancel
                                     </Button>
 
 
@@ -158,11 +162,11 @@ function CompanyDetails() {
 
                                             <div className='userdetails__address_container'>
 
-                                                <span className="userdetails__detail">{details.address.street_name}</span><br />
+                                                <span className="userdetails__detail">{details?.address?.street_name}</span><br />
 
-                                                <span className="userdetails__detail">{details.address.house_number}/{details.address.house_orient}</span><br />
+                                                <span className="userdetails__detail">{details?.address?.house_number}/{details.address?.house_orient}</span><br />
 
-                                                <span className="userdetails__detail">{details.address.postal_code} {details.address.city}</span><br />
+                                                <span className="userdetails__detail">{details?.address?.postal_code} {details.address?.city}</span><br />
 
                                             </div>
 
@@ -175,7 +179,7 @@ function CompanyDetails() {
 
                     }
 
-                    
+
                     <Button type="button" onClick={() => setEditing(true)}>
                         Edit
                     </Button>

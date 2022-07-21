@@ -25,7 +25,7 @@ const Contact = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await axios.post("/api/sendbasicemail", message);
+        const response = await axios.post("/api/sendtestemail", message);
         const response_data = response.data;
         console.log(response_data);
         setRespond(response_data);
@@ -109,9 +109,10 @@ const Contact = () => {
                             placeholder="Your message"
                             name="text"
                             onChange={(e) => handleChange(e)}
-                        >
-                            {message.text || ""}
-                        </Form.Control>
+                            value={message.text || ""}
+                        />
+
+
                     </Form.Group>
                     <Button
                         variant="primary"

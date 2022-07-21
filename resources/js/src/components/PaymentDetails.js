@@ -108,9 +108,14 @@ function PaymentDetails() {
                     </Form.Group>
                   </Row>
 
-                  <Button type="submit" variant="primary" onClick={(e) => handleSubmit(e)}>
+                  <Button type="button" variant="primary" onClick={(e) => handleSubmit(e)}>
                     Save
                   </Button>
+
+                  <Button type="button" variant="primary" onClick={() => { setEditing(false); setShowEdit(false); }}>
+                    Cancel
+                  </Button>
+
 
 
                 </Form>) :
@@ -136,7 +141,7 @@ function PaymentDetails() {
                 )}
             </div>
 
-          } 
+          }
           <Button type="button" onClick={() => setEditing(true)}>
             Edit
           </Button>
