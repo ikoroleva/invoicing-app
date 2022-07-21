@@ -30,13 +30,9 @@ export default function MainDashboard() {
     }, []);
 
     const revenues = async () => {
-
         const resp = await fetch('api/invoices/paid');
         const paidInvoices = await resp.json();
-
         const value = await paidInvoices.reduce((a, b) => (a + b), 0)
-
-        console.log('ciaioo', value)
         setRevenue(value)
     }
 

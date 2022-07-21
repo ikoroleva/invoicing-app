@@ -15,7 +15,7 @@ const ClientTotalInvoicesValue = ({ clientInvoicesData }) => {
 
         <Alert variant="secondary">
             <div className="sum-container-element">
-                <Alert.Heading>Total value</Alert.Heading>
+                <Alert.Heading>All issued invoices value:</Alert.Heading>
                 <p>
                     {totalAmount}
                 </p>
