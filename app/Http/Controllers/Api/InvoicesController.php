@@ -175,10 +175,6 @@ class InvoicesController extends Controller
 
             //dd($client);
 
-            // todo: remove if will be shown on the form or there will be another default value
-            $client->reg_type_court = '';
-            $client->reg_type_file = '';
-
             $address = new Address();
 
             $createNewClient = true;
@@ -189,14 +185,16 @@ class InvoicesController extends Controller
         $client->reg_number_EU = $request->client["reg_number_EU"] ?? "";
         $client->email = $request->client["email"] ?? "";
         $client->phone =  $request->client["phone"] ?? "";
+        $client->reg_type_court = $request->client['reg_type_court'] ?? "";
+        $client->reg_type_file = $request->client['reg_type_file'] ?? "";
 
         //dd($request);
 
-        $address->city = $request->input('address_city');
-        $address->street_name = $request->input('address_street_name');
-        $address->house_number = $request->input('address_house_number');
-        $address->house_orient = $request->input('address_house_orient');
-        $address->postal_code = $request->input('address_postal_code');
+        $address->city = $request->client['address']['city'];
+        $address->street_name = $request->client['address']['street_name'];
+        $address->house_number = $request->client['address']['house_number'];
+        $address->house_orient = $request->client['address']['house_orient'];
+        $address->postal_code = $request->client['address']['postal_code'];
 
         //dd($address);
 

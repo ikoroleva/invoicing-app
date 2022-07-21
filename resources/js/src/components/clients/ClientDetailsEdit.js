@@ -13,6 +13,8 @@ const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
         name: clientData.name || '',
         // reg_number: clientData.reg_number,
         reg_number_EU: clientData.reg_number_EU || "",
+        reg_type_court: clientData.reg_type_court || '',
+        reg_type_file: clientData.reg_type_file || '',
         address_city: clientData.address.city || '',
         address_street_name: clientData.address.street_name || '',
         address_house_number: clientData.address.house_number || '',
@@ -51,6 +53,8 @@ const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
             name: clientData.name || '',
             // reg_number: clientData.reg_number,
             reg_number_EU: clientData.reg_number_EU || "",
+            reg_type_court: clientData.reg_type_court || '',
+            reg_type_file: clientData.reg_type_file || '',
             address_city: clientData.address.city || '',
             address_street_name: clientData.address.street_name || '',
             address_house_number: clientData.address.house_number || '',
@@ -83,6 +87,23 @@ const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
             </Row>
 
             <Row className="client_contact_row">
+                <Form.Group as={Col} className="client_form_element client_reg_type_court">
+                    <Form.Label>Registration court:</Form.Label>
+                    <Form.Control type="text"
+                        name="reg_type_court"
+                        onChange={(e) => handleChange(e)}
+                        value={formData.reg_type_court || ''} />
+                </Form.Group>
+                <Form.Group as={Col} className="client_form_element client_reg_type_file">
+                    <Form.Label>Registration file:</Form.Label>
+                    <Form.Control type="text"
+                        name="reg_type_file"
+                        onChange={(e) => handleChange(e)}
+                        value={formData.reg_type_file || ''} />
+                </Form.Group>
+            </Row>
+
+            <Row className="client_contact_row">
                 <Form.Group as={Col} className="client_form_element client_email">
                     <Form.Label>Email:</Form.Label>
                     <Form.Control type="email"
@@ -98,6 +119,7 @@ const ClientDetailsEdit = ({ clientData, setEditing, setShowEdit }) => {
                         value={formData.phone || ''} />
                 </Form.Group>
             </Row>
+
 
 
             <strong>Address:  </strong>
