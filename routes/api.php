@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\FakeAresController;
 use App\Http\Controllers\Api\AresController;
 use App\Http\Controllers\Api\ClientsController;
 use App\Http\Controllers\Api\InvoicesController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\Api\SuppliersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Mail 
+
+Route::post('/sendbasicemail', [MailController::class, 'basic_email']);
+Route::get('/sendhtmlemail', [MailController::class, 'html_email']);
+Route::get('/sendattachmentemail', [MailController::class, 'attachment_email']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -71,7 +78,7 @@ Route::get('/invoices/issued', [InvoicesController::class, 'currentSupplierIssue
 //Create new invoice
 Route::post('/create-invoice', [InvoicesController::class, 'create']);
 //Update existing invoice
-Route::put('/invoices/{invoice_number}', [InvoicesController::class, 'update']);
+// Route::put('/invoices/{invoice_number}', [InvoicesController::class, 'update']);
 //Get current particular invoice by invoice number
 Route::get('/invoices/{invoice_id}', [InvoicesController::class, 'currentInvoice']);
 //delete specific invoice via it's ID

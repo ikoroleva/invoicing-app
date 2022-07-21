@@ -12,6 +12,8 @@ const ClientDetailsShow = ({ clientData, editing, setEditing }) => {
                     <p><strong>Address: </strong>{clientData.address.postal_code}, {clientData.address.city} {clientData.address.street_name} {clientData.address.house_number}/{clientData.address.house_orient} </p>
                 </div>
                 <div className="client-details-items item">
+                    <p><strong>Registration court: </strong> {clientData.reg_type_court}</p>
+                    <p><strong>Registration file:</strong> {clientData.reg_type_file}</p>
                     <p><strong>Phone: </strong>{clientData.phone}</p>
                     <p><strong>Email: </strong>{clientData.email}</p>
                 </div>
