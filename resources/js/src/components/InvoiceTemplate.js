@@ -141,11 +141,11 @@ const InvoiceTemplate = () => {
                                 <p>
                                     <b>Bill to: {invoiceData.client.name}</b>
                                 </p>
-                                <p>
+                                {/* <p>
                                     {clientData.address.street_name}{" "}
                                     {clientData.address.house_number} /{" "}
                                     {clientData.address.house_orient}
-                                </p>
+                                </p> */}
                                 <p>
                                     {clientData.postal_code} {clientData.city}
                                 </p>
