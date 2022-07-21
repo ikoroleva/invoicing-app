@@ -42,7 +42,7 @@ export default function TotalValueInvoices(){
         className="mb-2"
         >
             <CardHeader>
-               Issued invoices value:
+               All issued invoices value:
             </CardHeader>
             <Card.Body>
              <Card.Title>{sumOfIssuedInvoices()} CZK</Card.Title>

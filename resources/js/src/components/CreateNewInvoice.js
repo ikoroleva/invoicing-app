@@ -29,7 +29,7 @@ const CreateNewInvoice = ({ client_number }) => {
                 postal_code: "",
             },
         },
-        status: "new",
+        status: "unpaid",
         currency: "CZK",
         number: "",
         issued_on: "",
